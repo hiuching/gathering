@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>login</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+Email<input type="text" id="email"/>
+Password<input type="text" id="password"/>
+<button id="login">login</button>
+<input type ="text" id="sendEmail"/>
+<button id="send">Send</button>
+<div id="message"></div>
+<script>
+    $(document).ready(function() {
+	
+		$('#login').click(function(){
+			var data = {
+				email: $('#email').val(),
+				password: $('#password').val()
+			}
+			$.support.cors = true;
+			$.ajax({
+				type: 'GET',
+				contentType: 'application/json',
+				url: 'http://127.0.0.1:8004/login',
+				data: data,
+				dataType: 'json',
+				success: function(user) {
+					var str = 'email: ' + user.email + ' logined'
+					$('#message').html(str)
+				},
+				error: function(err){
+					console.log('failed', err);
+				}
+			});
+		});
+		
+		$('#send').click(function(){
+			var data = {
+				"email": $('#sendEmail').val()
+			}
+			data = JSON.stringify(data);
+			$.support.cors = true;
+			$.ajax({
+				type: 'POST',
+				contentType: 'application/json',
+				url: 'http://127.0.0.1:8004/gathering/mail',
+				data: data,
+				dataType: 'json',
+				success: function(data) {
+					alert('sent');
+				},
+				error: function(err){
+					console.log('failed', err);
+				}
+			});
+		});
+	});
+</script>
+<body>
+
+<ul id="list"></ul>
+
+</body>
+</html>

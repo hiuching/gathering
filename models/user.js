@@ -43,7 +43,18 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 	var conditions = {};
 	conditions.email = options.email;
 	conditions.password = options.password;
-	this.findByConditions(conditions, callback);    
+	
+	this.findByConditions(conditions, function(err, users){
+		if(err){
+			callback(err);
+		} else {
+			if(users.length == 1){
+				callback(null, users[0]);
+			} else {
+				callback({code:404, message: 'uncorrert email or password'});
+			}
+		}
+	});    
 };
 
 userSchema.statics.findUserByEmail = function (options, callback) {

@@ -32,16 +32,31 @@ app.engine('html', require('ejs').renderFile);
 app.set('title', 'Garthering');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+// app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.all("/gathering/*", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+  return next();
+});
+
+app.all("/login", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+  return next();
+});
+
 var controllers = {};
 var modules = [
-'user'
+'user',
+'mail'
 ];
 
 var count = modules.length;
@@ -52,6 +67,8 @@ for (var ii=0; ii < count; ii++) {
 /**************************
 route
 **************************/
+
+
 app.delete('/gathering/:moduleName/:id', function (req, res) {
 	var moduleName = req.params.moduleName;
         getController(moduleName, function(error, controller){
@@ -69,22 +86,23 @@ app.get('/gathering/:moduleName', function (req, res) {
 
 app.get('/gathering/:moduleName/:id', function (req, res) {
 	var moduleName = req.params.moduleName;
-	getController(moduleName, function(error, controller){
-		return controller.findById(req, res);
-    });
+		getController(moduleName, function(error, controller){
+			return controller.findById(req, res);
+		});
 });
 
 app.put('/gathering/:moduleName', function (req, res) {
   var moduleName = req.params.moduleName;
         getController(moduleName, function(error, controller){
-                return controller.update(req, res);
+            return controller.update(req, res);
         });
 });
 
 app.post('/gathering/:moduleName', function (req, res) {
-  var moduleName = req.params.moduleName;
+	var moduleName = req.params.moduleName;
+		console.log('moduleName', moduleName);
         getController(moduleName, function(error, controller){
-                return controller.add(req, res);
+            return controller.add(req, res);
         });
 });
 
@@ -95,6 +113,32 @@ app.put('/gathering/:moduleName/:id', function (req, res) {
 	});
 });
 
+app.put('/gathering/:moduleName/:id', function (req, res) {
+	var moduleName = req.params.moduleName;
+	getController(moduleName, function(error, controller){
+		return controller.updateById(req, res);
+	});
+});
+
+app.get('/login', function (req, res) {
+	var UserController = require('./controller/userController');
+	var User = new UserController();
+    return User.login(req, res);
+});
+
+app.all("/gathering/*", function(req, res, next) {
+  if (req.method.toLowerCase() !== "options") {
+    return next();
+  }
+  return res.send(204);
+});
+
+app.all("/login", function(req, res, next) {
+  if (req.method.toLowerCase() !== "options") {
+    return next();
+  }
+  return res.send(204);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

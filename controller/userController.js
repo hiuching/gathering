@@ -3,6 +3,17 @@
 var UserController = function (){
 };
 
+UserController.prototype.login = function (req, res) {
+	var options = req.query;
+	User.findUserByEmailAndPassword(options, function(err, data){
+		if(err){
+			res.status(500).send(err);
+		} else {
+			res.status(200).send(data); 
+		}
+	});
+};
+
 UserController.prototype.findAll = function (req, res) {
 	var options = req.query;
 	User.findAll(options, function(err, data){
