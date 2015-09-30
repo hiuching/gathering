@@ -44,11 +44,11 @@ Password<input type="text" id="password"/>
 			$.ajax({
 				type: 'POST',
 				contentType: 'application/json',
-				url: 'http://127.0.0.1:8004/gathering/mail',
+				url: 'http://127.0.0.1:8004/gathering/user',
 				data: data,
 				dataType: 'json',
 				success: function(data) {
-					alert('sent');
+					alert('password sent');
 				},
 				error: function(err){
 					console.log('failed', err);

@@ -11,12 +11,13 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 });
 
 Mail.send = function(options, callback){
-var mailOptions = {
-    from: "gathering <gathering7710@gmail.com>", // sender address
-    to: options.email, // list of receivers
-    subject: "testing", // Subject line
-    html: "<b>gathering texting</b>" // html body
-};
+	options = options || {};
+	var mailOptions = {
+		from: "gathering <gathering7710@gmail.com>", // sender address
+		to: options.email, // list of receivers
+		subject: "thank you for register gathering", // Subject line
+		html: "<div>Welcome gathering!</div><div>Your new password is <b>" + options.password  + "</b>.</div><div>Please login to edit yoyr profile.</div>" // html body
+	};
 
 	smtpTransport.sendMail(mailOptions, function(err, res){
 		if(err){

@@ -1,21 +1,51 @@
 ﻿var mongoose = require('mongoose'), Schema = mongoose.Schema;
 var extend = require('mongoose-schema-extend');
-
+var Mail = require('./mail');
+/***************
+schema
+****************/
 var userSchema = new Schema({
 	email:  {type: String},
-	password: {type: Number},
+	password: {type: String},
 	displayName:  {type: String},
 	noShowCount: {type: Number},
 	profilePic: {type: String},
 	friendList: {type: Array}
 }, {collection: 'user'});
 
+/***************
+Public method
+****************/
+userSchema.statics.create = function (options, callback) {
+	var self = this;
+	options = options || {};
+	options.password = resetPassword();
+	Mail.send(options, function(err, res){
+		if (err){
+			callback(err);
+		} else {
+			self.findUserByEmail(options, function(err, user){
+				if (err){
+					callback(err);
+				} else {
+					if (user){
+						user.password = options.password;
+					} else {
+						var user = new self (options);
+					}
+					console.log('user', user);
+					user.save(callback);  
+				}
+			});
+		}
+	});
+};
 userSchema.statics.findAll = function (options, callback) {
 	if(options.action == "findUserByEmailAndPassword"){
 		return this.findUserByEmailAndPassword(options, callback);
 	} else  if (options.action == "findUserByEmail"){
 		return this.findUserByEmail(options, callback);
-	}else  if (options.action == "findUserByDisplayName"){
+	}else  if (options.action == "findUsersByDisplayName"){
 		return this.findUserByDisplayName(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
@@ -61,10 +91,18 @@ userSchema.statics.findUserByEmail = function (options, callback) {
 	options = options || {};
 	var conditions = {};
 	conditions.email = options.email;
-    this.findByConditions(conditions, callback);     
+    this.findByConditions(conditions, function(err, users){
+		if(users.length == 1){
+			callback(null, users[0]);
+		} else if (users.length == 0){
+			callback(null);
+		} else {
+			callback({code:403, message: 'more than one recode'});
+		}
+	});     
 };
 
-userSchema.statics.findUserByDisplayName = function (options, callback) {
+userSchema.statics.findUsersByDisplayName = function (options, callback) {
 	options = options || {};
 	var conditions = {};
 	conditions.displayName = options.displayName;
@@ -72,15 +110,21 @@ userSchema.statics.findUserByDisplayName = function (options, callback) {
 	this.findByConditions(conditions, callback);
 };
 
-userSchema.statics.create = function (options, callback) {
-	console.log('options', options)
-	var user = options || {};
-	var User = new this(user);
-	User.save(callback);       
-};
-
-
 userSchema.statics.updateById = function (id, update, callback) {
     this.update({ _id: id }, update,  callback);
 };
+
+/***************
+Private method
+****************/
+var resetPassword =  function(){
+    var password = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for ( var i=0; i < 8; i++ ) {
+        password += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+    return password;
+};
+
 module.exports = mongoose.model('User', userSchema);
