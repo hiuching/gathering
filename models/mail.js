@@ -30,4 +30,3 @@ Mail.send = function(options, callback){
 	});	
 }
 
-module.exports = Mail;
