@@ -38,8 +38,7 @@ UserController.prototype.add = function (req, res) {
 };
 
 UserController.prototype.updateById = function (req, res) {
-res.status(405).send('method not allowed');
-/*   var self = this;
+  var self = this;
   var req = req;
   var id = req.params.id;
   var update = req.body;
@@ -49,7 +48,7 @@ res.status(405).send('method not allowed');
 		} else {
 			res.status(200).send(data);                 
 		}
-	}); */
+	});
 };
 
 UserController.prototype.removeById = function (req, res) {

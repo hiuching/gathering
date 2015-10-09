@@ -16,7 +16,7 @@ var http = require('http');
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
 });
-console.log('Server running at http://127.0.0.1:8004/');
+console.log('Server running at http://127.0.0.1:8081/');
 
 var options = {
 	user: 'gathering',
@@ -91,26 +91,12 @@ app.get('/gathering/:moduleName/:id', function (req, res) {
 		});
 });
 
-app.put('/gathering/:moduleName', function (req, res) {
-  var moduleName = req.params.moduleName;
-        getController(moduleName, function(error, controller){
-            return controller.update(req, res);
-        });
-});
-
 app.post('/gathering/:moduleName', function (req, res) {
 	var moduleName = req.params.moduleName;
 		console.log('moduleName', moduleName);
         getController(moduleName, function(error, controller){
             return controller.add(req, res);
         });
-});
-
-app.put('/gathering/:moduleName/:id', function (req, res) {
-	var moduleName = req.params.moduleName;
-	getController(moduleName, function(error, controller){
-		return controller.updateById(req, res);
-	});
 });
 
 app.put('/gathering/:moduleName/:id', function (req, res) {
