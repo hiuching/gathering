@@ -55,8 +55,8 @@ app.all("/login", function(req, res, next) {
 
 var controllers = {};
 var modules = [
-'user',
-'mail'
+'file',
+'user'
 ];
 
 var count = modules.length;
@@ -137,7 +137,6 @@ app.use(function(req, res, next) {
 // app.listen(8004, localhost);
 
 var getController = function (moduleName, callback){
-	console.log (controllers[moduleName]);
     callback(null, controllers[moduleName])
  };
 
