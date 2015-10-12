@@ -46,7 +46,12 @@
 					console.log('success', str);
 					$('#msg').text ("login successful");
 					$.jStorage.set("userEmail", user.email);
-					window.location.href = 'home.html';
+					$.jStorage.set("userId", user._id);
+					if (user.displayName == null)
+						window.location.href = 'update.html';
+						else
+							window.location.href = 'home.html';
+					
 				},
 				error: function(err){
 					console.log('failed', err);
