@@ -9,7 +9,6 @@ FileController.prototype.findAll = function (req, res) {
 
 FileController.prototype.add = function (req, res) {
 	var options = req.body;
-	console.log(options.path);
 	File.create(options, function(err, data){
 		if(err) {
 			res.status(500).send(err);   

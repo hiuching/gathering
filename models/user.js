@@ -6,7 +6,7 @@ schema
 ****************/
 var userSchema = new Schema({
 	email:  {type: String},
-	password: {type: String},
+	password: {type: String, select: false},
 	displayName:  {type: String},
 	noShowCount: {type: Number},
 	profilePic: {type: String},
@@ -33,7 +33,6 @@ userSchema.statics.create = function (options, callback) {
 					} else {
 						var user = new self (options);
 					}
-					console.log('user', user);
 					user.save(callback);  
 				}
 			});
@@ -45,7 +44,9 @@ userSchema.statics.findAll = function (options, callback) {
 		return this.findUserByEmailAndPassword(options, callback);
 	} else  if (options.action == "findUserByEmail"){
 		return this.findUserByEmail(options, callback);
-	}else  if (options.action == "findUsersByDisplayName"){
+	} else  if (options.action == "findUserByEmailWithPassword"){
+		return this.findUserByEmailWithPassword(options, callback);
+	} else  if (options.action == "findUsersByDisplayName"){
 		return this.findUserByDisplayName(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
@@ -65,6 +66,9 @@ userSchema.statics.findByConditions = function (options, callback) {
 	if (conditions.displayName != null && conditions.displayName != '') {
 		q.where("displayName").equals(conditions.displayName);
 	}
+	if (conditions.select != null && conditions.select != '') {
+		q.select(conditions.select);
+	}
 	q.exec(callback);
 }; 
 
@@ -79,7 +83,7 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 			callback(err);
 		} else {
 			if(users.length == 1){
-				callback(null, users[0]);
+				callback(null, user[0]);
 			} else {
 				callback({code:404, message: 'uncorrert email or password'});
 			}
@@ -91,6 +95,22 @@ userSchema.statics.findUserByEmail = function (options, callback) {
 	options = options || {};
 	var conditions = {};
 	conditions.email = options.email;
+    this.findByConditions(conditions, function(err, users){
+		if(users.length == 1){
+			callback(null, users[0]);
+		} else if (users.length == 0){
+			callback(null);
+		} else {
+			callback({code:403, message: 'more than one recode'});
+		}
+	});     
+};
+
+userSchema.statics.findUserByEmailWithPassword = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions.email = options.email;
+	conditions.select = '+password';
     this.findByConditions(conditions, function(err, users){
 		if(users.length == 1){
 			callback(null, users[0]);

@@ -27,7 +27,6 @@ UserController.prototype.findAll = function (req, res) {
 
 UserController.prototype.add = function (req, res) {
 	var options = req.body;
-	console.log(options);
 	User.create(options, function(err, data){
 		if(err){
 			res.status(500).send(err);   
