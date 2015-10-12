@@ -131,7 +131,14 @@ userSchema.statics.findUsersByDisplayName = function (options, callback) {
 };
 
 userSchema.statics.updateById = function (id, update, callback) {
-    this.update({ _id: id }, update,  callback);
+    this.update({ _id: id }, update,  function(err, noOfUpdate){
+		if (err){
+			callback(err);
+		} else {
+			delete update.password;
+			callback(null, update);
+		}
+	});
 };
 
 /***************
