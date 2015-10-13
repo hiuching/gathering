@@ -1,0 +1,27 @@
+<script type="text/template" id="ModalView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= obj.title %></h4>
+      </div>
+      <div id="modal-content" class="modal-body">
+        <div><%= obj.content %></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><%= QuestCMS.l("Close") %></button>
+      </div>      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</script>
+
+
+<script type="text/template" id="SpinnerView">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-body">       
+        <div id="spinner"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</script>

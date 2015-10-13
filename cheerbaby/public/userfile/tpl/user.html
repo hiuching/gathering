@@ -1,0 +1,644 @@
+<script type="text/template" id="FormView">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-7">
+				<div id="output"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<%= QuestCMS.l("Login") %>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+							<fieldset>
+								<div class="control-group">
+									<label for="email" class="control-label"><%= QuestCMS.l("Email") %>:</label>
+									<input class="form-control" type="text" name="email" id="email" placeholder="<%= QuestCMS.l("Email") %>" required/>
+								</div>
+								﻿<div class="passwordGroup has-feedback control-group">
+									<label for="password" class="control-label"><%= QuestCMS.l("Password") %>:</label>
+									<input id="password" name="password" type="password" placeholder="<%= QuestCMS.l("Password") %>" class="form-control input-md" required>
+									<span class="glyphicon glyphicon-eye-open user-showHidden"></span>
+								</div>
+								﻿<div class="control-group">
+									<select id="branch" name="branch" class="form-control" required></option>
+									</select>
+								</div>
+								<br/>
+								<div class="control-group">
+									<button type="submit" class="btn btn-info btn-block login user-submit"><%= QuestCMS.l("Login") %></button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="panel-footer">
+						<%= QuestCMS.l("Not Register Yet") %>? <a href="#" class="user-signUp"><%= QuestCMS.l("Register") %></a>
+						<div>
+							<a class="user-forgot" href="#"><%= QuestCMS.l("Forgot ") %><%= QuestCMS.l("Password") %></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="SearchUserView">
+  <div class="container">
+		<div class="panel panel-info">
+
+		<ul class="nav nav-tabs nav-justified">
+		<li role="presentation" class="active" id ="joinedTab"><a href="#profile" data-toggle="tab"><%= QuestCMS.l("Profile ") %></a></li>
+		<li role="presentation" id ="searchedTab"><a href="#reviewJoinesClub"  data-toggle="tab"><%= QuestCMS.l("Joined ") %><%= QuestCMS.l("Club") %></a></li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content row">
+			<div class="tab-pane active" id="profile">
+			</div>
+
+			<div class="tab-pane row" id="reviewJoinesClub">
+			</div>
+		</div>
+
+		</div>
+  </div>
+</script>
+
+<script type="text/template" id="SignUpFormView">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-7">
+				<div id="output"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<%= QuestCMS.l("Register") %>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+							<fieldset>
+								<div class="control-group">
+									<label for="lastName" class="control-label"><%= QuestCMS.l("Mother") %><%= QuestCMS.l("Last Name") %>:</label>
+									<span style = "color: red;"><%= QuestCMS.l("Last Name in HKID card") %></span>
+									<input class="form-control" type="text" name="lastName" id="lastName" placeholder="<%= QuestCMS.l("Mother") %><%= QuestCMS.l("Last Name") %>" required/>
+
+								</div>
+								<div class="control-group">
+									<label for="firstName" class="control-label"><%= QuestCMS.l("Mother") %><%= QuestCMS.l("First Name") %>:</label>
+									<span style = "color: red;"><%= QuestCMS.l("First Name in HKID card") %></span>
+									<input class="form-control" type="text" name="firstName" id="firstName" placeholder="<%= QuestCMS.l("Mother") %><%= QuestCMS.l("First Name") %>" required/>
+								</div>
+								<div class="control-group">
+									<label for="DOB" class="control-label"><%= QuestCMS.l("EDD") %>/ <%= QuestCMS.l("DOB") %>:</label>
+									<input class="form-control" type="text" name="EDD" id="EDD" placeholder="<%= QuestCMS.l("EDD") %>" required/>
+								</div>
+								<div class="control-group">
+									<label for="phone" class="control-label"><%= QuestCMS.l("Phone") %><%= QuestCMS.l("Number") %>:</label>
+								</div>
+								<div class="control-group input-group">
+									<span class="input-group-addon">+852</span>
+									<input class="form-control" type="text" name="phone" id="phone" placeholder="<%= QuestCMS.l("Phone") %><%= QuestCMS.l("Number") %>" required/>
+								</div>
+								<div class="control-group">
+									<label for="email" class="control-label"><%= QuestCMS.l("Email") %>:</label>
+									<input class="form-control" type="text" name="email" id="email" placeholder="<%= QuestCMS.l("Email") %>" required/>
+								</div>
+								<br/>
+								<div class="row">
+									<div class="col-md-6">
+										<button type="submit" class="btn btn-info btn-block login user-submit ladda-button" data-style="zoom-in"><%= QuestCMS.l("Register") %></button>
+									</div>
+									<div class="col-md-6">
+										<button type="submit" class="btn btn-info btn-block login user-cancel"><%= QuestCMS.l("Cancel") %></button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="panel-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="EmailEdit">
+	﻿<div class="container">
+		<form class="form-horizontal well">
+			<fieldset>
+				<div class="control-group">
+					<h3 class="header"><%= QuestCMS.l("Change") %><%= QuestCMS.l("Email") %></h3>
+				</div>
+				<div class="form-group">
+					<label for="email" class="control-label col-md-2"><%= QuestCMS.l("Email") %>:</label>
+					<div class="col-md-3">
+						<input type="text" id="email" name="email" class="form-control" value="" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email_retype" class="control-label col-md-2"><%= QuestCMS.l("Retype") %><%= QuestCMS.l("Email") %>:</label>
+					<div class="col-md-3">
+						<input type="text" id="email_retype" name="email_retype" class="form-control" value="" />
+					</div>
+				</div>
+				<hr/>
+				<div class="form-group buttonGroup">
+					<button class="btn btn-default user-cancel pull-right"><%= QuestCMS.l("Cancel") %></button>
+					<button type="submit" class="btn btn-primary user-submit pull-right ladda-button" id="user-submit" data-style="zoom-in"><%= QuestCMS.l("Submit") %></button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</script>
+
+<script type="text/template" id="ItemEdit">
+  <div class="container">
+		<form class="form-horizontal well" id="userProfile">
+			<fieldset>
+			<a href="#" class="closeRegion hidden pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+				<h4><%= QuestCMS.l("Information") %></h4>
+				<span class='glyphicon-color-red'>*</span>: <%= QuestCMS.l("Mandatory ") %>
+				<br>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="lastName"> <%= QuestCMS.l("Mother ") %> <span class='glyphicon-color-red'>*</span></label>
+					<div class="col-md-3">
+						<input name="lastName" class="form-control input-md" placeholder="<%= QuestCMS.l("Last Name in HKID card") %>" data-toggle="floatLabel" data-value="no-js" value="<%= obj.lastName %>" />
+						<label for="lastName" style=""><%= QuestCMS.l("Last Name in HKID card") %></label>
+					</div>
+					<div class="col-md-3">
+						<input name="firstName" class="form-control input-md" placeholder="<%= QuestCMS.l("First Name in HKID card") %>" data-toggle="floatLabel" data-value="no-js" value="<%= obj.firstName %>" />
+						<label for="firstName" style=""><%= QuestCMS.l("First Name in HKID card") %></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="HKID"><%= QuestCMS.l("HKID") %> <span class='glyphicon-color-red'>*</span></label>
+					<div class="col-md-3" id = "HKID">
+						<input id="HKIDchar" placeholder="<%= QuestCMS.l("a") %>" class="form-control input-md col-md-3" type="text" style="width:20%" value="<%= obj.HKIDchar %>" />
+						<input id="HKIDnum" placeholder="<%= QuestCMS.l("123456") %>" class="form-control input-md col-md-6" type="text" style="width:60%" value="<%= obj.HKIDnum %>" />
+						<input id="HKIDbracket" placeholder="<%= QuestCMS.l("7") %>" class="form-control input-md col-md-3" type="text" style="width:20%" value="<%= obj.HKIDbracket %>" />
+					</div>
+					<label class="col-md-2 control-label" for="DOB"><%= QuestCMS.l("Mother ") %><%= QuestCMS.l("DOB") %> <span class='glyphicon-color-red'>*</span></label>
+					<div class="col-md-3">
+						<div id="birthdayPicker" class = "birthdayPicker"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="email"><%= QuestCMS.l("Email") %> <span class='glyphicon-color-red'>*</span></label>
+					<div class="col-md-3">
+						<input id="email" name="email" placeholder="<%= QuestCMS.l("Email") %>" class="form-control input-md" type="text" value="<%= obj.email %>" disabled/>
+						<span class="help-block"><a href="#" id="changeEmail"><%= QuestCMS.l("Change ") %><%= QuestCMS.l("Email") %></a></span>
+					</div>
+					<label class="col-md-2 control-label"><%= QuestCMS.l("Phone ") %><%= QuestCMS.l("Number") %> <span class='glyphicon-color-red'>*</span></label>
+					<div class="col-md-2">
+						<input id="phone" name="phone" placeholder="<%= QuestCMS.l("Phone ") %><%= QuestCMS.l("Number") %>" class="form-control input-md" type="text" value="<%= obj.phone %>" />
+					</div>
+				</div>
+
+				<div id="AppointmentHistory" />
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="email"><%= QuestCMS.l("Joined Clubs") %>:</label>
+					<div class="col-md-3">
+						<button id="userJoinedClubs" class="btn btn-md btn-primary"><%= QuestCMS.l("Review") %></button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="occupation"><%= QuestCMS.l("Occupation") %></label>
+					<div class="col-md-6">
+						<input name="occupation" class="input-md" type="radio" value="Full time Mother" <%=  obj.occupation == "Full time Mother" ? "checked" : "" %> > <%= QuestCMS.l("Housewife") %></input>&nbsp;&nbsp;
+						<input name="occupation" class="input-md" type="radio" value="Full time Worker" <%=  obj.occupation == "Full time Worker" ? "checked" : "" %> > <%= QuestCMS.l("Full Time") %><%= QuestCMS.l(" Worker") %></input>&nbsp;&nbsp;
+						<input name="occupation" class="input-md" type="radio" value="Part time Worker" <%=  obj.occupation == "Part time Worker" ? "checked" : "" %> > <%= QuestCMS.l("Part time") %><%= QuestCMS.l(" Worker") %></input>
+					</div>
+				</div>
+				<div id="address" class="control-group">
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="address.line1"><%= QuestCMS.l("Address") %> <span class='glyphicon-color-red'>*</span></label>
+						<div class="col-md-7">
+							<input id="line1" name="address.line1" placeholder="<%= QuestCMS.l("Room") %>/ <%= QuestCMS.l("Flat") %>/ <%= QuestCMS.l("Block") %>/ <%= QuestCMS.l("Building") %>" class="form-control input-md address" data-toggle="floatLabel" data-value="no-js" type="text" value="<%= obj.line1 %>" />
+							<label for="address.line1" style=""><%= QuestCMS.l("Room") %>/ <%= QuestCMS.l("Flat") %>/ <%= QuestCMS.l("Block") %>/ <%= QuestCMS.l("Building") %></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-7">
+							<input id="line2" name="address.line2" placeholder="<%= QuestCMS.l("Estate") %>/ <%= QuestCMS.l("Street") %>/ <%= QuestCMS.l("Number") %>" class="form-control input-md address" data-toggle="floatLabel" data-value="no-js" type="text" value="<%= obj.line2 %>" />
+							<label for="address.line2" style=""><%= QuestCMS.l("Estate") %>/ <%= QuestCMS.l("Street") %>/ <%= QuestCMS.l("Number") %></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="address.district"><%= QuestCMS.l("District") %> <span class='glyphicon-color-red'>*</span></label>
+						<div class="col-md-2">
+							<select id="district" name="address.district" class="form-control address">
+								<option selected disabled><%=QuestCMS.l("Please select")%></option>
+								<option value="N.T" <%=  obj.district == "N.T" ? "selected" : "" %> ><%= QuestCMS.l("N.T") %></option>
+								<option value="Kowloon" <%=  obj.district == "Kowloon" ? "selected" : "" %> ><%= QuestCMS.l("Kowloon") %></option>
+								<option value="HK ISLAND" <%=  obj.district == "HK ISLAND" ? "selected" : "" %> ><%= QuestCMS.l("HK ISLAND") %></option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select id="region" name="address.region" class="form-control regionList address">
+								<option selected disabled><%=QuestCMS.l("Please select")%></option>
+							</select>
+						</div>
+						<label class="col-md-1 control-label" for="address.country"><%= QuestCMS.l("Country") %> <span class='glyphicon-color-red'>*</span></label>
+						<div class="col-md-2">
+							<select id="country" name="address.country" class="form-control address">
+								<!-- <option value=""></option> -->
+								<option value="Hong Kong"><%= QuestCMS.l("HK") %></option>
+								<!-- <option value="Macau">Macau</option> -->
+							</select>
+						</div>
+					</div>
+					<br/>
+				</div>
+				<div id="baby" class="control-group">
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="baby.EDD"> <%= QuestCMS.l("Baby") %> <span class='glyphicon-color-red'>*</span></label>
+							<div class="col-md-3">
+								<input id="EDD" name="baby.EDD" type="text" class="form-control input-md" placeholder="<%= QuestCMS.l("EDD") %>" data-toggle="floatLabel" data-value="no-js" />
+								<label for="EDD" style=""><%= QuestCMS.l("EDD") %></label>
+							</div>
+							<label class="col-md-2 control-label" for="baby.bornType"><%= QuestCMS.l("Born Type") %> <span class='glyphicon-color-red'>*</span></label>
+							<div class="col-md-3">
+								<input name="baby.bornType" class="input-md baby" type="radio" value="Natural Childbirth" <%=  obj.bornType == "Natural Childbirth" ? "checked" : "" %> > <%= QuestCMS.l("Natural") %></input>&nbsp;&nbsp;<br>
+								<input name="baby.bornType" class="input-md baby" type="radio" value="Caesarean Birth" <%=  obj.bornType == "Caesarean Birth" ? "checked" : "" %> > <%= QuestCMS.l("Caesarean") %></input>&nbsp;&nbsp;<br>
+								<input name="baby.bornType" class="input-md baby" type="radio" value="Not Confirm" <%=  obj.bornType == "Not Confirm" ? "checked" : "" %> > <%= QuestCMS.l("Not Confirm") %></input><br>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="baby.hospitalType"> <%= QuestCMS.l("Hospital for Baby") %> <span class='glyphicon-color-red'>*</span></label>
+							<div class="col-md-3">
+								<select id="hospitalType" name="baby.hospitalType" class="form-control baby">
+									<option selected disabled><%=QuestCMS.l("Please select")%></option>
+									<option value="Not Confirm" <%=  obj.hospitalType == "Not Confirm" ? "selected" : "" %>><%= QuestCMS.l("Not Confirm") %></option>
+									<option value="Public Hospitals" <%=  obj.hospitalType == "Public Hospitals" ? "selected" : "" %>><%= QuestCMS.l("Public ") %><%= QuestCMS.l("Hospital") %></option>
+									<option value="Private Hospitals" <%=  obj.hospitalType == "Private Hospitals" ? "selected" : "" %>><%= QuestCMS.l("Private ") %><%= QuestCMS.l("Hospital") %></option>
+								</select>
+							</div>
+							<div class="col-md-5">
+								<select id="hospitalList" name="baby.hospital" class="form-control hospitalList baby">
+									<option selected disabled><%=QuestCMS.l("Please select")%></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-offset-2 col-md-7">
+								<input name="baby.attendingPhysician" type="text" class="form-control input-md baby" placeholder="<%= QuestCMS.l("Doctor") %>" data-toggle="floatLabel" data-value="no-js" value="<%= obj.attendingPhysician %>" />
+								<label for="attendingPhysician" style=""><%= QuestCMS.l("Doctor") %></label>
+							</div>
+						</div>
+	<!-- 						<div class="col-md-5">
+								<input name="attendingPhysician" type="text" class="form-control input-md baby" placeholder="<%= QuestCMS.l("Doctor") %>" data-toggle="floatLabel" data-value="no-js" value="<%= obj.attendingPhysician %>" />
+								<label for="attendingPhysician" style=""><%= QuestCMS.l("Doctor") %></label>
+							</div> -->
+
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="babiesHave"><%= QuestCMS.l("Number Of Child") %> <span class='glyphicon-color-red'>*</span></label>
+						<div class="col-md-2">
+							<select id="countBabies" name="countBabies" class="form-control">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="col-md-5">
+							<table id="noOfBabies">
+								<tr class="hidden">
+									<td>
+										<select class="form-control" name="noOfBabies.sex">
+											<option value="" disabled <%= (obj.sex == "" || !obj.sex) ? "selected" : "" %> >-- <%= QuestCMS.l("Sex") %> --</option>
+											<option value="M"><%= QuestCMS.l("Male") %></option>
+											<option value="F"><%= QuestCMS.l("Female") %></option>
+										</select>
+									</td>
+									<td><input class="form-control DOBDatepicker" type="text" name="noOfBabies.DOB" placeholder="<%= QuestCMS.l("DOB") %>" value="" /></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				<!-- <div id="fileComponent"></div> -->
+				<!-- <br/> -->
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="totalFamilyIncome"> <%= QuestCMS.l("Total Family Income") %> /(<%= QuestCMS.l("Month") %>): </label>
+					<div class="col-md-3">
+						<input name="totalFamilyIncome" class="input-md" type="radio" value="100001 Or Above" <%=  obj.totalFamilyIncome == "100001 Or Above" ? "checked" : "" %> > $100,001 <%= QuestCMS.l("Or ") %><%= QuestCMS.l("Above") %></input><br/>
+						<input name="totalFamilyIncome" class="input-md" type="radio" value="80001-100000" <%=  obj.totalFamilyIncome == "80001-100000" ? "checked" : "" %> > $80,001 - $100,000</input><br/>
+						<input name="totalFamilyIncome" class="input-md" type="radio" value="60001-80000" <%=  obj.totalFamilyIncome == "60001-80000" ? "checked" : "" %> > $60,001 - $80,000</input><br/>
+						<input name="totalFamilyIncome" class="input-md" type="radio" value="40001-60000" <%=  obj.totalFamilyIncome == "40001-60000" ? "checked" : "" %> > $40,001 - $60,000</input><br/>
+						<input name="totalFamilyIncome" class="input-md" type="radio" value="20001-40000" <%=  obj.totalFamilyIncome == "20001-40000" ? "checked" : "" %> > $20,001 - $40,000</input><br/>
+						<input name="totalFamilyIncome" class="input-md" type="radio" value="20000 Or Below" <%=  obj.totalFamilyIncome == "20000 Or Below" ? "checked" : "" %> > $20,000 <%= QuestCMS.l("Or ") %><%= QuestCMS.l("Below") %></input>
+					</div>
+					<label class="col-md-2 control-label" for="educationLevel"> <%= QuestCMS.l("Education Level") %>: </label>
+					<div class="col-md-4">
+						<input name="educationLevel" class="input-md" type="radio" value="University Bachelor Or Master Or Above" <%=  obj.educationLevel == "University Bachelor Or Master Or Above" ? "checked" : "" %> > <%= QuestCMS.l("University Bachelor") %>/ <%= QuestCMS.l("Master") %> <%= QuestCMS.l("Or ") %><%= QuestCMS.l("Above") %></input><br/>
+						<input name="educationLevel" class="input-md" type="radio" value="Higher Diploma Or Tertiary Institutions" <%=  obj.educationLevel == "Higher Diploma Or Tertiary Institutions" ? "checked" : "" %> > <%= QuestCMS.l("Higher Diploma") %>/ <%= QuestCMS.l("Tertiary Institutions") %></input><br/>
+						<input name="educationLevel" class="input-md" type="radio" value="Secondary School" <%=  obj.educationLevel == "Secondary School" ? "checked" : "" %> > <%= QuestCMS.l("Secondary School") %></input><br/>
+						<input name="educationLevel" class="input-md" type="radio" value="Primary Or Below" <%=  obj.educationLevel == "Primary Or Below" ? "checked" : "" %> > <%= QuestCMS.l("Primary") %> <%= QuestCMS.l("Or ") %><%= QuestCMS.l("Below") %></input><br/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="interestedTypes"> <%= QuestCMS.l("Interested Types") %>: <span class='glyphicon-color-red'>*</span><button class="btn btn-xs btn-primary selectAll"><%= QuestCMS.l("Select All") %></button></label>
+					<div id="interestedTypesList">
+					</div>
+				</div>
+				<hr/>
+				<div class="form-group">
+					<div class="col-md-offset-1">
+						<input type="checkbox" name="agreePolicy" value="agreed" id="agreePolicy"/><%= QuestCMS.l("Privacy Policy") %>
+					</div>
+				</div>
+				<hr/>
+				<div class="form-group buttonGroup">
+					<button class="btn btn-default btn-md user-cancel pull-right"><%= QuestCMS.l("Cancel") %></button>
+					<button class="btn btn-primary btn-md user-submit pull-right ladda-button" data-style="zoom-in"><%= QuestCMS.l("Update") %></button>
+					<button class="btn btn-success btn-md user-verify pull-right hidden"><%= QuestCMS.l("Verify") %></button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</script>
+
+<script type="text/template" id="ReviewUserJoinedClubItemView">
+	<td><%= name%></td>
+	<td><%= date %></td>
+	<td><%= items %></td>
+</script>
+
+<script type="text/template" id="ReviewUserJoinedClubCompositeView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= userName %> - <%= QuestCMS.l(" Joined") %><%= lengthOfCollection %><%= QuestCMS.l(" Club") %></h4>
+      </div>
+      <div class="modal-body">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+					<label><%= QuestCMS.l("Club") %><%= QuestCMS.l("List") %></label>
+						<form id="vendorPager" class="pager tablesorter-pager pull-right">
+							<a type="button" class="btn btn-xs btn-default first"><span class="glyphicon glyphicon-fast-backward " aria-hidden="true"></span></a>
+							<a type="button" class="btn btn-xs btn-default prev"><span class=" glyphicon glyphicon-step-backward" aria-hidden="true"></span></a>
+							<span class="pagedisplay"></span>
+							<a type="button" class="btn btn-xs btn-default follow"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
+							<a type="button" class="btn btn-xs btn-default last"><span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span></a>
+							<select class="pagesize" title="Select Page Size">
+								<option selected="selected" value="5">5</option>
+								<option value="10">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+							</select>
+							<select class="gotoPage" title="Select page number"></select>
+						</form>
+
+					</div>
+					<table class="table table-list-search table-responsive tablesorter" id="allVendorList">
+						<thead>
+							<tr>
+								<th><%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Name") %></th>
+								<th><%= QuestCMS.l("Join ") %><%= QuestCMS.l("Date") %></th>
+								<th><%= QuestCMS.l("Item") %></th>
+							</tr>
+						</thead>
+						<tbody class="questcms-userJoinedClubs"></tbody>
+					</table>
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= QuestCMS.l("Close") %></button>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="ReviewSubmittedFiles">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><%= username %>'s <%= QuestCMS.l("Submitted Files") %></h4>
+			</div>
+			<div class="modal-body">
+				<ul class="submittedFiles"></ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+
+<script type="text/template" id="AssignAdminModalView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= obj.lastName + " " + obj.firstName %> - <%= QuestCMS.l("Assign Right") %></h4>
+				<%= QuestCMS.l("Right ") %>:<span id="userAdminRoles"></span>
+      </div>
+      <div class="modal-body">
+				<div class="form-group">
+					<div class="col-md-6 adminRoles">
+						<input name="AdminRoles" class="input-md admin adminRole" type="checkbox" value="admin"> <%= QuestCMS.l("Admin") %></input>
+					</div>
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= QuestCMS.l("Close") %></button>
+        <button type="button" class="btn btn-primary submit" data-dismiss="modal"><%= QuestCMS.l("Submit") %></button>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="ShowUserDetail">
+	<div class="container">
+		<h4><%= QuestCMS.l("Search ") %><%= QuestCMS.l("Member") %></h4>
+			<div class="form-group">
+				<label class="col-md-2 control-label"><%= QuestCMS.l("Member ") %><%= QuestCMS.l("Code") %></label>
+				<div class="col-md-4">
+					<input id="code" name="code" type="text" class="form-control" placeholder="<%= QuestCMS.l("Enter ") %><%= QuestCMS.l("Member") %><%= QuestCMS.l("Code") %>"></input>
+				</div>
+			</div>
+		<hr/>
+		<form id="userDetails" role="form" class="form-horizontal">
+			<fieldset>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="lastName"> <%= QuestCMS.l("Mother ") %> </label>
+					<div class="col-md-2">
+						<input name="lastName" class="form-control input-md" placeholder="<%= QuestCMS.l("Last Name") %>" data-toggle="floatLabel" data-value="no-js" value="<%= obj.lastName %>" disabled/>
+						<label for="lastName" style=""><%= QuestCMS.l("Last Name") %></label>
+					</div>
+					<div class="col-md-3">
+						<input name="firstName" class="form-control input-md" placeholder="<%= QuestCMS.l("First Name") %>" data-toggle="floatLabel" data-value="no-js" value="<%= obj.firstName %>" disabled/>
+						<label for="firstName" style=""><%= QuestCMS.l("First Name") %></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="HKID"><%= QuestCMS.l("HKID") %> </label>
+					<div class="col-md-3">
+						<input id="HKID" name="HKID" placeholder="<%= QuestCMS.l("HKID") %>" class="form-control input-md" type="text" value="<%= obj.HKID %>" disabled/>
+					</div>
+					<label class="col-md-2 control-label date" for="DOB"><%= QuestCMS.l("Mother ") %><%= QuestCMS.l("DOB") %></label>
+					<div class="col-md-2">
+						<input id="DOB" name="DOB" placeholder="<%= QuestCMS.l("Mother ") %><%= QuestCMS.l("DOB") %>" class="form-control input-md DOB" type="text" value="<%= obj.formatedDOB %>" disabled/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="email"><%= QuestCMS.l("Email") %> </label>
+					<div class="col-md-3">
+						<input id="email" name="email" placeholder="<%= QuestCMS.l("Email") %>" class="form-control input-md" type="text" value="<%= obj.email %>" disabled/>
+					</div>
+					<label class="col-md-2 control-label"><%= QuestCMS.l("Phone ") %><%= QuestCMS.l("Number") %></label>
+					<div class="col-md-2">
+						<input id="phone" name="phone" placeholder="<%= QuestCMS.l("Phone ") %><%= QuestCMS.l("Number") %>" class="form-control input-md" type="text" value="<%= obj.phone %>" disabled/>
+					</div>
+				</div>
+				<div id="address" class="control-group">
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="address.line1"><%= QuestCMS.l("Address") %></label>
+						<div class="col-md-7">
+							<input id="address-line1" name="address.line1" placeholder="<%= QuestCMS.l("Room") %>/ <%= QuestCMS.l("Flat") %>/ <%= QuestCMS.l("Block") %>/ <%= QuestCMS.l("Building") %>" class="form-control input-md address" data-toggle="floatLabel" data-value="no-js" type="text" value="<%= obj.line1 %>" disabled/>
+							<label for="address-line1" style=""><%= QuestCMS.l("Room") %>/ <%= QuestCMS.l("Flat") %>/ <%= QuestCMS.l("Block") %>/ <%= QuestCMS.l("Building") %></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-7">
+							<input id="address-line2" name="address.line2" placeholder="<%= QuestCMS.l("Estate") %>/ <%= QuestCMS.l("Street") %>/ <%= QuestCMS.l("Number") %>" class="form-control input-md address" data-toggle="floatLabel" data-value="no-js" type="text" value="<%= obj.line2 %>" disabled/>
+							<label for="address-line2" style=""><%= QuestCMS.l("Estate") %>/ <%= QuestCMS.l("Street") %>/ <%= QuestCMS.l("Number") %></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="address-state"><%= QuestCMS.l("District") %></label>
+						<div class="col-md-2">
+							<select id="address-district" name="address.district" class="form-control address" disabled>
+								<option value=""></option>
+								<option value="N.T" <%=  obj.district == "N.T" ? "selected" : "" %> ><%= QuestCMS.l("N.T") %></option>
+								<option value="Kowloon" <%=  obj.district == "Kowloon" ? "selected" : "" %> ><%= QuestCMS.l("Kowloon") %></option>
+								<option value="HK ISLAND" <%=  obj.district == "HK ISLAND" ? "selected" : "" %> ><%= QuestCMS.l("HK ISLAND") %></option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select id="address-region" name="address.region" class="form-control regionList address" disabled>
+								<option value=""></option>
+							</select>
+						</div>
+						<label class="col-md-1 control-label" for="address.country"><%= QuestCMS.l("Country") %></label>
+						<div class="col-md-2">
+							<select id="address-country" name="address.country" class="form-control address" disabled>
+								<!-- <option value=""></option> -->
+								<option value="Hong Kong"><%= QuestCMS.l("香港") %></option>
+								<!-- <option value="Macau">Macau</option> -->
+							</select>
+						</div>
+					</div>
+				</div>
+				<hr/>
+				<div class="buttonGroup">
+					<button class="btn btn-default btn-md user-cancel pull-right"><%= QuestCMS.l("Cancel") %></button>
+					<button class="btn btn-primary btn-md user-confirm pull-right ladda-button" data-style="zoom-in"><%= QuestCMS.l("Confirm") %></button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</script>
+
+<script type="text/template" id="StepFlowView">
+	<div class="container well">
+		<div class="questcms-stepFlow">
+			<div class="questcms-stepFlow-row step-panel">
+				<div class="questcms-stepFlow-step hidden">
+					<a href="#step-0" type="button" class="btn btn-primary btn-circle goToWhichStep">0</a>
+					<p class="questcms-stepFlow-label"></p>
+				</div>
+			</div>
+		</div>
+		<form id="step-contents" role="form" class="form-horizontal">
+			<fieldset>
+				<div class="row step-content hidden" id="step-0"></div>
+			</fieldset>
+		</form>
+	</div>
+</script>
+
+
+<script type="text/template" id="CompositeView">
+	<div class="container">
+		<div id="searchUser"></div>
+		<div id="displayUser"></div>
+	</div>
+</script>
+
+<script type="text/template" id="SearchUserRegion">
+	<h2><%= QuestCMS.l("All User") %></h2>
+	<form class="form-horizontal filter-form" role="form">
+		<fieldset>
+			<div class="form-ground header">
+				<div class="panel panel-info">
+					<div class="panel-heading user-header">
+						<%= QuestCMS.l("User ") %><%= QuestCMS.l("Filter") %>
+					</div>
+					<div class="form-input-btn">
+						<div class="form-group col-md-2">
+							<input name="universalSearch" class="form-control input-md" placeholder="<%= QuestCMS.l("Key Words ") %><%= QuestCMS.l("Search") %>" data-toggle="floatLabel" data-value="no-js"/>
+							<label for="universalSearch" style=""><%= QuestCMS.l("Keyword ") %><%= QuestCMS.l("Search") %></label>
+						</div>
+						<div class="form-group col-md-2">
+							<input name="name" class="form-control input-md" placeholder="<%= QuestCMS.l("Name") %>" data-toggle="floatLabel" data-value="no-js"/>
+							<label for="name" style=""><%= QuestCMS.l("Name") %></label>
+						</div>
+						<div class="form-group col-md-2">
+							<input name="phone" class="form-control input-md" placeholder="<%= QuestCMS.l("Phone") %>" data-toggle="floatLabel" data-value="no-js"/>
+							<label for="phone" style=""><%= QuestCMS.l("Phone") %></label>
+						</div>
+						<div class="form-group col-md-2">
+							<input name="HKID" class="form-control input-md" placeholder="<%= QuestCMS.l("HKID") %>" data-toggle="floatLabel" data-value="no-js"/>
+							<label for="HKID" style=""><%= QuestCMS.l("Hong Kong ID") %></label>
+						</div>
+						<div class="form-group col-md-2">
+							<input name="email" class="form-control input-md" placeholder="<%= QuestCMS.l("Email") %>" data-toggle="floatLabel" data-value="no-js"/>
+							<label for="email" style=""><%= QuestCMS.l("Email") %></label>
+						</div>
+						<div class="form-group col-md-2">
+							<select id="activated" name="activated" class="form-control" data-toggle="floatLabel" data-value="no-js">
+								<option value="" disabled selected><%= QuestCMS.l("Activated") %>?</option>
+								<option value=""></option>
+								<option value="true"><%= QuestCMS.l("True") %></option>
+								<option value="false"><%= QuestCMS.l("False") %></option>
+							</select>
+							<label for="status" style=""><%= QuestCMS.l("Activated") %></label>
+						</div>
+						<div class="form-group col-md-2 searchForm" style="padding-left: 0px; padding-right: 0px; margin:0px; width:180px;">
+							<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" style="width: 50%" value="<%= QuestCMS.l("Reset") %>" ></input>
+							<input title="<%= QuestCMS.l("Search") %>" class="ladda-button btn btn-primary search" data-style="zoom-in" value="<%= QuestCMS.l("Search") %>" type="submit" style="margin-left:-5px; width: 50%"></input>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</script>
+
+<script type="text/template" id="DisplayUserRegion">
+	<div id="toolbar">
+		<div class="btn-group">
+			<button id="operation" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<%= QuestCMS.l("Task") %> <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li class="dropdown-header"><%= QuestCMS.l("Member") %></li>
+				<li data-tip=<%= QuestCMS.l("Manage-User") %> ><a href="#" id="userDetail"><%= QuestCMS.l("Member") %><%= QuestCMS.l("Details") %></a></li>
+				<li data-tip=<%= QuestCMS.l("Manage-User") %> ><a href="#" id="userJoinedClubs"><%= QuestCMS.l("Member") %><%= QuestCMS.l("Club") %></a></li>
+				<li data-tip=<%= QuestCMS.l("Manage-User") %> ><a href="#" id="reviewFile"><%= QuestCMS.l("Review File") %></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a href="#" id="sendActivationLink"><%= QuestCMS.l("Activation Link") %></a></li>
+				<li><a href="#" id="sendActivationSMS"><%= QuestCMS.l("Activation SMS") %></a></li>
+				<li role="separator" class="divider"></li>
+				<li class="dropdown-header"><%= QuestCMS.l("Permission") %></li>
+				<li data-tip=<%= QuestCMS.l("Manage-User") %> ><a href="#" id="assignRole"><%= QuestCMS.l("Manage") %><%= QuestCMS.l("Permission") %></a></li>
+			</ul>
+		</div>
+	</div>
+	<table id="table-userList"></table>
+</script>

@@ -1,0 +1,84 @@
+
+<script type="text/template" id="CalendarItemView">
+	<div class = "container">
+		<h2><%= QuestCMS.l("Daily Setting") %></h2>
+		<h5 style="color: red;padding-bottom: 10px"><b><%= QuestCMS.l("Format") %> : </b><%= QuestCMS.l("Opening ") %><%= QuestCMS.l("Time") %> ~ <%= QuestCMS.l("Closing ") %><%= QuestCMS.l("Time") %> | <%= QuestCMS.l("Quota") %></h5>
+		<div id="calendar"></div>
+	</div>
+</script>
+
+<script type="text/template" id="DayEventItemView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel"><%= QuestCMS.l("Daily Setting") %></h3>
+			</div>
+      <div class="modal-body">
+				<form class="form-horizontal filter-form" role="form">
+					<fieldset>
+						<div class="form-group">
+							<label class="control-label col-md-3" for="branch"><%= QuestCMS.l("Branch") %></label>
+							<div class="col-md-4">
+							<select id="branch" class="form-control" name="branch" disabled>
+							</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3" for="startDate"><%= QuestCMS.l("Start ") %><%= QuestCMS.l("Date") %></label>
+							<div class="col-md-4">
+								<input name="startDate" id="startDate" class="input-md form-control col-md-5" value="" required="required"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3" for="isRepeat"><%= QuestCMS.l("Repeat") %> ?</label>
+								<input name="isRepeat" class="isRepeat" value="true" type="radio"><%= QuestCMS.l("Yes") %>
+								<input name="isRepeat" class="isRepeat" value="false" type="radio" checked><%= QuestCMS.l("No") %>
+						</div>
+						<div class="form-group hidden endDate">
+							<label class="control-label col-md-3" for="EndDate"><%= QuestCMS.l("End ") %><%= QuestCMS.l("Date") %></label>
+							<div class="col-md-4">
+								<input name="endDate" id="endDate" class="input-md form-control col-md-5" value="" required="required"/>
+							</div>
+						</div>
+						<div class="form-group hidden repeats">
+							<label class="control-label col-md-3" for="repeats"><%= QuestCMS.l("Repeat") %></label>
+
+								<input name="repeats" value="0" type="checkbox"><%= QuestCMS.l("Sun") %>
+								<input name="repeats" value="1" type="checkbox"><%= QuestCMS.l("Mon") %>
+								<input name="repeats" value="2" type="checkbox"><%= QuestCMS.l("Tue") %>
+								<input name="repeats" value="3" type="checkbox"><%= QuestCMS.l("Wed") %>
+								<input name="repeats" value="4" type="checkbox"><%= QuestCMS.l("Thu") %>
+								<input name="repeats" value="5" type="checkbox"><%= QuestCMS.l("Fri") %>
+								<input name="repeats" value="6" type="checkbox"><%= QuestCMS.l("Sat") %>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3" for="numOfAppointment"><%= QuestCMS.l("appointment") %> /<%= QuestCMS.l("day") %></label>
+							<div class="col-md-8">
+								<input name="numOfAppointment" id="numOfAppointment" class="input-md form-control" value="<%= obj.numOfAppointment %>" required="required"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3" for="opening"><%= QuestCMS.l("Opening ") %><%= QuestCMS.l("time") %></label>
+							<div class="col-md-8">
+								<input name="opening" id="opening" class="input-md form-control col-md-2" value="<%= obj.openingTime %>" required="required"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3" for="closing"><%= QuestCMS.l("Closing ") %><%= QuestCMS.l("time") %></label>
+							<div class="col-md-8">
+								<input name="closing" id="closing" class="input-md form-control" value="<%= obj.closingTime %>" required="required"/>
+							</div>
+						</div>
+					</fieldset>
+				</form>			
+			</div>
+				
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><%= QuestCMS.l("Close") %></button>
+				<button type="button" class="btn btn-primary save ladda-button" data-style="zoom-in" data-dismiss="modal"><%= QuestCMS.l("Save") %></button>
+				<button type="button" class="btn btn-danger delete hidden" data-dismiss="modal"><%= QuestCMS.l("Delete") %></button>
+			</div>
+    </div>
+</div>
+</script>

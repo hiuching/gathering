@@ -1,0 +1,59 @@
+<script type="text/template" id="ItemView">
+	<div class="login-container">
+            <div id="output"></div>
+            <div class="avatar">
+			<h3>Login with APAO ID</h3>
+			</div>
+            <div class="form-box">
+			<form action="/oauth2/login" method="POST">
+				<input type="text" name="username" id="email" placeholder="<%= QuestCMS.l("Email") %>" />
+				﻿<div class="passwordGroup has-feedback">
+				<input type="password" id="password" name="password" placeholder="<%= QuestCMS.l("Password") %>">
+				<span class="glyphicon glyphicon-eye-open user-showHidden" style="display: inline;"></span>
+				</div>
+				<button type="submit"  class="btn btn-info btn-block login user-submit"><%= QuestCMS.l("Login") %></button>
+			</form>
+                </form>
+            </div>
+        </div>
+</script>
+
+
+<script type="text/template" id="AuthorizeItemView">
+  <div class="">
+		<center>
+			<h1>Authorization - APAO Congress ID</h1>
+			<p>Hi <%= username %>!</p>
+			<p>
+				<b><%= clientName %></b> is requesting <b><%= scope %></b> of your account.
+			</p>
+			<p>Do you approve?</p>
+
+			<form action="<%= oauth2Authorize %>" method="post">
+				<input name="transaction_id" type="hidden" value="<%= transactionID %>">
+				<div>
+				<input type="submit" value="Allow" id="allow">
+				<input type="submit" value="Deny" name="cancel" id="deny">
+				</div>
+			</form>
+
+		</center>
+  </div>
+</script>
+
+<script type="text/template" id="ModalView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel"><%= QuestCMS.l("Title") %></h3>
+				</div>
+      <div id="modal-content" class="modal-body">
+
+			</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><%= QuestCMS.l("Close") %></button>
+      </div>      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</script>

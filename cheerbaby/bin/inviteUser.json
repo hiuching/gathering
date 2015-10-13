@@ -1,0 +1,41 @@
+{
+	"inviter":{
+		"firstName": "kit",
+		"lastName": "Lee",
+		"_id" : "54abbcd98efab658108d24c5",
+		"groups": [
+			{
+				"name" : "Test create group",
+				"owner" : "54abbcd98efab658108d24c5",
+				"created" : "2015-01-09T18:57:17.947+08:00",
+				"joined" : "2015-01-09T18:57:17.947+08:00",
+				"isAdmin" : true,
+				"isMember" : true,
+				"_id" : "54afb40d3608883c1027eb2f"
+			},{
+				"name" : "Test create group 2",
+				"owner" : "54abbcd98efab658108d24c5",
+				"created" : "2015-01-09T18:58:05.910+08:00",
+				"joined" : "2015-01-09T18:58:05.910+08:00",
+				"isAdmin" : true,
+				"isMember" : true,
+				"_id" : "54afb43d8291e33c1717894e"
+			},{
+				"name" : "Test create group 3",
+				"owner" : "54abbcd98efab658108d24c5",
+				"created" : "2015-01-09T19:03:57.526+08:00",
+				"joined" : "2015-01-09T19:03:57.526+08:00",
+				"isAdmin" : true,
+				"isMember" : true,
+				"_id" : "54afb59d5c1feca01632f803"
+			}
+		]
+	},
+	"inviteeId": "54a24f0ea61c38880f240f5d",
+	"group": {
+		"name": "Test create group 2",
+		"owner" : "54abbcd98efab658108d24c5",
+		"created" : "2015-01-09T18:58:05.910+08:00"
+	},
+	"action": "inviteUser"
+}

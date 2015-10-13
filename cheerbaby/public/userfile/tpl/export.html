@@ -1,0 +1,461 @@
+<script type="text/template" id="ListView">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3><%= QuestCMS.l("前台") %></h3>
+					<button class="btn btn-primary btn-md admin transactionReport"><%= QuestCMS.l("交易紀錄") %></button>
+					<button class="btn btn-primary btn-md admin sentGiftReport"><%= QuestCMS.l("派出禮品") %></button>
+					<button class="btn btn-primary btn-md admin memberTransactionReport"><%= QuestCMS.l("會員交易紀錄") %></button>
+					<button class="btn btn-primary btn-md admin appointmentReport"><%= QuestCMS.l("預約情況") %></button>
+      </div>
+      <div class="col-md-4">
+        <h3><%= QuestCMS.l("倉庫") %></h3>
+					<button class="btn btn-primary btn-md admin viewDayAppointment"><%= QuestCMS.l("現存數量") %></button>
+					<button class="btn btn-primary btn-md admin viewMouthAppointment"><%= QuestCMS.l("廠商名單") %></button>
+					<button class="btn btn-primary btn-md admin viewMouthAppointment"><%= QuestCMS.l("出貨") %></button>
+					<button class="btn btn-primary btn-md admin viewMouthAppointment"><%= QuestCMS.l("入貸") %></button>
+      </div>
+      <div class="col-md-4">
+        <h3><%= QuestCMS.l("會計") %></h3>
+					<button class="btn btn-primary btn-md admin createItem"><%= QuestCMS.l("各廠商紀錄") %></button>
+					<button class="btn btn-primary btn-md admin manageItem"><%= QuestCMS.l("全部廠商紀錄") %></button>
+      </div>
+		</div>
+		<div class="row">
+      <div class="col-md-4">
+        <h3><%= QuestCMS.l("管理") %></h3>
+					<button class="btn btn-primary btn-md admin manageVendorCategory"><%= QuestCMS.l("廠商報名情況") %></button>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/template" id="VendorsApplicationReportItemView">
+	<div class="container">
+		<h2><%= QuestCMS.l("Admin ") %><%= QuestCMS.l("Report") %></h2>
+			<div class="row">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Admin ") %><%= QuestCMS.l("Report") %>
+							</div>
+							<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="vendorsApplicationReport-startDate" class="form-control input-md vendorsApplicationReport-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="vendorsApplicationReport-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+ 								<div class="form-group col-md-3">
+									<input name="vendorsApplicationReport-endDate" class="form-control input-md vendorsApplicationReport-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="vendorsApplicationReport-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+								<div class="form-group col-md-3" style="width: 450px">
+									<select id="vendorsApplicationReport-type" name="vendorsApplicationReport-year" class="form-control" data-toggle="floatLabel" data-value="no-js">
+										<option value="simple" selected><%= QuestCMS.l("Simple") %></option>
+										<option value="detail"><%= QuestCMS.l("Detail") %></option>
+									</select>
+									<label for="vendorsApplicationReport-year" style=""><%= QuestCMS.l("Type") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default reset" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" value="<%= QuestCMS.l("Export") %>" type="submit" class="btn btn-success exportvendorsApplicationReport" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="TransactionReportItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Transaction ") %><%= QuestCMS.l("Report") %>
+							</div>
+							<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="transactionReport-startDate" class="form-control input-md transactionReport-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="transactionReport-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<input name="transactionReport-endDate" class="form-control input-md transactionReport-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="transactionReport-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<select id="transactionReport-type" name="transactionReport-year" class="form-control" data-toggle="floatLabel" data-value="no-js">
+										<option value="simple" selected><%= QuestCMS.l("Simple") %></option>
+										<option value="detail"><%= QuestCMS.l("Detail") %></option>
+									</select>
+									<label for="transactionReport-type" style=""><%= QuestCMS.l("Type") %></label>
+								</div>
+								<div class="form-group col-md-2" style="width:218px">
+									<select id="transactionReport-branch" name="transactionReport-branch" class="form-control" data-toggle="floatLabel" data-value="no-js">
+									</select>
+									<label for="transactionReport-branch" style=""><%= QuestCMS.l("Branch") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default reset" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportTransactionReport" type="submit" value="<%= QuestCMS.l("Export") %>"  style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+</script>
+
+
+<script type="text/template" id="SentGiftReportItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Gift ") %><%= QuestCMS.l("Report ") %>
+							</div>
+							<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="sentGiftReport-startDate" class="form-control input-md sentGiftReport-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="sentGiftReport-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<input name="sentGiftReport-endDate" class="form-control input-md sentGiftReport-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="sentGiftReport-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+								<div class="form-group col-md-3" style="width: 436px">
+									<select id="sentGiftReport-vendorService" name="sentGiftReport-vendorService" class="form-control" data-toggle="floatLabel" data-value="no-js">
+										<option value="" selected><%= QuestCMS.l("All") %></option>
+										<option value="Member Easy"><%= QuestCMS.l("Member Easy") %></option>
+										<option value="Info Easy"><%= QuestCMS.l("Info Easy") %></option>
+									</select>
+									<label for="sentGiftReport-vendorService" style=""><%= QuestCMS.l("Vendor Service") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportSentGiftReport" type="submit" value="<%= QuestCMS.l("Export") %>" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+<script/>
+
+<script type="text/template" id="AppointmentReportItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Appointment") %>
+							</div>
+						<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="appointmentReport-startDate" class="form-control input-md appointmentReport-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="appointmentReport-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<input name="appointmentReport-endDate" class="form-control input-md appointmentReport-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="appointmentReport-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+								<div class="form-group col-md-3" style="width:436px">
+									<select id="appointmentReport-branch" name="appointmentReport-branch" class="form-control" data-toggle="floatLabel" data-value="no-js">
+									</select>
+									<label for="appointmentReport-branch" style=""><%= QuestCMS.l("Branch") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportappointmentReport" type="submit" value="<%= QuestCMS.l("Export") %>" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+</script>
+
+<script type="text/template" id="StockTakeReportItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Stock Take") %><%= QuestCMS.l("Report") %>
+							</div>
+								<div class="form-group col-md-10" style="width: 871px">
+									<select id="stockTakeReport-branch" name="stockTakeReport-branch" class="form-control" data-toggle="floatLabel" data-value="no-js">
+									</select>
+									<label for="stockTakeReport-branch" style=""><%= QuestCMS.l("Branch") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportstockTakeReport" type="submit" value="<%= QuestCMS.l("Export") %>" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+</script>
+
+<script type="text/template" id="VendorListReportItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("List ") %><%= QuestCMS.l("Report") %>
+							</div>
+								<div class="form-group col-md-10" style="width: 871px">
+									<select id="vendorListReport-vendorService" name="vendorListReport-vendorService" class="form-control" data-toggle="floatLabel" data-value="no-js">
+										<option value="" selected><%= QuestCMS.l("All") %></option>
+										<option value="Member Easy"><%= QuestCMS.l("Member Easy") %></option>
+										<option value="Info Easy"><%= QuestCMS.l("Info Easy") %></option>
+									</select>
+									<label for="vendorListReport-vendorService" style=""><%= QuestCMS.l("Vendor Service") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportVendorListReport" type="submit" value="<%= QuestCMS.l("Export") %>" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+</script>
+
+<script type="text/template" id="StockReportByPeriodItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("Stock In/Out Report By Period") %>
+							</div>
+							<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="stockReportByPeriod-startDate" class="form-control input-md stockReportByPeriod-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="stockReportByPeriod-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<input name="stockReportByPeriod-endDate" class="form-control input-md stockReportByPeriod-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="stockReportByPeriod-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+								<div class="form-group col-md-3" style="width:436px;">
+									<select id="stockReportByPeriod-stockType" name="stockReportByPeriod-stockType" class="form-control" data-toggle="floatLabel" data-value="no-js">
+										<option value="Stock-In"><%= QuestCMS.l("Stock In") %></option>
+										<option value="Stock-Out"><%= QuestCMS.l("Stock Out") %></option>
+									</select>
+									<label for="stockReportByPeriod-stockType" style=""><%= QuestCMS.l("Stock In/Out") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportStockReportByPeriod" type="submit" value="<%= QuestCMS.l("Export") %>" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+</script>
+
+
+<script type="text/template" id="AllVendorRecordItemView">
+	<div class="container">
+			<form class="form-horizontal filter-form" role="form">
+				<fieldset>
+					<div class="form-ground header">
+						<div class="panel panel-info">
+							<div class="panel-heading user-header">
+								<%= QuestCMS.l("All Vendor Record") %>
+							</div>
+							<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="allVendorRecord-startDate" class="form-control input-md allVendorRecord-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="allVendorRecord-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<input name="allVendorRecord-endDate" class="form-control input-md allVendorRecord-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="allVendorRecord-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+								<div class="form-group col-md-3" style="width:436px">
+									<select id="allVendorRecord-branch" name="allVendorRecord-branch" class="form-control" data-toggle="floatLabel" data-value="no-js">
+									</select>
+									<label for="allVendorRecord-branch" style=""><%= QuestCMS.l("Branch") %></label>
+								</div>
+								<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+									<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+									<input title="<%= QuestCMS.l("Export") %>" class="btn btn-success exportAllVendorRecord" type="submit" value="<%= QuestCMS.l("Export") %>" style="margin-left:-5px; width:50%"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+</script>
+
+<script type="text/template" id="VendorReportCompositeView">
+	<div class="container">
+		<form class="form-horizontal filter-form" role="form">
+			<fieldset>
+				<div class="form-ground header">
+					<div class="panel panel-info">
+						<div class="panel-heading user-header">
+							<%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Report") %>
+						</div>
+						<div class="form-input-btn">
+								<div class="form-group col-md-3">
+									<input name="vendorReport-startDate" class="form-control input-md vendorReport-startDate" placeholder="<%= QuestCMS.l("Start Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="vendorReport-startDate" style=""><%= QuestCMS.l("Start Date") %></label>
+								</div>
+								<div class="form-group col-md-3">
+									<input name="vendorReport-endDate" class="form-control input-md vendorReport-endDate" placeholder="<%= QuestCMS.l("End Date") %>" data-toggle="floatLabel" data-value="no-js"/>
+									<label for="vendorReport-endDate" style=""><%= QuestCMS.l("End Date") %></label>
+								</div>
+							<div class="form-group col-md-3" style="width:436px">
+								<input name="vendorReport-code" class="form-control input-md vendorReport-code" placeholder="<%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Code") %>" data-toggle="floatLabel" data-value="no-js"/>
+								<label for="vendorReport-code" style=""><%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Code") %></label>
+							</div>
+							<div class="form-group col-md-2 searchForm report-search" style="padding-left: 0px; padding-right: 0px; margin:0px;">
+								<input title="<%= QuestCMS.l("Reset") %>" class="btn btn-default" type="reset" value="<%= QuestCMS.l("Reset") %>" style="width: 50%"></input>
+								<input title="<%= QuestCMS.l("Search") %>" class="btn btn-primary report-search search" type="submit" value="<%= QuestCMS.l("Search") %>" style="margin-left:-5px; width:50%"></input>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>		
+		<div class="panel panel-info">
+			<div class="panel-heading"><%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("List") %>
+				<label class="filter_count">  - 0  </label>
+				<label><%= QuestCMS.l(" items found") %> </label>
+				<form id="pager" class="pager tablesorter-pager pull-right">
+					<a type="button" class="btn btn-xs btn-default first"><span class="glyphicon glyphicon-fast-backward " aria-hidden="true"></span></a>
+					<a type="button" class="btn btn-xs btn-default prev"><span class=" glyphicon glyphicon-step-backward" aria-hidden="true"></span></a>
+					<span class="pagedisplay"></span>
+					<a type="button" class="btn btn-xs btn-default follow"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
+					<a type="button" class="btn btn-xs btn-default last"><span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span></a>
+					<select class="pagesize" title="Select Page Size">
+						<option selected="selected" value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select>
+					<select class="gotoPage" title="Select page number"></select>
+				</form>
+			</div>
+			<table class="table table-list-search table-responsive tablesorter" id="vendorReportTable">
+				<thead>
+					<tr>
+						<th width="10%"><%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Code") %></th>
+						<th width="20%"><%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Name") %></th>
+						<th width="20%"><%= QuestCMS.l("Vendor ") %><%= QuestCMS.l("Category") %></th>
+						<th width="20%"><%= QuestCMS.l("Service") %></th>
+						<th width="13%"><%= QuestCMS.l("Report") %></th>
+					</tr>
+				</thead>
+				<tbody class="questcms-vendorsReport">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="VendorReportItemView">
+
+	<td><b><%= obj.vendorCode %></b></td>
+	<td><b><%= obj.chiCompanyName %></b> <b><%= obj.engCompanyName %></b></td>
+	<td><%= obj.categoryId.name %></td>
+	<td><div class="service"></div></td>
+	<td>
+		<button class="btn btn-success btn-xs adminReport "><%= QuestCMS.l("Admin") %></button>
+		<button class="btn btn-success btn-xs vendorReport "><%= QuestCMS.l("Vendor") %></button>
+	</td>
+</script>
+
+
+<script type="text/template" id="AccountingCompositeView">
+	<div class="container">
+		<h2><%= QuestCMS.l("Accounting ") %><%= QuestCMS.l("Report") %></h2>
+		<div class="row">
+			<div id="allVendorRecord"></div>
+			<div id="vendorReport"></div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="FrontdeskCompositeView">
+	<div class="container">
+	<h2><%= QuestCMS.l("Front Desk ") %><%= QuestCMS.l("Report") %></h2>
+		<div class="row">
+			<div id="transactionReport"></div>
+			<div id="sentGiftReport"></div>
+			<div id="appointmentReport"></div>
+			<div id="memberTranscationReport"></div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="StockCompositeView">
+	<div class="container">
+		<h2><%= QuestCMS.l("Stock ") %><%= QuestCMS.l("Report") %></h2>
+		<div class="row">
+			<div id="stockTakeReport"></div>
+			<div id="vendorListReport"></div>
+			<div id="stockReportByPeriod"></div>
+			<div id="stockReportByItem"></div>
+		</div>
+	</div>
+</script>
+
+
+<script type="text/template" id="PDFTemplate">
+	<div style="width:500px; float:left; padding:10px;">
+		<div>會員編號: <span id="memberCode"><%= memberCode %><span></div>
+		<div>會員姓名: <span id="memberName"><%= memberName %><span></div>
+	</div>
+	<div style="padding: 10px;">
+		<div>日期: <span id="date"><%= date %><span>	</div>
+		<div>時間: <span id="time"><%= time %><span>	</div>
+		<div>服務中心: <span id="branch"><%= branch %><span>	</div>
+	</div>
+	<br/>
+	<table class="pdfTemplate" align="center" width="600" style="border: 2px solid black; border-collapse: collapse;">
+		<thead>
+			<tr>
+				<th class="pdfTemplate-header" style="text-align:center; vertical-align:middle;border: 2px solid black; border-collapse: collapse;">Member Easy (入會易)</th>
+				<th class="pdfTemplate-header" style="text-align:center; vertical-align:middle;border: 2px solid black; border-collapse: collapse;">Info Easy (資訊易)</th>
+			</tr>
+		</thead>
+		<tbody class="questcms-vendorsByService pdfTemplate" style="border: 2px solid black; border-collapse: collapse;">
+		</tbody>
+	</table>
+	<div style="page-break-before:always;"></div>
+	<p>1.免責聲明 — 以上所有計劃中之任何貨品及服務之有效性及使用均受制於供應商指定的使用指示及條款及細則所規限。我們不會充當，或負上任何產品/服務供應商(或其代理) 的責任。任何有關貨品及服務的申索、投訴或糾紛，會員應向有關的供應商反映，並跟有關的供應商解決。任何會員向供應商所作的申索將不會解除會員對我們所承擔的責任。</p>
+	<p>2.最終決定權 — 我們可於任何時間更改、終止或撤回任何計劃及就所有因任何計劃引發的事宜及紛爭作出最終決定(在我們的酌情權下)。我們可在不作出事先通知的情況下更改任何有關細節及所有條款及細則。我們將不會負責或承擔閣下或其他人士因參與任何計劃的任何申索或責任。</p>
+	<p>3.批核 — 閣下是否合資格獲贈禮品將由我們(根據我們的酌情權)作出最終決定，而我們沒有責任提供任何原因。</p>
+	<p>4.禮品須視乎供應量 — 迎新禮品之供應須視乎其於換領時的供應量而定，先到先得。不論閣下收到禮品換領信與否，如禮品換罄，我們可用其他禮品取代。若禮品換罄或已被取代，我們將無須作另行通知。</p>
+	<p>5.禮品不可兌換現金。貨品說明及圖片均由相關製造商及/或供應商提供及只作參考。禮品製造商及/或供應商須全權負責其產品的質素及供應量。</p>
+	<p>6.如顧客以任何不合法、無效、虛假、舞弊、欺詐或其他不當之方法換領禮品，樂兒會保留拒絕該顧客換領禮品或向該顧客收取已換領禮品之價值的權利。</p>
+</script>

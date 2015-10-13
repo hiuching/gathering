@@ -1,0 +1,42 @@
+<script type="text/template" id="Layout">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+          <div id="mainMenuRegion"></div>﻿
+					<div id="languageMenuRegion" class="nav navbar-nav navbar-right"></div>
+          <div id="profileRegion" class="nav navbar-nav navbar-right"></div>
+          <!-- <div id="searchBoxRegion" class="nav navbar-nav navbar-right"></div> -->
+
+				</div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="contentWrapper">
+      <div id="slideMenu" class="slidein">
+        <div id="slideMenu-trigger"><span><%= QuestCMS.l("Show") %></span></div>
+        <div id="adminRegion">
+          <ul></ul>
+        </div>
+      </div>
+
+			<div class="filler border-thin-right">
+				<section id="contentRegion" class="banner">
+					<!-- content will be load to here -->
+				</section>
+			</div>
+    </div>
+		
+    <footer id="footerRegion"></footer>
+</script>

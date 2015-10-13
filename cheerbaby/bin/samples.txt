@@ -1,0 +1,12 @@
+
+POSTing data to a REST resource:
+curl -i -X POST -H "Content-Type: application/json; charset=UTF-8" -d @data.json http://127.0.0.1:8022/questcms/group
+
+PUT a resource from file
+curl -i -X PUT -H "Accept: application/json; charset=UTF-8" -d @userProfile.json http://localhost:8022/questcms/user/54acbf79fdab3b2c15c9c2e7
+
+curl -i -X PUT -H "Content-Type: application/json; charset=UTF-8" -d @createNewGroupByUser.json http://localhost:8022/questcms/user/54abbcd98efab658108d24c5
+curl -i -X PUT -H "Content-Type: application/json; charset=UTF-8" -d @inviteUser.json http://localhost:8022/questcms/user/54abbcd98efab658108d24c5
+
+GET a resource:
+curl -i -H "Accept: application/json" http://localhost:8022/questcms/user?action=findDuplicateUsers

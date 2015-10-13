@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cheer Baby</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="userfile/css/bootstrap.min.css" media="screen">
+
+		<link rel="stylesheet" type="text/css" href="userfile/css/bootstrap-table/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="userfile/css/font-awesome-4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="userfile/css/fullcalendar.css" />
+		<link rel="stylesheet" type="text/css" href="userfile/css/iosOverlay.css" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/jqueryui/jquery-ui-1.11.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/jquery.jqGrid/css/ui.jqgrid.css" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/jquery.jqGrid/plugins/ui.multiselect.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/jquery.timepicker/jquery.timepicker.css" />
+		<link rel="stylesheet" type="text/css" href="userfile/css/jquery.tablesorter/jquery.tablesorter.pager.css">
+		<link rel="stylesheet" type="text/css" href="userfile/css/jquery.tablesorter/theme.default.css">
+    <link rel="stylesheet" type="text/css" href="userfile/css/ladda/ladda-themeless.min.css" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/ladda/ladda.min.css" />
+
+
+    <link rel="stylesheet" type="text/css" href="userfile/css/pickadate/classic.css" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/pickadate/classic.date.css" />
+    <link rel="stylesheet" type="text/css" href="userfile/css/pickadate/classic.time.css" />
+
+    <link rel="stylesheet" href="userfile/css/styles.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="js/ie-html5/html5shiv.min.js"></script>
+      <script src="js/ie-html5/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <noscript>
+    <div class="loading absolute-center is-responsive">
+      It appears that your web browser does not support JavaScript, or you have temporarily disabled scripting. Either way, this site won't work without it.
+    </div>
+  </noscript>
+  <div id="mainContent">
+    <div class="loading absolute-center is-responsive">
+      Loading...
+    </div>
+  </div>
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  <script src="js/require.js"></script>
+	<script src="https://apis.google.com/js/client.js"> </script>
+
+
+<script>
+  function start(type) {
+	  if (type == 'dev') {
+			require.config({paths: {"main": "js/main"}});
+		} else {
+		  require.config({paths: {"main": "js/main-built"}});
+		}
+		require(["main"]);
+	}
+
+	function isIE() {
+	  return (
+		  (navigator.appName == 'Microsoft Internet Explorer') || ((navigator.appName == 'Netscape') && (new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})").exec(navigator.userAgent) != null))
+		);
+	}
+
+	function isIEAbove10 () {
+		if (navigator.userAgent.indexOf('MSIE') != -1) {
+			var detectIEregexp = /MSIE (\d+\.\d+);/ //test for MSIE x.x
+		} else {// if no "MSIE" string in userAgent
+			var detectIEregexp = /Trident.*rv[ :]*(\d+\.\d+)/ //test for rv:x.x or rv x.x where Trident string exists
+		}
+
+		if (detectIEregexp.test(navigator.userAgent)){ //if some form of IE
+			var ieversion=new Number(RegExp.$1) // capture x.x portion and store as a number
+			if (ieversion>=12) {
+				console.log("You're using IE12 or above")
+				return true;
+			} else if (ieversion>=11) {
+				console.log("You're using IE11 or above")
+				return true;
+			} else if (ieversion>=10) {
+				console.log("You're using IE10 or above")
+				return true;
+			} else if (ieversion>=9) {
+				console.log("You're using IE9 or above")
+				return false;
+			} else if (ieversion>=8) {
+				console.log("You're using IE8 or above")
+				return false;
+			} else if (ieversion>=7) {
+				console.log("You're using IE7.x")
+				return false;
+			} else if (ieversion>=6) {
+				console.log("You're using IE6.x")
+				return false;
+			} else if (ieversion>=5) {
+				console.log("You're using IE5.x")
+				return false;
+			}
+		} else{
+			console.log("n/a")
+			return false;
+		}
+	}
+
+	if (isIE() && !isIEAbove10()) {
+		var msg = '<center><h1>Your IE version is below 10. Please update your IE or use FireFox or Chrome</h1></center>';
+		document.getElementById("mainContent").innerHTML = msg;
+	} else {
+	  //start();
+    start('dev');
+	}
+</script>
+
+
+</body>
+</html>

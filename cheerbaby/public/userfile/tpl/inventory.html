@@ -1,0 +1,167 @@
+<script type="text/template" id="StockInView">
+	<div class="container">
+		<form id="createStockIn" class="form-horizontal">
+			<fieldset>
+				<h4><label id="title"><%= QuestCMS.l("禮品入貨") %></label></h4>
+				<span class='glyphicon-color-red'>*</span>: <%= QuestCMS.l("Mandatory ") %>
+				<br>
+				﻿<div class="form-group">
+					<label class="col-md-2 control-label" for="branch"><%= QuestCMS.l("倉庫") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-4">
+						
+						<select id="branch" name="branch" class="form-control" required>
+							<option value="" disabled selected> <%= QuestCMS.l("倉庫")%> </option>
+							<option value="Cheung Sha Wan" <%=  obj.branch == "Cheung Sha Wan" ? "selected" : "" %> ><%= QuestCMS.l("長沙灣") %></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="itemCode"><%= QuestCMS.l("貨品編號") %><span style = "color: red;"> *</span></label>
+					
+					<div class="col-md-4">
+						<input id="itemCode" name="itemCode" placeholder="<%= QuestCMS.l("貨品編號") %>" class="form-control input-md itemCode" type="text" value="" required disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="date"><%= QuestCMS.l("送貨日期") %><span style = "color: red;"> *</span></label>
+					
+					<div class="col-md-4">
+						<input id="date" name="date" placeholder="<%= QuestCMS.l("送貨日期") %>" class="form-control input-md needDatepicker" type="text" value="<%= obj.date %>" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="receiptNo"><%= QuestCMS.l("送貨單號碼") %><span style = "color: red;"> *</span></label>
+					
+					<div class="col-md-4">
+						<input id="receiptNo" name="receiptNo" placeholder="<%= QuestCMS.l("送貨單號碼") %>" class="form-control input-md" type="text" value="<%= obj.receiptNo %>" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="quantity"><%= QuestCMS.l("數量") %><span style = "color: red;"> *</span></label>
+					
+					<div class="col-md-4">
+						<input id="quantity" name="quantity" placeholder="<%= QuestCMS.l("數量") %>" class="form-control input-md" type="text" value="<%= obj.quantity %>" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="existQuantity"><%= QuestCMS.l("目前庫存") %></label>
+					<div class="col-md-4">
+						<input id="existQuantity" name="existQuantity" placeholder="<%= QuestCMS.l("目前庫存") %>" class="form-control input-md" type="text" value="<%= obj.existQuantity %>" disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="effectiveDate"><%= QuestCMS.l("有效日期") %></label>
+					<div class="col-md-4">
+						<input id="effectiveDate" name="effectiveDate" placeholder="<%= QuestCMS.l("有效日期") %>" class="form-control input-md needDatepicker" type="text" value="<%= obj.effectiveDate %>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="responsibleFor"><%= QuestCMS.l("收貨人") %><span style = "color: red;"> *</span></label>
+					
+					<div class="col-md-4">
+						<input id="responsibleFor" name="responsibleFor" placeholder="<%= QuestCMS.l("收貨人") %>" class="form-control input-md" type="text" value="<%= obj.responsibleFor %>" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="remarks"><%= QuestCMS.l("備註") %></label>
+					<div class="col-md-4">
+						<textarea class="form-control" id="remarks" name="remarks" placeholder="<%= QuestCMS.l("備註") %>" value="obj.remarks"></textarea>
+					</div>
+				</div>
+				<hr/>
+				<div class="buttonGroup">
+					<input type="reset" value="<%= QuestCMS.l("取消") %>" class="btn btn-default btn-md inventory-cancel pull-right"></input>
+					<input type="submit" value="<%= QuestCMS.l("確定") %>" class="btn btn-primary btn-md inventory-create pull-right ladda-button" data-style="zoom-in"></input>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</script>
+
+<script type="text/template" id="StockOutView">
+	<div class="container">
+		<form id="createStockOut" class="form-horizontal">
+			<fieldset>
+				<h4><label id="title"><%= QuestCMS.l("禮品出貨") %></label></h4>
+				<span class='glyphicon-color-red'>*</span>: <%= QuestCMS.l("Mandatory ") %>
+				<br>
+				﻿<div class="form-group">
+					<label class="col-md-2 control-label" for="branch"><%= QuestCMS.l("倉庫") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-4">
+						<select id="branch" name="branch" class="form-control" required>
+							<option value="" disabled selected> <%= QuestCMS.l("倉庫")%> </option>
+							<option value="Cheung Sha Wan" <%=  obj.branch == "Cheung Sha Wan" ? "selected" : "" %> ><%= QuestCMS.l("長沙灣") %></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="itemCode"><%= QuestCMS.l("禮品編號") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-4">
+						<input id="itemCode" name="itemCode" placeholder="<%= QuestCMS.l("禮品編號") %>" class="form-control input-md" type="text" value="" required disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="reasons"><%= QuestCMS.l("出貨原因") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-10">
+						<input id="return" name="reasons"  class="input-md" type="radio" value="return" > <%= QuestCMS.l("退貨") %></input>
+						<input id="adjust" name="reasons"  class="input-md" type="radio" value="adjust" > <%= QuestCMS.l("點貨調整") %></input>
+						<input id="damaged" name="reasons"  class="input-md" type="radio" value="damaged" > <%= QuestCMS.l("壞貨") %></input>
+						<input id="expired" name="reasons"  class="input-md" type="radio" value="expired" > <%= QuestCMS.l("過期") %></input>
+						<input id="transfer" name="reasons" class="input-md" type="radio" value="transfer"> <%= QuestCMS.l("轉送") %></input>
+						<input id="transferReasonsText" name="transferReasonsText" placeholder="" class="input-md" type="text" value="" disabled></input>
+						<input id="other" name="reasons"  class="input-md" type="radio" value="other" > <%= QuestCMS.l("其他") %></input>
+						<input id="otherReasonsText" name="otherReasonsText" placeholder="" class="input-md" type="text" value="" disabled></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="date"><%= QuestCMS.l("出貨日期") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-4">
+						<input id="date" name="date" placeholder="<%= QuestCMS.l("出貨日期") %>" class="form-control input-md" type="text" value="<%= obj.date %>" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="quantity"><%= QuestCMS.l("數量") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-4">
+						<input id="quantity" name="quantity" placeholder="<%= QuestCMS.l("數量") %>" class="form-control input-md" type="text" value="<%= obj.quantity %>" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="existQuantity"><%= QuestCMS.l("目前庫存") %></label>
+					<div class="col-md-4">
+						<input id="existQuantity" name="existQuantity" placeholder="<%= QuestCMS.l("目前庫存") %>" class="form-control input-md" type="text" value="<%= obj.existQuantity %>" disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="responsibleFor"><%= QuestCMS.l("出貨人") %><span style = "color: red;"> *</span></label>
+					<div class="col-md-4">
+						<input id="responsibleFor" name="responsibleFor" placeholder="<%= QuestCMS.l("出貨人") %>" class="form-control input-md" type="text" value="<%= obj.responsibleFor %>" required>
+					</div>
+				</div>
+				<hr>
+				<div class="buttonGroup">
+					<input type="reset" value="<%= QuestCMS.l("取消") %>" class="btn btn-default btn-md inventory-cancel pull-right"></input>
+					<input type="submit" value="<%= QuestCMS.l("確定") %>" class="btn btn-primary btn-md inventory-create pull-right ladda-button" data-style="zoom-in"></input>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</script>
+
+
+<script type="text/template" id="StepFlowView">
+	<div class="container well">
+		<div class="questcms-stepFlow">
+			<div class="questcms-stepFlow-row step-panel">
+				<div class="questcms-stepFlow-step hidden">
+					<a href="#step-0" type="button" class="btn btn-primary btn-circle goToWhichStep">0</a>
+					<p class="questcms-stepFlow-label"></p>
+				</div>
+			</div>
+		</div>
+		<form id="step-contents" role="form" class="form-horizontal">
+			<fieldset>
+				<div class="row step-content hidden" id="step-0"></div>
+			</fieldset>
+		</form>
+	</div>
+</script>

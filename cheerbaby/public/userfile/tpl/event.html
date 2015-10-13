@@ -1,0 +1,49 @@
+<script type="text/template" id="ItemView">
+  <%= obj.content %>
+</script>
+
+<script type="text/template" id="ListView">
+  <div class="questcms-events"></div>
+</script>
+
+<script type="text/template" id="ItemEdit">
+      <div class="control-group">
+          <label for="name" class="control-label"><%= QuestCMS.l("Event Name") %>:</label>
+          <div class="controls">
+              <input type="text" id="name" name="name" value="<%= obj.name %>" />
+          </div>
+      </div>
+
+      <div class="control-group">
+          <label for="code" class="control-label"><%= QuestCMS.l("Event Code") %>:</label>
+          <div class="controls">
+              <input type="text" id="code" name="code" value="<%= obj.code %>" />
+          </div>
+      </div>      
+
+      
+      <div class="control-group">
+          <label for="type" class="control-label"><%= QuestCMS.l("Event Type") %>:</label>
+          <div class="controls">
+              <input type="text" id="type" name="type" value="<%= obj.type %>" />
+          </div>
+      </div>
+      
+      
+      <div class="control-group">
+          <label for="isPublish" class="control-label"><%= QuestCMS.l("Publish") %>:</label>
+          <div class="controls">
+            <input type="radio" id="isPublish" name="isPublish" value="1" <%= obj.isPublish ?'checked':'' %> /><%= QuestCMS.l("Yes") %>
+            <input type="radio" id="isPublish" name="isPublish" value="0" <%= obj.isPublish ?'':'checked' %> /><%= QuestCMS.l("No") %>
+          </div>
+      </div>
+      
+                        
+      <div class="control-group">
+          <label for="isActive" class="control-label"><%= QuestCMS.l("Active") %>:</label>
+          <div class="controls">
+            <input type="radio" id="isActive" name="isActive" value="1" <%= obj.isActive ?'checked':'' %> /><%= QuestCMS.l("Yes") %>
+            <input type="radio" id="isActive" name="isActive" value="0" <%= obj.isActive ?'':'checked' %> /><%= QuestCMS.l("No") %>
+          </div>
+      </div>
+</script>

@@ -1,0 +1,13 @@
+{
+	"name": "English_Assignment_Template",
+	"content": {
+		"subject": "English",
+		"name": "English Assignment",
+		"description": "This is english assignment 1",
+		"reviewPreference": "SCORE_ONLY"
+	},
+	"formName": "assignment",
+	"isActive": true,
+	"isPublish": true,
+	"creator": "523f2a438d85061d32fa0a6b"
+}

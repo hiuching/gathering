@@ -1,0 +1,56 @@
+<script type="text/template" id="FormView">
+	<form action="" class="search-form" role="search">
+			<div class="form-group has-feedback">
+			<label for="search" class="sr-only">Search</label>
+			<input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="<%= QuestCMS.l("Search") %>">
+			<span class="glyphicon glyphicon-search form-control-feedback"></span>
+		</div>
+	</form>
+</script>
+
+
+<script type="text/template" id="FoundUsersItemView">
+	<td><%= obj.code	+ ". " + obj.lastName + " " + obj.firstName %></b></td>
+	<td><%= obj.email %></td>
+	<td><%= obj.phone %></td>
+	<td><%= obj.HKID %></td>
+	<td><button class="btn btn-success btn-xs user-edit" ><%= QuestCMS.l("Edit") %></button></td>
+</script>
+
+<script type="text/template" id="FoundUsersListView">
+  <div class="container">
+		<div class="panel panel-info">
+			<div class="panel-heading"><%= QuestCMS.l("User List ") %>
+				<label class="filter_count">  - 0  </label>
+				<label><%= QuestCMS.l(" items found") %> </label>
+				<form id="pager" class="pager tablesorter-pager pull-right">
+					<a type="button" class="btn btn-xs btn-default first"><span class="glyphicon glyphicon-fast-backward " aria-hidden="true"></span></a>
+					<a type="button" class="btn btn-xs btn-default prev"><span class=" glyphicon glyphicon-step-backward" aria-hidden="true"></span></a>
+					<span class="pagedisplay"></span>
+					<a type="button" class="btn btn-xs btn-default follow"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
+					<a type="button" class="btn btn-xs btn-default last"><span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span></a>
+					<select class="pagesize" title="Select Page Size"> 
+						<option selected="selected" value="5">5</option> 
+						<option value="10">10</option> 
+						<option value="15">15</option> 
+						<option value="20">20</option> 
+					</select>
+					<select class="gotoPage" title="Select page number"></select>
+				</form> 
+			</div>
+			<table class="table table-list-search table-responsive tablesorter" id="searchedUser">
+				<thead>
+					<tr>
+						<th><%= QuestCMS.l("User ") %></th>
+						<th><%= QuestCMS.l("Email ") %></th>
+						<th><%= QuestCMS.l("Phone") %></th>
+						<th><%= QuestCMS.l("HKID") %></th>
+						<th><%= QuestCMS.l("Edit") %></th>
+					</tr>
+				</thead>
+				<tbody class="questcms-users"></tbody>
+			</table>
+			
+		</div>
+  </div>
+</script>

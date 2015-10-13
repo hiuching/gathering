@@ -1,0 +1,116 @@
+<script type="text/template" id="ListView">
+  <ul class="questcms-mainmenus nav navbar-nav"></ul>
+</script>
+
+<script type="text/template" id="ItemView">
+<!--
+  <a class="mainmenu-item" href="#<%= obj.targetUrl %>" target="<%= obj.target %>" title="<%= obj.title %>">
+    <img class="mainmenu-item" src="<%= obj.imgsrc %>" alt="<%= obj.imgalt %>" /> <%= obj.title %>
+  </a>
+-->
+
+  <a class="mainmenu-item" href="#<%= obj.targetUrl %>" target="<%= obj.target %>" title="<%= obj.title %>">
+    <%= obj.label %>
+  </a>
+</script>
+
+
+
+<script type="text/template" id="ItemEdit">
+      <div class="control-group">
+          <label for="name" class="control-label"><%= QuestCMS.l("Name") %>:</label>
+          <div class="controls">
+              <input type="text" id="name" name="name" value="<%= obj.name %>" />
+          </div>
+      </div>
+      
+      <div class="control-group">
+          <label for="alias" class="control-label"><%= QuestCMS.l("Alias") %>:</label>
+          <div class="controls">
+              <input type="text" id="alias" name="alias" value="<%= obj.alias %>" />
+          </div>
+      </div>
+      
+      <div class="control-group">
+          <label for="title" class="control-label"><%= QuestCMS.l("Title") %>:</label>
+          <div class="controls">
+              <input type="text" id="title" name="title" value="<%= obj.title %>" />
+          </div>
+      </div>
+      
+      <div class="control-group">
+          <label for="order" class="control-label"><%= QuestCMS.l("Order") %>:</label>
+          <div class="controls">
+              <input type="text" id="order" name="order" value="<%= obj.order %>" />
+          </div>
+      </div>
+
+      <div class="control-group">
+          <label for="imgsrc" class="control-label"><%= QuestCMS.l("Image Source") %>:</label>
+          <div class="controls">
+              <input type="text" id="imgsrc" name="imgsrc" value="<%= obj.imgsrc %>" />
+          </div>
+      </div>
+      
+      <div class="control-group">
+          <label for="imgalt" class="control-label"><%= QuestCMS.l("Image alt text") %>:</label>
+          <div class="controls">
+              <input type="text" id="imgalt" name="imgalt" value="<%= obj.imgalt %>" />
+          </div>
+      </div>
+      
+      <div class="control-group">
+          <label for="targetUrl" class="control-label"><%= QuestCMS.l("A Href URL") %>: <span class="admin-note">(alias after # key)</span></label>
+          <div class="controls">
+              <input type="text" id="targetUrl" name="targetUrl" value="<%= obj.targetUrl %>" />
+          </div>
+      </div>
+      
+      <div class="control-group">
+          <label for="target" class="control-label"><%= QuestCMS.l("A Href Target") %>:</label>
+          <div class="controls">
+              <input type="text" id="target" name="target" value="<%= obj.target %>" />
+          </div>
+      </div>
+      
+      
+      <hr />
+      <% if (!obj.language) { %>
+      <div class="control-group">
+          <label for="language" class="control-label"><%= QuestCMS.l("Language") %>:</label>
+          <div class="controls">
+              <select id="language" name="language">
+                  <option value=""></option>
+                  <option value="en-us"><%= QuestCMS.l("English") %></option>
+                  <option value="zh-hant"><%= QuestCMS.l("Traditional Chinese") %></option>
+                  <option value="zh-hans"><%= QuestCMS.l("Simplified Chinese") %></option>
+              </select>
+          </div>
+      </div>
+      <% } else { %>
+      <div class="control-group">
+          <label for="language" class="control-label"><%= QuestCMS.l("Language") %>:</label>
+          <div class="controls">
+              <%= obj.language %>
+          </div>
+      </div>
+      <% }%>
+      
+      <div class="control-group">
+          <label for="isPublish" class="control-label"><%= QuestCMS.l("Publish") %>:</label>
+          <div class="controls">
+            <input type="radio" id="isPublish" name="isPublish" value="1" <%= obj.isPublish ?'checked':'' %> /><%= QuestCMS.l("Yes") %>
+            <input type="radio" id="isPublish" name="isPublish" value="0" <%= obj.isPublish ?'':'checked' %> /><%= QuestCMS.l("No") %>
+          </div>
+      </div>
+      
+                        
+      <div class="control-group">
+          <label for="isActive" class="control-label"><%= QuestCMS.l("Active") %>:</label>
+          <div class="controls">
+            <input type="radio" id="isActive" name="isActive" value="1" <%= obj.isActive ?'checked':'' %> /><%= QuestCMS.l("Yes") %>
+            <input type="radio" id="isActive" name="isActive" value="0" <%= obj.isActive ?'':'checked' %> /><%= QuestCMS.l("No") %>
+          </div>
+      </div>
+      
+</script>

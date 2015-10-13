@@ -1,0 +1,34 @@
+<script type="text/template" id="ForgotView">
+<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-7">
+				<div id="output"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<%= QuestCMS.l("Forgot") %> <%= QuestCMS.l("Password") %>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+							<fieldset>
+								<div class="control-group">
+									<input class="form-control" type="text" name="email" id="email" placeholder="<%= QuestCMS.l("Email") %>" />
+								</div>
+								<br/>
+								<div class="row">
+									<div class="col-md-6">
+										<button type="submit" class="btn btn-info btn-block login reset-submit ladda-button" data-style="zoom-in"><%= QuestCMS.l("Submit") %></button>
+									</div>
+									<div class="col-md-6">
+										<button type="submit" class="btn btn-info btn-block login reset-cancel"><%= QuestCMS.l("Cancel") %></button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="panel-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
