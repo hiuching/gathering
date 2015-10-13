@@ -83,9 +83,9 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 			callback(err);
 		} else {
 			if(users.length == 1){
-				callback(null, user[0]);
+				callback(null, users[0]);
 			} else {
-				callback({code:404, message: 'uncorrert email or password'});
+				callback({code:404, message: 'incorrert email or password'});
 			}
 		}
 	});    
