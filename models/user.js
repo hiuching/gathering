@@ -57,6 +57,9 @@ userSchema.statics.findAll = function (options, callback) {
 userSchema.statics.findByConditions = function (options, callback) {
 	var conditions = options || {};
 	var q = this.find();
+	if (conditions._id != null && conditions._id != '') {
+		q.where("_id").equals(conditions._id);
+	}	
 	if (conditions.email != null && conditions.email != '') {
 		q.where("email").equals(conditions.email);
 	}	
@@ -85,7 +88,7 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 			if(users.length == 1){
 				callback(null, users[0]);
 			} else {
-				callback({code:404, message: 'incorrert email or password'});
+				callback({code: 404, message: 'incorrert email or password'});
 			}
 		}
 	});    
@@ -101,7 +104,7 @@ userSchema.statics.findUserByEmail = function (options, callback) {
 		} else if (users.length == 0){
 			callback(null);
 		} else {
-			callback({code:403, message: 'more than one recode'});
+			callback({code: 403, message: 'more than one recode'});
 		}
 	});     
 };
@@ -117,7 +120,23 @@ userSchema.statics.findUserByEmailWithPassword = function (options, callback) {
 		} else if (users.length == 0){
 			callback(null);
 		} else {
-			callback({code:403, message: 'more than one recode'});
+			callback({code: 403, message: 'more than one recode'});
+		}
+	});     
+};
+
+userSchema.statics.findUserById = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions._id = options.id;
+	conditions.select = '+password';
+    this.findByConditions(conditions, function(err, users){
+		if(users.length == 1){
+			callback(null, users[0]);
+		} else if (users.length == 0){
+			callback({code: 404, message: 'recode not found'});
+		} else {
+			callback({code: 403, message: 'more than one recode'});
 		}
 	});     
 };
@@ -131,14 +150,38 @@ userSchema.statics.findUsersByDisplayName = function (options, callback) {
 };
 
 userSchema.statics.updateById = function (id, update, callback) {
-    this.update({ _id: id }, update,  function(err, noOfUpdate){
-		if (err){
-			callback(err);
-		} else {
-			delete update.password;
-			callback(null, update);
-		}
-	});
+	update = update || {};
+	var self = this;
+	if (update.action == 'setPassword') {
+		this.findUserById({id: id}, function (err, user) {
+			if (err) {
+				callback(err);
+			} else {
+				if (user.password == update.currentPassword) {
+					user.password = update.newPassword;
+					self.update({ _id: id }, user,  function(err, noOfUpdate) {
+						if (err) {
+							callback(err);
+						} else {
+							user.password = undefined;
+							callback(null, user);
+						}
+					});
+				} else {
+					callback({code: 401, message: 'incorrect password'});
+				}
+			}
+		});
+	} else {
+		this.update({ _id: id }, update,  function(err, noOfUpdate) {
+			if (err) {
+				callback(err);
+			} else {
+				delete update.password;
+				callback(null, update);
+			}
+		});
+	}
 };
 
 /***************
