@@ -11,6 +11,10 @@
 #msg{
 	color: red;
 }
+#profilePic {
+	width: 100px;
+	height: 100px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
@@ -19,27 +23,34 @@
 	$(document).ready(function() {
 		$('#email').val($.jStorage.get("userEmail"));
 		var userId = $.jStorage.get("userId");
-		console.log(userId);
+		var test = $('#profilePic').attr("src","img/" + userId + ".png");
+		console.log(test);
+
 		$('#submit').click(function() {
 			if ($('#displayName').val() == '')
 				return;
+			else if ($('#displayName').toString().length > 26 || $('#displayName').toString().length < 3) {
+				$('#msg').text ("Display name cannot be shorter than 3chars or longer than 26chars");
+				return;
+				}
 			var data = {
 				displayName: $('#displayName').val(),
 			}
 			$.support.cors = true;
 			data = JSON.stringify (data);
 			$.ajax({
-				type: 'POST',
+				type: 'PUT',
 				contentType: 'application/json',
 				url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/' + userId,
 				data: data,
 				dataType: 'json',
 				success: function (user) {
+					var str = user.displayName;
 					console.log ('success', str);
 				},
 				error: function (err){
 					console.log ('failed', err);
-					$('#msg').text ("Wrong email address");
+					$('#msg').text ("Something Wrong occured. Please contact to Admin.");
 					return;
 				}
 				});
@@ -49,7 +60,7 @@
 			window.location.href = 'change_password.html'
 			});
 
-		/*uploadFileViaBase64 = function (options) {
+		uploadFileViaBase64 = function (options) {
 			options = options || {};
 			var input = options.input;
 
@@ -59,14 +70,16 @@
 				var file = input.files[0];
 				var fileReader = new FileReader();
 				fileReader.onload = function (e) {
-					$.extend(true, data, {"name": file.name, "base64encoded": e.target.result}, options.data);
+					$.support.cors = true;
+					$.extend(true, data, {"name": userId + ".png", "base64encoded": e.target.result}, options.data);
 					$.ajax({
-					url: 'http://127.0.0.1:8081/gathering/file',
+					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file',
 					contentType: 'application/json; Charset=UTF-8',
 					dataType: 'json',
 					type: 'POST',
 					data: JSON.stringify(data)
 					}).done(function (result) {
+						console.log("success");
 						if (options.success) {
 							options.success(result);
 						}
@@ -85,8 +98,16 @@
 			uploadFileViaBase64({
 				input: $('#fileupload')[0]
 			});
-		});*/
 		});
+
+		
+	});
+
+	function imgError(image) {
+			image.onerror = "";
+			image.src = "img/noImg.png";
+			return true;
+		}
 </script>
 <html>
 	<head>
@@ -95,9 +116,11 @@
 	<body>
 		<div id = "main">
 			<div id = "container">
-			<!--Pic:<input id="fileupload" type="file" name="file[]" data-url="http://127.0.0.1:8081/gathering/file" data-path="./public/img" /><br/>-->
+			Profile Pic:<br/>
+			<img id = "profilePic" onerror = "imgError(this)"/><br/>
+			<input id = "fileupload" type = "file" name = "file[]" data-url = "http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file" data-path = "./public/img/"/><br/>
 			Email: <input type = "text" id = "email" disabled/><br/>
-			Display Name:<input type = "text" id = "displayName"/><br/>
+			New Display Name:<input type = "text" id = "displayName"/><br/>
 			<button type = "submit" id = "submit">Submit</button>&nbsp;
 			<button id = "changePw">Change Password</button><br/>
 			</div>
