@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<style>
+#main {
+	width: 100%;
+	height:100%;
+}
+#container {
+	margin-left: 45%;
+	margin-top: 15%;
+}
+#msg{
+	color: red;
+}
+#profilePic {
+	width: 100px;
+	height: 100px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+<script src="js/jstorage.js"></script>
+<script>
+	var userId;
+	var firstError = true;
+
+	$(document).ready(function() {
+		var fileExt;
+
+		$('#email').val($.jStorage.get("userEmail"));
+		userId = $.jStorage.get("userId");
+		$('#profilePic').attr("src","img/" + userId + ".png");
+
+		$('#submit').click(function() {
+			if ($('#displayName').val() == '')
+				return;
+			else if ($('#displayName').toString().length > 26 || $('#displayName').toString().length < 3) {
+				$('#msg').text ("Display name cannot be shorter than 3chars or longer than 26chars");
+				return;
+				}
+			var data = {
+				displayName: $('#displayName').val(),
+			}
+			$.support.cors = true;
+			data = JSON.stringify (data);
+			$.ajax({
+				type: 'PUT',
+				contentType: 'application/json',
+				url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/' + userId,
+				data: data,
+				dataType: 'json',
+				success: function (user) {
+					var str = user.displayName;
+					console.log ('success', str);
+				},
+				error: function (err){
+					console.log ('failed', err);
+					$('#msg').text ("Something Wrong occured. Please contact to Admin.");
+					return;
+				}
+				});
+			});	
+
+		$('#changePw').click(function() {
+			window.location.href = 'change_password.html'
+			});
+
+		uploadFileViaBase64 = function (options) {
+			options = options || {};
+			var input = options.input;
+
+			if (input.files && input.files[0]) {
+				console.log(fileExt);
+				lowCaseExt = fileExt.toLowerCase();
+				var path = $(input).data('path') || "upload";
+				var data = {path: path};    
+				var file = input.files[0];
+				var fileReader = new FileReader();
+				fileReader.onload = function (e) {
+					$.support.cors = true;
+					$.extend(true, data, {"name": userId + "." + lowCaseExt, "base64encoded": e.target.result}, options.data);
+					$.ajax({
+					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file',
+					contentType: 'application/json; Charset=UTF-8',
+					dataType: 'json',
+					type: 'POST',
+					data: JSON.stringify(data)
+					}).done(function (result) {
+						console.log("success");
+						if (options.success) {
+							options.success(result);
+						}
+					}).fail(function (err) {
+						if (options.error) {
+							options.error(err);
+						}
+					});
+				};
+				fileReader.readAsDataURL(file);
+			  } else {
+				console.log('no input.files');
+			  }
+			};
+		$('#fileupload').change(function(){
+			var fileName = this.files[0].name;
+			fileExt = fileName.substr(fileName.length - 3);
+			console.log(fileName);
+			//console.log(fileExt);
+			if (this.files[0].size > (1.5 * 1024 * 1024)){
+				$('#msg').text ("The file exceeds 1.5 MB!");
+			}
+			else if (fileExt != "png" && fileExt != "jpg" && fileExt != "PNG" && fileExt != "JPG"){
+				$('#msg').text ("The file format must be .jpg or .png");
+			}
+			else {
+				uploadFileViaBase64({
+					input: $('#fileupload')[0]
+				});
+				console.log('uploaded');
+				//refreshElement();
+				window.location.reload();
+			}
+		});
+
+		
+	});
+
+	function imgError(image) {
+		//console.log("gg");
+		if (firstError){
+			firstError = false;
+			$('#profilePic').attr("src","img/" + userId + ".jpg");
+		}else{
+			image.src = "img/noImg.png";
+			image.onerror = "";
+		}
+		return true;
+	}
+</script>
+<html>
+	<head>
+	<title>Gathering</title>
+	</head>
+	<body>
+		<div id = "main">
+			<div id = "container">
+			Profile Pic:<br/>
+			<img id = "profilePic" onerror = "imgError(this)"/><br/>
+			<input id = "fileupload" type = "file" name = "file[]" data-url = "http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file" data-path = "./public/img/"/><br/>
+			Email: <input type = "text" id = "email" disabled/><br/>
+			New Display Name:<input type = "text" id = "displayName"/><br/>
+			<span id = "msg"></span><br/>
+			<button type = "submit" id = "submit">Submit</button>&nbsp;
+			<button id = "changePw">Change Password</button><br/>
+			</div>
+		</div>
+
+	</body>
+</html>
