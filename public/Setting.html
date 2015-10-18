@@ -143,42 +143,15 @@ body, html {
 		console.log(displayName);
 		$(document).ready(function() {
 			var fileExt;
-			$(".inputEnter").keypress(function (e) {
+			$('.inputEnter').keypress(function (e) {
 				if (e.which == 13) {
-				if ($('#displayName').val() == '')
-					return;
-				else if ($('#displayName').toString().length > 26 || $('#displayName').toString().length < 3) {
-					$('#msg').text ("Display name cannot be shorter than 3chars or longer than 26chars");
-					return;
-					}
-				$(".inputEnter").attr("disabled", true);
-				var data = {
-					displayName: $('#displayName').val(),
-				}
-				$.support.cors = true;
-				data = JSON.stringify (data);
-				$.ajax({
-					type: 'PUT',
-					contentType: 'application/json',
-					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/' + userId,
-					data: data,
-					dataType: 'json',
-					success: function (user) {
-						var str = user.displayName;
-						console.log ('success', str);
-						$(".inputEnter").attr("disabled", false);
-						$('#msg').text ("Saved!");
-					},
-					error: function (err){
-						console.log ('failed', err);
-						$('#msg').text ("Something Wrong occured. Please contact to Admin.");
-						$(".inputEnter").attr("disabled", false);
-						return;
-					}
-				});
+					submitData();
 				}
 			});
 
+			$('#saveButton').click(function() {
+				submitData();
+			});
 
 			$('#email').val($.jStorage.get("userEmail"));
 			if (displayName != null){
@@ -253,7 +226,40 @@ body, html {
 				$.jStorage.flush();
 				window.location.href = "index.html";
 			});
-
+			
+			function submitData() {
+				if ($('#displayName').val() == '')
+					return;
+				else if ($('#displayName').val().length > 26 || $('#displayName').val().length < 3) {
+					$('#msg').text ("Display name cannot be shorter than 3chars or longer than 26chars");
+					return;
+					}
+				$(".inputEnter").attr("disabled", true);
+				var data = {
+					displayName: $('#displayName').val(),
+				}
+				$.support.cors = true;
+				data = JSON.stringify (data);
+				$.ajax({
+					type: 'PUT',
+					contentType: 'application/json',
+					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/' + userId,
+					data: data,
+					dataType: 'json',
+					success: function (user) {
+						var str = user.displayName;
+						console.log ('success', str);
+						$(".inputEnter").attr("disabled", false);
+						$('#msg').text ("Saved!");
+					},
+					error: function (err){
+						console.log ('failed', err);
+						$('#msg').text ("Something Wrong occured. Please contact to Admin.");
+						$(".inputEnter").attr("disabled", false);
+						return;
+					}
+				});
+			}
 			
 		});
 

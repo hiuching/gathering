@@ -103,7 +103,14 @@ body, html {
 
 			$(".inputEnter").keypress(function (e) {
 				if (e.which == 13) {
-					if ($('#email').val() == "" || $('#pw').val() == "") {
+					submitData();
+				}
+			});
+			$("#login").click(function () {
+					submitData();
+			});
+			function submitData(){
+				if ($('#email').val() == "" || $('#pw').val() == "") {
 						$('#msg').text ("Please fill in both email and password");
 						return;
 					}
@@ -136,8 +143,7 @@ body, html {
 							$('#msg').text ("Incorrect email or password");
 						}
 					});
-				}
-			});
+			}
 		});
 	</script>
 </head>

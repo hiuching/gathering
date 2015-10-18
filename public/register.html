@@ -75,7 +75,16 @@ body, html {
 
 		$('.inputEnter').keypress(function (e) {
 			if (e.which == 13) {
-				if (($('#email').val()) == ""){
+				submitData();
+			}
+		});
+
+		$('#submitBtn').click(function() {
+			submitData();
+		});
+
+		function submitData() {
+			if (($('#email').val()) == ""){
 					$('#msg').text ("Please fill in your email address");
 					return;
 					}
@@ -108,8 +117,7 @@ body, html {
 						return;
 					}
 				});
-			}
-		});
+		}
 	});
 </script>
 <html lang="en">
