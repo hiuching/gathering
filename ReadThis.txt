@@ -1,0 +1,15 @@
+in index_v3.html:
+
+line 47: i cant make it in same row with forgot pass and sign up..
+
+line 73: cant make it center in css
+
+
+home.html:
+
+line 21, #Header;
+- cant make "Home" size 18px
+- center command isnt work, so i replaced it by margin-right.
+
+tag menu1~5:
+just 9 made the backgrd color.... so difficult to make it LOL!!!
