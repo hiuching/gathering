@@ -34,8 +34,10 @@ app.set('title', 'Garthering');
 // uncomment after placing your favicon in /public
 // app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json({limit: CONFIG.fileLimit}));
+// app.use(bodyParser.urlencoded({ extended: true, limit: CONFIG.fileLimit }));
+app.use(bodyParser.json({limit: '30mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
