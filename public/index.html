@@ -28,7 +28,7 @@ body, html {
 	text-align: center;
 	padding-top: 8%;
 	padding-bottom: 10%;
-	font-size: 5px;
+	font-size: 15px;
 	height: 40%;
 	width: 100%;
 }
@@ -40,7 +40,7 @@ body, html {
 	background: #FFFFFF;
 	text-align: center;
 	font-weight: 200;
-	font-size: 5px;
+	font-size: 15px;
 	margin-bottom: 2px ;
     box-shadow: 5px 2px 8px rgb(55,71,71);
 }
@@ -81,18 +81,21 @@ body, html {
 
 </style>
 
-<html lang="en">
+<html lang = "en">
 <head>
 	<title>Gathering</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset = "utf-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 	<meta name = "viewport" content = "width = device-width, height = device-height, initial-scale=1.0">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
-	<script src="js/jstorage.js"></script>
+	<link rel = "stylesheet" href = "css/bootstrap.css">
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel = "icon" type = "image/png" href = "images/03.png" sizes = "16x16">
+	<script src = "js/jstorage.js"></script>
 	<script>
 		$(document).ready(function() {
+			$.jStorage.flush();
 			$("#forget").click(function(){
 				document.location.href='register.html?forget';
 			});
@@ -109,6 +112,30 @@ body, html {
 			$("#login").click(function () {
 					submitData();
 			});
+
+			 $.toggleShowPassword = function (options) {
+				var settings = $.extend({
+					field: "#password",
+					control: "#toggle_show_password",
+				}, options);
+
+				var control = $(settings.control);
+				var field = $(settings.field)
+
+				control.bind('click', function () {
+					if (control.is(':checked')) {
+						field.attr('type', 'text');
+					} else {
+						field.attr('type', 'password');
+					}
+				});
+			};
+			//Here how to call above plugin from everywhere in your application document body
+			$.toggleShowPassword({
+				field: '#pw',
+				control: '#showPw'
+			});
+
 			function submitData(){
 				if ($('#email').val() == "" || $('#pw').val() == "") {
 						$('#msg').text ("Please fill in both email and password");
@@ -128,6 +155,7 @@ body, html {
 						success: function(user) {
 							var str = 'email:' + user.email;
 							console.log('success', str);
+							$('#msg').css("color", "rgb(188,230,35)");
 							$('#msg').text ("login successful");
 							$.jStorage.set("userEmail", user.email);
 							$.jStorage.set("userId", user._id);
@@ -145,7 +173,9 @@ body, html {
 					});
 			}
 		});
+		
 	</script>
+	 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -159,12 +189,13 @@ body, html {
 					<img src = "images/05.png" class = "textboxImg"/> </img>
 					<input type = "text" class = "textbox" id = "email" placeholder = "User Name"/><br/>
 					<img src = "images/11.png" class = "textboxImg"> </img>
-					<input type = "password" class = "textbox inputEnter" id = "pw" placeholder = "Password"/><br/>
+					<input type = "password" class = "textbox inputEnter" data-toggle = "password" id = "pw" placeholder = "Password"/><br/>
+					<input id = "showPw" type = "checkbox" />Show password<br/>
 					<span id = "msg"> </span><br/>
 				</div>
 				<div id = "bottom">  
 					<a href = "#" id = "forget">Forgot Password </a> 
-					<button type = "button" id = "login" class = "inputEnter"><img src = "images/09.png" id = "submitImg"></img></button><br/>
+					<button type = "button" id = "login" class = "inputEnter"><img src = "images/09.png" id = "submitImg"></img></button>
 					<a href = "#" id = "register">Sign up</a> 
 				</div>
 			<!--</form>-->

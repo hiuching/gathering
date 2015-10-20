@@ -54,7 +54,7 @@ body, html {
 	background: #FFFFFF;
 	text-align: center;
 	font-weight: 200;
-	font-size: 5px;
+	font-size: 10px;
 	margin-bottom: 20px ;
     box-shadow: 5px 2px 8px rgb(55,71,71);
 }
@@ -113,35 +113,68 @@ body, html {
 	margin-right: 10px;
 }
 #profilePic {
-	width: 100px;
-	height: 100px;
+	width: 200px;
+	height: 200px;
 }
 #fileUpload {
+	display: none;
 	margin-left: auto;
 	margin-right: auto;
 }
-#msg{
+#msg {
 	color: red;
 }
+.custom-file-upload {
+	width: 200px;
+	background-color: #2E2E2E;
+	color: white;
+    cursor: pointer;
+}
+.container {
+	margin-left: auto;
+	margin-right: auto;
+}
+.action {
+	width: 100%;
+	height:30px;
+	margin: 10px 0;
+	text-align: center;
+	padding-right: 31%
+	
+}
+.cropped>img {
+	margin-right: 10px;
+}
+
 </style>
 
 <html lang="en">
 
 <head>
-	<title>Setting</title>
+	<title>Gathering</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/style_Croper.css" type="text/css" />
+	<link rel="icon" type="image/png" href="images/03.png" sizes="16x16">
+    <style>
+        
+    </style>
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="js/cropbox.js"></script>
 	<script src="js/jstorage.js"></script>
 	<script>
 		var userId;
 		var firstError = true;
 		var userId = $.jStorage.get("userId");
 		var displayName = $.jStorage.get("displayName");
-		console.log(displayName);
+		var userEmail = $.jStorage.get("userEmail");
+		if (userId == null || displayName == null ||userEmail == null)
+				window.location.href = "index.html";
+		
 		$(document).ready(function() {
+			$('.container, .action').hide();
 			var fileExt;
 			$('.inputEnter').keypress(function (e) {
 				if (e.which == 13) {
@@ -155,7 +188,6 @@ body, html {
 
 			$('#email').val($.jStorage.get("userEmail"));
 			if (displayName != null){
-				console.log("hi");
 				$('#displayName').attr("placeholder",displayName);
 				}
 			
@@ -164,63 +196,6 @@ body, html {
 			$('#changePw').click(function() {
 				window.location.href = 'change_password.html'
 				});
-
-			uploadFileViaBase64 = function (options) {
-				options = options || {};
-				var input = options.input;
-
-				if (input.files && input.files[0]) {
-					console.log(fileExt);
-					lowCaseExt = fileExt.toLowerCase();
-					var path = $(input).data('path') || "upload";
-					var data = {path: path};    
-					var file = input.files[0];
-					var fileReader = new FileReader();
-					fileReader.onload = function (e) {
-						$.support.cors = true;
-						$.extend(true, data, {"name": userId + "." + lowCaseExt, "base64encoded": e.target.result}, options.data);
-						$.ajax({
-						url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file',
-						contentType: 'application/json; Charset=UTF-8',
-						dataType: 'json',
-						type: 'POST',
-						data: JSON.stringify(data)
-						}).done(function (result) {
-							console.log("success");
-							if (options.success) {
-								options.success(result);
-							}
-						}).fail(function (err) {
-							if (options.error) {
-								options.error(err);
-							}
-						});
-					};
-					fileReader.readAsDataURL(file);
-				  } else {
-					console.log('no input.files');
-				  }
-				};
-			$('#fileupload').change(function(){
-				var fileName = this.files[0].name;
-				fileExt = fileName.substr(fileName.length - 3);
-				console.log(fileName);
-				//console.log(fileExt);
-				if (this.files[0].size > (1.5 * 1024 * 1024)){
-					$('#msg').text ("The file exceeds 1.5 MB!");
-				}
-				else if (fileExt != "png" && fileExt != "jpg" && fileExt != "PNG" && fileExt != "JPG"){
-					$('#msg').text ("The file format must be .jpg or .png");
-				}
-				else {
-					uploadFileViaBase64({
-						input: $('#fileupload')[0]
-					});
-					console.log('uploaded');
-					//refreshElement();
-					window.location.reload();
-				}
-			});
 
 			$('#logOut').click(function(){
 				$.jStorage.flush();
@@ -231,6 +206,7 @@ body, html {
 				if ($('#displayName').val() == '')
 					return;
 				else if ($('#displayName').val().length > 26 || $('#displayName').val().length < 3) {
+					$('#msg').css("color", "red");
 					$('#msg').text ("Display name cannot be shorter than 3chars or longer than 26chars");
 					return;
 					}
@@ -250,10 +226,13 @@ body, html {
 						var str = user.displayName;
 						console.log ('success', str);
 						$(".inputEnter").attr("disabled", false);
+						$.jStorage.set("displayName", user.displayName);
+						$('#msg').css("color", "rgb(188,230,35)");
 						$('#msg').text ("Saved!");
 					},
 					error: function (err){
 						console.log ('failed', err);
+						$('#msg').css("color", "red");
 						$('#msg').text ("Something Wrong occured. Please contact to Admin.");
 						$(".inputEnter").attr("disabled", false);
 						return;
@@ -263,13 +242,101 @@ body, html {
 			
 		});
 
+		$(window).load(function() {
+			var options =
+			{
+				thumbBox: '.thumbBox',
+				spinner: '.spinner'
+			}
+			var cropper;
+			var fileName;
+			var fileExt;
+			$('#fileUpload').on('change', function(){
+				console.log("change");
+				fileName = this.files[0].name;
+				fileExt = fileName.substr(fileName.length - 3);
+				if (this.files[0].size > (5 * 1024 * 1024)){
+						$('#msg').text ("The file exceeds 5 MB!");
+						$('.container, .action').hide();
+						$('#profilePicContainer').show();
+						return;
+					}
+					else if (fileExt != "png" && fileExt != "jpg" && fileExt != "PNG" && fileExt != "JPG"){
+						$('#msg').text ("The file format must be .jpg or .png");
+						$('.container, .action').hide();
+						$('#profilePicContainer').show();
+						return;
+					}
+				$('.container, .action').show();
+				$('#profilePicContainer').hide();
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					options.imgSrc = e.target.result;
+					
+					//console.log(fileName);
+					//console.log(fileExt);
+					
+					cropper = $('.imageBox').cropbox(options);
+				}
+
+				reader.readAsDataURL(this.files[0]);
+			})
+			$('#btnCrop').on('click', function(){
+				try {
+					var img = cropper.getDataURL();
+					console.log("img =" + img);
+				}catch(err) {
+					$('#msg').text ("You haven't uploaded a new profile pic");
+					$('.container, .action').show();
+				$('#profilePicContainer').hide();
+					return;
+				}
+				//console.log(fileExt);
+				uploadFileViaBase64(img);
+				console.log('upload');
+					//refreshElement();
+					
+			})
+			$('#btnZoomIn').on('click', function(){
+				cropper.zoomIn();
+			})
+			$('#btnZoomOut').on('click', function(){
+				cropper.zoomOut();
+			})
+			uploadFileViaBase64 = function (img) {
+						console.log("start");
+						$.support.cors = true;
+						img = '{"path":"./public/img/","name": "' + userId + '.png", "base64encoded": "' + img + '"}';
+						console.log(img);
+						$.ajax({
+						url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file',
+						contentType: 'application/json; Charset=UTF-8',
+						dataType: 'json',
+						type: 'POST',
+						data: img
+						}).done(function (result) {
+							console.log("success");
+							if (options.success) {
+								options.success(result);
+							}
+						}).fail(function (err) {
+							if (options.error) {
+								options.error(err);
+							}
+						}).always(function () {
+							window.location.reload();
+							//alert("finish");
+						});
+			};
+
+		});
 		function imgError(image) {
 			//console.log("gg");
 			if (firstError){
 				firstError = false;
 				$('#profilePic').attr("src","img/" + userId + ".jpg");
 			}else{
-				image.src = "img/noImg.png";
+				image.src = "img/noImg.jpg";
 				image.onerror = "";
 			}
 			return true;
@@ -309,13 +376,28 @@ body, html {
 </nav>
 
 <div id="content">
-	<form action="">
+	<form action = "">
 		<div id="input">
-			Profile Pic:<br/>
+			<label style = "color: white">Profile Pic:</label><br/>
+			<div class = "container" id = "changeBox">
+				<div class = "imageBox">
+					<div class = "thumbBox"></div>
+					<div class = "spinner" style="display: none">Loading...</div>
+				</div>
+			</div>
+			<div id = "profilePicContainer">
 			<img id = "profilePic" onerror = "imgError(this)"/><br/>
-			<input id = "fileupload" type = "file" name = "file[]" class="btn btn-default" data-url = "http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file" data-path = "./public/img/"/><br/>
+			<label for = "fileUpload" class = "custom-file-upload">Edit</label><br/>
+			</div>
+			<div class = "action">
+				<input type = "file" id = "fileUpload" name = "file[]" style = "width: 200px" data-url = "http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file" data-path = "./public/img/">
+				<input type = "button" id = "btnCrop" class = "btn btn-default" value = "Crop" style = "float: right">
+				<input type = "button" id = "btnZoomIn" class = "btn btn-default" value = "+" style = "float: right">
+				<input type = "button" id = "btnZoomOut" class = "btn btn-default" value = "-" style = "float: right">
+			</div>
+			<br/>
 			<input type = "text" id = "email" class = "textbox" disabled/><br/>
-			<input type="text" class="textbox inputEnter" id = "displayName" placeholder="Display Name" > </input><br/>
+			<input type = "text" class = "textbox inputEnter" id = "displayName" placeholder = "Display Name" > </input><br/>
 
 			<!--<p><select class="select-style" id="select">
 			
@@ -330,8 +412,8 @@ body, html {
 			
 		</div>
 		
-		<button type="button" class="btn btn-default" id="changePw">Change password</button>
-		<p><button type="button" class="btn btn-default inputEnter" id="saveButton">Save</button></p>
+		<button type = "button" class = "btn btn-default" id = "changePw">Change password</button>
+		<p><button type = "button" class = "btn btn-default inputEnter" id = "saveButton">Save</button></p>
 		</div>
 	</form>
     </div>

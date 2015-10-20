@@ -64,70 +64,76 @@ body, html {
 	border: 0;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-	$(document).ready (function() {
-		var parameters = location.search.substring(1);
-		/*if (parameters == "forget")
-			$('#titleImg').text("Forget Password");
-		else if (parameters == "joinUs")
-			$('#titleImg').text("Sign Up");*/
 
-		$('.inputEnter').keypress(function (e) {
-			if (e.which == 13) {
-				submitData();
-			}
-		});
-
-		$('#submitBtn').click(function() {
-			submitData();
-		});
-
-		function submitData() {
-			if (($('#email').val()) == ""){
-					$('#msg').text ("Please fill in your email address");
-					return;
-					}
-				$(".inputEnter").attr("disabled", true);
-				var data = {
-					email: $('#email').val(),
-				}
-				$.support.cors = true;
-				data = JSON.stringify (data);
-				$.ajax({
-					type: 'POST',
-					contentType: 'application/json',
-					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user',
-					data: data,
-					dataType: 'json',
-					success: function (user) {
-						var str = 'email:' + user.email;
-						console.log ('success', str);
-						if (parameters == "forget")
-							$('#msg').html("Your password is reset successfully, Please check your mail box to get a new password.<br/> The browser will redirect to login page after 3 seconds...");
-						else if (parameters == "joinUs")
-							$('#msg').html("Registration is successful. Please check your mail box to get a password.</br> The browser will redirect to login page after 3 seconds...");
-						setTimeout(function() {window.location.href = 'index.html';}, 3000);
-
-					},
-					error: function (err){
-						console.log ('failed', err);
-						$('#msg').text ("Wrong email address");
-						$(".inputEnter").attr("disabled", true);
-						return;
-					}
-				});
-		}
-	});
-</script>
 <html lang="en">
 
 <head>
 	<title>Gathering</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel = "icon" type = "image/png" href = "images/03.png" sizes = "16x16">
 	<meta name = "viewport" content = "width = device-width, height = device-height, initial-scale=1.0">
-  <title>Gathering</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		$(document).ready (function() {
+			var parameters = location.search.substring(1);
+			/*if (parameters == "forget")
+				$('#titleImg').text("Forget Password");
+			else if (parameters == "joinUs")
+				$('#titleImg').text("Sign Up");*/
+
+			$('.inputEnter').keypress(function (e) {
+				if (e.which == 13) {
+					submitData();
+				}
+			});
+
+			$('#submitBtn').click(function() {
+				submitData();
+			});
+
+			function submitData() {
+				if (($('#email').val()) == ""){
+						$('#msg').css("color", "red");
+						$('#msg').text ("Please fill in your email address");
+						return;
+						}
+					$(".inputEnter").attr("disabled", true);
+					var data = {
+						email: $('#email').val(),
+					}
+					$.support.cors = true;
+					data = JSON.stringify (data);
+					$.ajax({
+						type: 'POST',
+						contentType: 'application/json',
+						url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user',
+						data: data,
+						dataType: 'json',
+						success: function (user) {
+							var str = 'email:' + user.email;
+							console.log ('success', str);
+							if (parameters == "forget")
+								$('#msg').css("color", "rgb(188,230,35)");
+								$('#msg').html("Your password is reset successfully, Please check your mail box to get a new password.<br/> The browser will redirect to login page after 3 seconds...");
+							else if (parameters == "joinUs")
+								$('#msg').css("color", "rgb(188,230,35)");
+								$('#msg').html("Registration is successful. Please check your mail box to get a password.</br> The browser will redirect to login page after 3 seconds...");
+							setTimeout(function() {window.location.href = 'index.html';}, 3000);
+
+						},
+						error: function (err){
+							console.log ('failed', err);
+							$('#msg').css("color", "red");
+							$('#msg').text ("Wrong email address");
+							$(".inputEnter").attr("disabled", true);
+							return;
+						}
+					});
+			}
+		});
+	</script>
+	<title>Gathering</title>
 </head>
 
 <body>

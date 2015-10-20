@@ -57,10 +57,16 @@ body, html {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="icon" type="image/png" href="images/03.png" sizes="16x16">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="js/jstorage.js"></script>
   <script>
+	var userId = $.jStorage.get("userId");
+	var displayName = $.jStorage.get("displayName");
+	var userEmail = $.jStorage.get("userEmail");
+	if (userId == null || displayName == null ||userEmail == null)
+		window.location.href = "index.html";
 	$(document).ready(function() {
 		$('#logOut').click(function(){
 			$.jStorage.flush();
@@ -78,7 +84,7 @@ body, html {
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
       <img src="images/08.png" id="iconMenu"> </img> 
       </button>
-      <a class="navbar-brand" href="#"><img src="images/03.png" id="iconMenu">  </img></a>
+      <a class="navbar-brand" href="home.html"><img src="images/03.png" id="iconMenu">  </img></a>
       	<div id="Header" class="navbar-toggle collapsed" >
         	 <p> Home </p>
      	</div>
