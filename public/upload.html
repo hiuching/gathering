@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>File upload Node.</title>
+  </head>
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<input id="fileupload" type="file" name="file[]" data-url="http://127.0.0.1:8081/gathering/file" data-path="./public/img" />
+	<body>
+	<script>
+	$(function () {
+		uploadFileViaBase64 = function (options) {
+		  options = options || {};
+		  var input = options.input;
+
+		  if (input.files && input.files[0]) {
+			var path = $(input).data('path') || "upload";
+			var data = {path: path};    
+			var file = input.files[0];
+			var fileReader = new FileReader();
+			fileReader.onload = function (e) {
+			  $.extend(true, data, {"name": file.name, "base64encoded": e.target.result}, options.data);
+			  $.ajax({
+				url: 'http://127.0.0.1:8081/gathering/file',
+				contentType: 'application/json; Charset=UTF-8',
+				dataType: 'json',
+				type: 'POST',
+				data: JSON.stringify(data)
+			  }).done(function (result) {
+				if (options.success) {
+				  options.success(result);
+				}
+			  }).fail(function (err) {
+				if (options.error) {
+				  options.error(err);
+				}
+			  });
+			};
+			fileReader.readAsDataURL(file);
+		  } else {
+			console.log('no input.files');
+		  }
+		};
+		$('#fileupload').change(function(){
+			uploadFileViaBase64({
+				input: $('#fileupload')[0]
+			});
+		});
+	});
+</script>
+</html>
