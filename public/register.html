@@ -1,69 +1,5 @@
 <!DOCTYPE html>
-<style>
-body, html {
-  	font-family: 'Open Sans', sans-serif;
-    font-size: 70%;
-	background: #446265;
-	text-align:center;
-}
-#container {
-	width: 100%;
-	height: 100%;
-	background: #446265;
-}
-#top {
-	padding-top: 5%;
-	height: 40%;
-	width: 100%;
-}
-#input {
-  	font-family: 'Open Sans', sans-serif;
-    font-size: 70%;
-	text-align: center;
-	padding-top: 10%;
-	height: 40%;
-	width: 100%;
-}
-#bottom {
-	text-align: center;
-	padding-top: 8%;
-	padding-bottom: 10%;
-	font-size: 5px;
-	height: 40%;
-	width: 100%;
-}
-.textbox {
-	border:0px solid #000000;
-	border-radius:10px;
-	height: 20px;
-	width: 60%;
-	background: #FFFFFF;
-	text-align: center;
-	font-weight: 200;
-	font-size: 5px;
-    box-shadow: 5px 2px 8px rgb(55,71,71);
-}
-#logoImg {
-	width: 160px;
-	height: 150px;
-	text-align: center;
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
 
-}
-#submitImg {
-	width: 120px;
-	height: 120px;
-}
-#msg {
-	color: red;
-}
-#submitBtn {
-	background: transparent;
-	border: 0;
-}
-</style>
 
 <html lang="en">
 
@@ -72,6 +8,71 @@ body, html {
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel = "icon" type = "image/png" href = "images/03.png" sizes = "16x16">
+	<style>
+	body, html {
+		font-family: 'Open Sans', sans-serif;
+		font-size: 70%;
+		background: #446265;
+		text-align:center;
+	}
+	#container {
+		width: 100%;
+		height: 100%;
+		background: #446265;
+	}
+	#top {
+		padding-top: 5%;
+		height: 40%;
+		width: 100%;
+	}
+	#input {
+		font-family: 'Open Sans', sans-serif;
+		font-size: 70%;
+		text-align: center;
+		padding-top: 10%;
+		height: 40%;
+		width: 100%;
+	}
+	#bottom {
+		text-align: center;
+		padding-top: 8%;
+		padding-bottom: 10%;
+		font-size: 5px;
+		height: 40%;
+		width: 100%;
+	}
+	.textbox {
+		border:0px solid #000000;
+		border-radius:10px;
+		height: 20px;
+		width: 60%;
+		background: #FFFFFF;
+		text-align: center;
+		font-weight: 200;
+		font-size: 10px;
+		box-shadow: 5px 2px 8px rgb(55,71,71);
+	}
+	#logoImg {
+		width: 160px;
+		height: 150px;
+		text-align: center;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+	#submitImg {
+		width: 120px;
+		height: 120px;
+	}
+	#msg {
+		color: red;
+	}
+	#submitBtn {
+		background: transparent;
+		border: 0;
+	}
+	</style>
 	<meta name = "viewport" content = "width = device-width, height = device-height, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
@@ -100,7 +101,7 @@ body, html {
 						}
 					$(".inputEnter").attr("disabled", true);
 					var data = {
-						email: $('#email').val(),
+						email: $.trim($('#email').val())
 					}
 					$.support.cors = true;
 					data = JSON.stringify (data);
@@ -113,21 +114,21 @@ body, html {
 						success: function (user) {
 							var str = 'email:' + user.email;
 							console.log ('success', str);
-							if (parameters == "forget")
+							if (parameters == "forget"){
 								$('#msg').css("color", "rgb(188,230,35)");
-								$('#msg').html("Your password is reset successfully, Please check your mail box to get a new password.<br/> The browser will redirect to login page after 3 seconds...");
-							else if (parameters == "joinUs")
+								$('#msg').html("Your password is reset successfully, Please check your mail box to get a new password.<br/> The browser will redirect to login page after 5 seconds...");
+							}else if (parameters == "joinUs"){
 								$('#msg').css("color", "rgb(188,230,35)");
-								$('#msg').html("Registration is successful. Please check your mail box to get a password.</br> The browser will redirect to login page after 3 seconds...");
-							setTimeout(function() {window.location.href = 'index.html';}, 3000);
+								$('#msg').html("Registration is successful. Please check your mail box to get a password.</br> The browser will redirect to login page after 5 seconds...");
+							}
+							setTimeout(function() {window.location.href = 'index.html';}, 5000);
 
 						},
 						error: function (err){
 							console.log ('failed', err);
 							$('#msg').css("color", "red");
 							$('#msg').text ("Wrong email address");
-							$(".inputEnter").attr("disabled", true);
-							return;
+							$(".inputEnter").attr("disabled", false);
 						}
 					});
 			}
@@ -139,7 +140,7 @@ body, html {
 <body>
 	<div id = "container">
 		<div id="top">
-			<img src="images/03.png" id="logoImg"/> 
+			<a href = "index.html"><img src="images/03.png" id="logoImg"/></a>
 			<!-- I cant make this center in css.. //Carrie: fixed-->
 		</div>
 		<!--<form>-->

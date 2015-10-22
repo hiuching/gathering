@@ -1,160 +1,164 @@
 <!DOCTYPE html>
-<style>
-
-body, html {
-  	font-family: 'Open Sans', sans-serif;
-    font-size: 70%;
-  	background: rgb(68,98,101);
-	text-align:center;
-}
-#content{
-	background: rgb(68,98,101);
-	margin-top: -30px;
-	font-size:18px;
-}
-#input{
-	padding-top: 100px;
-}
-#iconMenu{
-	width:60px;
-	height:55px;
-}
-
-#Header {
-	color: white;
-	font-size: 18px;
-	margin-right: 25%;
-	margin-top: 15px;	
-}
-#menu1 {
-	background: rgb(255,244,219);
-	padding-bottom: 45px;
-	padding-left: 100px;
-}
-#menu2 {
-	background: rgb(250,229,187);
-	padding-bottom: 45px;
-	padding-left: 100px;
-}
-#menu3 {
-	background: rgb(249,219,159);
-}
-#menu4 {
-	background: rgb(247,207,132);
-}
-#logOut {
-	background: rgb(245,196,103);
-	padding-bottom: 25px;
-}
-.textbox {
-	border:0px solid #000000;
-	border-radius:10px;
-	height: 20px;
-	width: 40%;
-	background: #FFFFFF;
-	text-align: center;
-	font-weight: 200;
-	font-size: 10px;
-	margin-bottom: 20px ;
-    box-shadow: 5px 2px 8px rgb(55,71,71);
-}
-#index1 {
-	width: 30px;
-	height: 30px;
-}
-#index2 {
-	width: 70px;
-	height: 70px;
-	float: left;
-	margin-left: 10px;
-	margin-top: -90px;
-}
-#select {
-	color: black;
-	font-size: 12px;
-	text-align: center;
-	margin-bottom: 20px;
-	margin-left: auto;
-	margin-right: auto;
-}
-	
-.select-style {
-    padding: 0;    
-
-	position:relative;
-    border: 1px solid #ccc;
-    width: 100px;
-	height: 20px;
-	text-align: center;
-    border-radius: 10px;
-	box-shadow: 5px 2px 8px rgb(55,71,71);
-    overflow: hidden;
-    background-color: #fff;
-
-}
-.select-style select {
-    padding: 1px 8px;
-	width: 80%;
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-    background-image: none;
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-}
-
-.select-style select:focus {
-    outline: none;
-}
-
-#saveButton {
-	float: right;
-	margin-right: 10px;
-}
-#profilePic {
-	width: 200px;
-	height: 200px;
-}
-#fileUpload {
-	display: none;
-	margin-left: auto;
-	margin-right: auto;
-}
-#msg {
-	color: red;
-}
-.custom-file-upload {
-	width: 200px;
-	background-color: #2E2E2E;
-	color: white;
-    cursor: pointer;
-}
-.container {
-	margin-left: auto;
-	margin-right: auto;
-}
-.action {
-	width: 100%;
-	height:30px;
-	margin: 10px 0;
-	text-align: center;
-	padding-right: 31%
-	
-}
-.cropped>img {
-	margin-right: 10px;
-}
-
-</style>
 
 <html lang="en">
-
 <head>
 	<title>Gathering</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style_Croper.css" type="text/css" />
+	<style>
+
+	body, html {
+		font-family: 'Open Sans', sans-serif;
+		font-size: 70%;
+		background: rgb(68,98,101);
+		text-align:center;
+	}
+	#content{
+		background: rgb(68,98,101);
+		margin-top: -30px;
+		font-size:18px;
+	}
+	#input{
+		padding-top: 100px;
+	}
+	#iconMenu{
+		width:60px;
+		height:55px;
+	}
+
+	#Header {
+		color: white;
+		font-size: 18px;
+		margin-right: 25%;
+		margin-top: 15px;	
+	}
+	#menu1 {
+		background: rgb(255,244,219);
+		padding-bottom: 45px;
+		padding-left: 100px;
+	}
+	#menu2 {
+		background: rgb(250,229,187);
+		padding-bottom: 45px;
+		padding-left: 100px;
+	}
+	#menu3 {
+		background: rgb(249,219,159);
+	}
+	#menu4 {
+		background: rgb(247,207,132);
+	}
+	#logOut {
+		background: rgb(245,196,103);
+		padding-bottom: 25px;
+	}
+	.textbox {
+		border:0px solid #000000;
+		border-radius:10px;
+		height: 20px;
+		width: 40%;
+		background: #FFFFFF;
+		text-align: center;
+		font-weight: 200;
+		font-size: 10px;
+		margin-bottom: 20px ;
+		box-shadow: 5px 2px 8px rgb(55,71,71);
+	}
+	#index1 {
+		width: 30px;
+		height: 30px;
+	}
+	#index2 {
+		width: 70px;
+		height: 70px;
+		float: left;
+		margin-left: 10px;
+		margin-top: -90px;
+	}
+	#select {
+		color: black;
+		font-size: 12px;
+		text-align: center;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+		
+	.select-style {
+		padding: 0;    
+
+		position:relative;
+		border: 1px solid #ccc;
+		width: 100px;
+		height: 20px;
+		text-align: center;
+		border-radius: 10px;
+		box-shadow: 5px 2px 8px rgb(55,71,71);
+		overflow: hidden;
+		background-color: #fff;
+
+	}
+	.select-style select {
+		padding: 1px 8px;
+		width: 80%;
+		border: none;
+		box-shadow: none;
+		background-color: transparent;
+		background-image: none;
+		-webkit-appearance: none;
+		   -moz-appearance: none;
+				appearance: none;
+	}
+
+	.select-style select:focus {
+		outline: none;
+	}
+
+	#saveButton {
+		float: center;
+		margin-right: 10px;
+	}
+	#changePw {
+		float: center;
+		margin-right: 10px;
+	}
+	#profilePic {
+		width: 200px;
+		height: 200px;
+	}
+	#fileUpload {
+		display: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#msg {
+		color: red;
+	}
+	.custom-file-upload {
+		width: 200px;
+		background-color: #2E2E2E;
+		color: white;
+		cursor: pointer;
+	}
+	.container {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.action {
+		width: 100%;
+		height:30px;
+		margin: 10px 0;
+		text-align: center;
+		padding-right: 31%
+		
+	}
+	.cropped>img {
+		margin-right: 10px;
+	}
+
+	</style>
+
 	<link rel="icon" type="image/png" href="images/03.png" sizes="16x16">
     <style>
         
@@ -170,7 +174,7 @@ body, html {
 		var userId = $.jStorage.get("userId");
 		var displayName = $.jStorage.get("displayName");
 		var userEmail = $.jStorage.get("userEmail");
-		if (userId == null || displayName == null ||userEmail == null)
+		if (userId == null ||userEmail == null)
 				window.location.href = "index.html";
 		
 		$(document).ready(function() {
@@ -188,7 +192,7 @@ body, html {
 
 			$('#email').val($.jStorage.get("userEmail"));
 			if (displayName != null){
-				$('#displayName').attr("placeholder",displayName);
+				$('#displayName').attr("value",displayName);
 				}
 			
 			$('#profilePic').attr("src","img/" + userId + ".png");
@@ -212,7 +216,7 @@ body, html {
 					}
 				$(".inputEnter").attr("disabled", true);
 				var data = {
-					displayName: $('#displayName').val(),
+					displayName: $.trim($('#displayName').val())
 				}
 				$.support.cors = true;
 				data = JSON.stringify (data);
