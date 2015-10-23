@@ -1,85 +1,5 @@
 <!DOCTYPE html>
-<style>
-body, html {
-  	font-family: 'Open Sans', sans-serif;
-    font-size: 70%;
-	background: #446265;
-	text-align: center;
-}
-#container {
-	width: 100%;
-	height: 100%;
-	background: #446265;
-}
-#top {
-	padding-top: 5%;
-	height: 40%;
-	width: 100%;
-}
-#input {
-  	font-family: 'Open Sans', sans-serif;
-    font-size: 70%;
-	text-align: center;
-	padding-top: 10%;
-	height: 40%;
-	width: 100%;
-}
-#bottom {
-	text-align: center;
-	padding-top: 8%;
-	padding-bottom: 10%;
-	font-size: 15px;
-	height: 40%;
-	width: 100%;
-}
-.textbox {
-	border:0px solid #000000;
-	border-radius:10px;
-	height: 20px;
-	width: 60%;
-	background: #FFFFFF;
-	text-align: center;
-	font-weight: 200;
-	font-size: 15px;
-	margin-bottom: 2px ;
-    box-shadow: 5px 2px 8px rgb(55,71,71);
-}
-#logoImg {
-	width: 160px;
-	height: 150px;
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
 
-}
-.textboxImg {
-	width: 30px;
-	height: 30px;
-}
-#submitImg {
-	width: 60px;
-	height: 60px;
-	 /*i dunno how to make this */
-}
-#forget {
-	float: left;
-	padding-left: 10%;
-	color: rgb(174,216,216);
-}
-#register {
-	float: right;
-	padding-right: 10%;
-	color: rgb(244,193,103);
-}
-#msg {
-	color: red;
-}
-#login {
-	background: transparent;
-	border: 0;
-}
-
-</style>
 
 <html lang = "en">
 <head>
@@ -88,6 +8,87 @@ body, html {
 	<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 	<meta name = "viewport" content = "width = device-width, height = device-height, initial-scale=1.0">
 	<link rel = "stylesheet" href = "css/bootstrap.css">
+	<style>
+		body, html {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 70%;
+			background: #446265;
+			text-align: center;
+		}
+		#container {
+			width: 100%;
+			height: 100%;
+			background: #446265;
+		}
+		#top {
+			padding-top: 5%;
+			height: 40%;
+			width: 100%;
+		}
+		#input {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 70%;
+			text-align: center;
+			padding-top: 10%;
+			padding-bottom: 5%;
+			height: 40%;
+			width: 100%;
+		}
+		#bottom {
+			text-align: center;
+			padding-top: 8%;
+			padding-bottom: 10%;
+			font-size: 15px;
+			height: 40%;
+			width: 100%;
+		}
+		.textbox {
+			border:0px solid #000000;
+			border-radius:10px;
+			height: 20px;
+			width: 60%;
+			background: #FFFFFF;
+			text-align: center;
+			font-weight: 200;
+			font-size: 10px;
+			margin-bottom: 2px ;
+			box-shadow: 5px 2px 8px rgb(55,71,71);
+		}
+		#logoImg {
+			width: 160px;
+			height: 150px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+
+		}
+		.textboxImg {
+			width: 30px;
+			height: 30px;
+		}
+		#submitImg {
+			width: 60px;
+			height: 60px;
+		}
+		#forget {
+			float: left;
+			padding-left: 10%;
+			color: rgb(174,216,216);
+		}
+		#register {
+			float: right;
+			padding-right: 10%;
+			color: rgb(244,193,103);
+		}
+		#msg {
+			color: red;
+		}
+		#login {
+			background: transparent;
+			border: 0;
+		}
+
+	</style>
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src = "https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -142,8 +143,8 @@ body, html {
 						return;
 					}
 					var data = {
-						email: $('#email').val(),
-						password: $('#pw').val()
+						email: $.trim($('#email').val()),
+						password: $.trim($('#pw').val())
 					}
 					$.support.cors = true;
 					$.ajax({
