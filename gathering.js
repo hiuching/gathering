@@ -73,9 +73,9 @@ route
 
 app.delete('/gathering/:moduleName/:id', function (req, res) {
 	var moduleName = req.params.moduleName;
-        getController(moduleName, function(error, controller){
-                return controller.removeById(req, res);
-        });
+		getController(moduleName, function(error, controller){
+						return controller.removeById(req, res);
+		});
 });
 
 app.get('/gathering/:moduleName', function (req, res) {

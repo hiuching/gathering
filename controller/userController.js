@@ -15,7 +15,7 @@ UserController.prototype.login = function (req, res) {
 };
 
 UserController.prototype.findAll = function (req, res) {
-	var options = req.query;
+	var options = req.query; //?後面
 	User.findAll(options, function(err, data){
 		if(err){
 			res.status(500).send(err);
@@ -39,7 +39,7 @@ UserController.prototype.add = function (req, res) {
 UserController.prototype.updateById = function (req, res) {
   var self = this;
   var req = req;
-  var id = req.params.id;
+  var id = req.params.id; //URL 個 id
   var update = req.body;
 	User.updateById(id, update, function(err, data){
 		if(err){

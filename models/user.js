@@ -10,7 +10,7 @@ var userSchema = new Schema({
 	displayName:  {type: String},
 	noShowCount: {type: Number},
 	profilePic: {type: String},
-	friendList: {type: Array}
+	friendList: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 }, {collection: 'user'});
 
 /***************
@@ -39,6 +39,7 @@ userSchema.statics.create = function (options, callback) {
 		}
 	});
 };
+
 userSchema.statics.findAll = function (options, callback) {
 	if(options.action == "findUserByEmailAndPassword"){
 		return this.findUserByEmailAndPassword(options, callback);
@@ -48,6 +49,8 @@ userSchema.statics.findAll = function (options, callback) {
 		return this.findUserByEmailWithPassword(options, callback);
 	} else  if (options.action == "findUsersByDisplayName"){
 		return this.findUserByDisplayName(options, callback);
+	} else  if (options.action == "searchFriends"){
+		return this.searchFriends(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
 	}
@@ -71,7 +74,10 @@ userSchema.statics.findByConditions = function (options, callback) {
 	}
 	if (conditions.select != null && conditions.select != '') {
 		q.select(conditions.select);
+	} if (!conditions.populate){
+		q.populate("friendList");
 	}
+	
 	q.exec(callback);
 }; 
 
@@ -141,10 +147,36 @@ userSchema.statics.findUserById = function (options, callback) {
 	});     
 };
 
+userSchema.statics.findUserByIdWithoutPopulate = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions._id = options.id;
+	conditions.populate = true;
+    this.findByConditions(conditions, function(err, users){
+		if(users.length == 1){
+			callback(null, users[0]);
+		} else if (users.length == 0){
+			callback({code: 404, message: 'recode not found'});
+		} else {
+			callback({code: 403, message: 'more than one recode'});
+		}
+	});     
+};
+
 userSchema.statics.findUsersByDisplayName = function (options, callback) {
 	options = options || {};
 	var conditions = {};
 	conditions.displayName = options.displayName;
+	
+	this.findByConditions(conditions, callback);
+};
+
+
+userSchema.statics.searchFriends = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions.displayName = options.displayName;
+	conditions.email = options.email;
 	
 	this.findByConditions(conditions, callback);
 };
@@ -172,7 +204,49 @@ userSchema.statics.updateById = function (id, update, callback) {
 				}
 			}
 		});
-	} else {
+	} else if (update.action == 'addFriend') {
+		this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
+			if (err) {
+				callback(err);
+			} else {
+				if (user.friendList.indexOf(update.friend) == -1){
+					user.friendList.push(update.friend);
+					self.update({ _id: id }, user,  function(err, noOfUpdate) {
+						if (err) {
+							callback(err);
+						} else {
+							delete user.password;
+							callback(null, user);
+						}
+					});
+				} else {
+					callback({code: 403, message: 'You have this friend already'});
+				}
+			}
+		});
+		
+	} else if (update.action == 'removeFriend') {
+		this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
+			if (err) {
+				callback(err);
+			} else {
+				for (var i=0; i<user.friendList.length; i++){
+					if (update.friend == user.friendList[i]){
+						user.friendList.splice(i, 1);
+					}
+				};
+				self.update({ _id: id }, user,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						delete user.password;
+						callback(null, user);
+					}
+				});
+			}
+		});
+	}
+	else {
 		this.update({ _id: id }, update,  function(err, noOfUpdate) {
 			if (err) {
 				callback(err);
