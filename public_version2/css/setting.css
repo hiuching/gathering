@@ -85,3 +85,21 @@
 #changePwBtn {
 	margin-left: 28%;
 }
+
+
+#right {
+    float: right;
+    vertical-align: middle;
+}
+.circle-Save {
+    font-size: 200%;
+    display: table-cell;
+    height: 200px;
+    width: 100px;
+    text-align: left;
+    padding-left:10%;
+    vertical-align: middle;
+    border-radius: 100px 0px 0px 100px;
+    background: #A9DED1;
+    color: #284D57;
+}
