@@ -10,8 +10,6 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var app = express();
 
-
-
 var http = require('http');
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -57,6 +55,7 @@ app.all("/login", function(req, res, next) {
 
 var controllers = {};
 var modules = [
+'event',
 'file',
 'user'
 ];
