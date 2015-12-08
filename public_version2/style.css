@@ -1,0 +1,247 @@
+body {
+    background-image: url("images/BK1.jpg");
+    background-color: #cccccc;
+}
+
+#header {
+    background-color:rgb(0,160,154);
+    color:white;
+    text-align:left;
+    padding:5px;
+	font-family: "Times New Roman", Times, serif;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;	      
+}
+#section {
+	padding-top: -200px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+   	padding:5px;	 	 
+}
+#iconMenu{
+	width:60px;
+	height:55px;
+	float: center;
+}
+.menu{
+	color: rgb(68,98,101);
+	font-weight: bold;
+	font-size: 18px;
+}
+#bigIcon{
+	font-weight: bold;
+	font-size:30px;
+}
+
+/* Login */ 
+#left_circle{
+     height:250px;
+     width:130px;
+     border-radius: 0 90px 90px 0 ;
+     -moz-border-radius: 0 90px 90px 0 ;
+     -webkit-border-radius: 0 130px 130px 0 ;
+     background: #20353F;
+	 cursor: pointer;
+}
+#left{
+	float:left;
+	padding-top: 200px;
+}
+#left_text{
+	 text-align: center;
+	 padding-top:70px;
+	 color:#A9D2D1;
+	 font-size:22px;
+}
+#right_circle{
+     height:250px;
+     width:130px;
+     border-radius: 90px 0 0 90px;
+     -moz-border-radius: 90px 0 0 90px ;
+     -webkit-border-radius: 130px 0 0 130px;
+     background: #20353F;
+	 vertical-align: center;
+	 cursor: pointer;
+}
+#right{
+	float:right;
+	vertical-align:middle;
+		padding-top: 200px;
+}
+#right_text{
+	 text-align: center;
+	 padding-top: 70px;
+	 color:#F9C848;
+	 font-size:22px;
+}
+.textbox {
+	border:0px solid #000000;
+	border-radius:25px;
+	height: 25px;
+	width: 280px;
+	background: #FFFFFF;
+	text-align: center;
+	font-weight: 200;
+	font-size: 10px;
+	margin-bottom: 2px ;
+    box-shadow: 5px 2px 8px rgb(55,71,71);
+	color: #000000;
+}
+.loginBtn {
+	margin-top: 20px;
+	color:#41AA54;
+	width: 130px;
+	height:40px;
+	background-color:#FFFFFF;
+	font-size:16px;
+	font-weight: bold;
+	text-align: center;
+	display:table-cell;
+	vertical-align: middle;
+}
+#img_logo {
+	width: 280px;
+	height: 260px;
+	text-align:center;
+	margin-bottom: 20px;
+
+}
+#img_2 {
+	margin-left: -20px;
+	width: 50px;
+	height: 50px;
+}
+#center {
+	padding-top:50px;
+	float: inherit;
+	text-align:center;
+}
+/* Home */
+
+#upper_text {
+	font-size:18px;
+	color: #20353F;
+	padding-top: 0px;
+	text-align:center;
+	padding-top: 30px;
+	line-height: 12px;
+	margin-top: -90px;
+
+}
+#lower_text {
+	font-size:18px;
+	color: #CCCCCC;
+	padding-top: 0px;
+	text-align:center;
+	padding-top: 10px;
+	line-height: 12px;
+
+	
+}
+#scroll{
+	width: 800px; 
+	height: 200px; 
+	border: 0px solid black; 
+	overflow: auto; 
+	white-space: nowrap;
+	font-size: 14px;
+	display:inline-block;
+	margin-top: 20px;
+}
+.img{
+	width:100px;
+	height:100x;
+}
+#upper_circle{
+     height:75px;
+     width:150px;
+     border-radius: 90px 90px 0 0px;
+     -moz-border-radius: 90px 90px 0 0px;
+     -webkit-border-radius: 90px 90px 0 0px;
+     background:#F9C848;
+	 vertical-align: center;
+}
+#lower_circle{
+     height:75px;
+     width:150px;
+     border-radius: 0 0px 90px 90px;
+     -moz-border-radius: 0 0px 90px 90px;
+     -webkit-border-radius: 0 0px 90px 90px;
+     background: #00B498;
+	 vertical-align: center;
+}
+#rectangle_top1 {
+	width: 200px;
+	height: 15px;
+	border-radius: 5px 5px 0 0 ;
+	background: #A9D2D1;
+	padding-left: 30px;
+
+}
+#rectangle_top2 {
+	width: 200px;
+	height: 15px;
+	border-radius: 5px 5px 0 0 ;
+	background: #F9C848;
+	padding-left: 30px;
+
+}
+#rectangle_top3 {
+	width: 200px;
+	height: 15px;
+	border-radius: 5px 5px 0 0 ;
+	background: #F63D3D;
+	padding-left: 30px;
+
+}
+#rectangle_top4 {
+	width: 200px;
+	height: 15px;
+	border-radius: 5px 5px 0 0 ;
+	background: #00B498;
+	padding-left: 30px;
+
+}
+#rectangle_bottom {
+	width: 200px;
+	height: 150px;
+	background: #FFFFFF;
+	padding-left: 30px;
+}
+#blank {
+	display: inline-block;
+	padding-left: 30px;
+}
+#blank2 {
+	display: inline-block;
+	padding-left: 30px;
+
+}
+#pwText {
+	font-weight: bold;
+	color: white;
+}
+#msg {
+	color: red;
+	font-weight: bold;
+}
+#searchBtn {
+	width: 50px;
+	height: 30px;
+}
+#searchBox {
+	height: 30px;
+}
+#logOut {
+	float: right;
+}

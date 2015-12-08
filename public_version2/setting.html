@@ -1,0 +1,48 @@
+<link rel = "stylesheet" href = "css/setting.css">
+<link rel = "stylesheet" href="css/style_Croper.css" type="text/css" />
+<script src = "js/cropbox.js"></script>
+<script src = "js/setting.js"></script>
+	<div class = "panel panel-warning">
+		<div class = "panel-heading">Profile</div>
+		<div class = "panel-body">
+			<div id = "warningContainer">
+				<div>
+					<div id = "input">
+						<label style = "color: white">Profile Pic:</label><br/>
+						<div class = "container" id = "changeBox">
+							<div class = "imageBox">
+								<div class = "thumbBox"></div>
+								<div class = "spinner" style = "display: none">Loading...</div>
+							</div>
+						</div>
+						<div id = "profilePicContainer">
+							<img id = "profilePic" onerror = "imgError(this)"/><br/>
+							<label for = "fileUpload" class = "custom-file-upload">Edit</label><br/>
+						</div>
+						<div class = "action">
+							<input type = "file" id = "fileUpload" name = "file[]" style = "width: 200px" data-url = "http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/file" data-path = "./public/img/">
+							<input type = "button" id = "btnCrop" class = "btn btn-default" value = "Crop" style = "float: right"></input>
+							<input type = "button" id = "btnZoomIn" class = "btn btn-default" value = "+" style = "float: right"></input>
+							<input type = "button" id = "btnZoomOut" class = "btn btn-default" value = "-" style = "float: right"></input>
+						</div>
+					</div>
+				</div>
+				<div id = "infoContainer">
+					<span id = "userName"></span><button id = "changePwBtn" class = "btn btn-primary"><p>Change</p><p>password</p></button><br/>
+					<input type = "text" id = "userEmail" class = "textbox" disabled/><br/>
+					
+				</div>
+				<span id = "msg"></span><br/>
+			</div>
+		</div>
+	</div>
+	<div class = "panel panel-danger">
+		<div class = "panel-heading">Your Friend List</div>
+		<div class = "panel-body">
+			<ul id = "list"></ul>
+		</div>
+	</div>
+	
+	<button id = 'testAddFd'>+Friend</button>
+</body>
+</html>

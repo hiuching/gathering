@@ -1,0 +1,80 @@
+#aboutUsContainer{
+	text-align: center;
+}
+#content{
+	background: rgb(68,98,101);
+	padding-top: 5%;
+	margin-top: -20px;
+	font-size: 15px;
+	color: rgb(255,208,135);
+}
+#carrie {
+	color: rgb(255,172,247);
+}
+#jeffee {
+	color: rgb(0,169,251);
+}
+#ching {
+	color: rgb(0,210,105);
+}
+#bee {
+	color: rgb(255,128,0);
+}
+#sheron {
+	color: rgb(46,231,170);
+}
+#himal {
+	color: rgb(191,191,0);
+}
+
+#iconMenu{
+	width:60px;
+	height:55px;
+}
+
+#Header {
+	color: white;
+	font-size: 18px;
+	margin-right: 25%;
+	margin-top: 15px;	
+}
+#menu1 {
+	background: rgb(255,244,219);
+	padding-bottom: 45px;
+	padding-left: 100px;
+}
+#menu2 {
+	background: rgb(250,229,187);
+	padding-bottom: 45px;
+	padding-left: 100px;
+}
+#menu3 {
+	background: rgb(249,219,159);
+}
+#menu4 {
+	background: rgb(247,207,132);
+}
+#logOut {
+	background: rgb(245,196,103);
+	padding-bottom: 25px;
+}
+
+#index1 {
+	width: 30px;
+	height: 30px;
+}
+#index2 {
+	width: 70px;
+	height: 70px;
+	float: left;
+	margin-left: 10px;
+	margin-top: -90px;
+}
+#ourIcon {
+	width: 70%;
+	max-width: 400px;
+	height: 70%;
+	max-height: 400px;
+	border:2px solid #ffffff;
+	border-radius:400px;
+}
