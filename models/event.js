@@ -5,26 +5,37 @@ var Mail = require('./mail');
 /***************
 sub-schema
 ****************/
-var pastEventSchema = new Schema({
-	code: String,
-	name: String,
-	role: String,
-	year: Date,
-	isAttended: Boolean,
-	accompanyPersons: [accompanyPersonSchema]
+var result = new Schema({
+	userId:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	period: [{type:String}],
+	note: {type:String}
+});
+
+var choiceResult = new Schema({
+	vote:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	choiceresult: String,
+	note: String
 });
 /***************
 schema
 ****************/
 var eventSchema = new Schema({
-	email:  {type: String},
-	password: {type: String, required: true},
-	displayName:  {type: String},
-	noShowCount: [pastEventSchema],
-	profilePic: {type: String},
-	friendList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
+	name: {type: String},
+	types:  {type: String},
+	location: {type: String},
+	startDate: {type: Date},
+	endDate: {type: Date},
+	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	member:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	budget: {type: String},
+	group: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	description: {type: String},
+	eventTime:{type: String},
+	period:{result},
+	choice:{choiceResult},
+	active{type: boolean},
+	result:{type: mixed}
 }, {collection: 'event'});
-
 
 /***************
 Public method
