@@ -1,0 +1,129 @@
+{
+	"name": "BBQ gathering",
+	"types":  "BBQ",
+	"location": "north",
+	"startDate": "1-12-2015",
+	"endDate": "31-12-2015",
+	"owner": "56027b618ff1db68160fe357",
+	"accepted": ["56027b848ff1db68160fe359"],
+	"budget": "$200-300",
+	"invited": ["56027b3c8ff1db68160fe356"],
+	"description": "BBQ at fanling, ouhk gahering",
+	"eventTime": "night",
+	"period": [{
+		"userId": ["56027b848ff1db68160fe359"],
+		"period": ["12-12-2015"],
+		"note": "I free on that day only"
+	}],
+	"choice": [{
+		"suggester": ["56027b848ff1db68160fe359"], 
+		"vote": [],
+		"choice": "KFC",
+		"note": "KFC is good"
+	}]
+}
+
+
+return: 
+[
+  {
+    "_id": "56671a8e52b45a6a2d06ff64",
+    "name": "BBQ gathering",		// name of event
+    "types": "BBQ",					// type of event, maybe options(dropdown?)
+    "location": "north",			// location of event, maybe options of district(dropdown?)
+    "startDate": "1-12-2015",		
+    "endDate": "31-12-2015",		// event can hold on 1-12-2015 to 31-12-2015
+    "owner": {						// the person create this event
+      "_id": "56027b618ff1db68160fe357",
+      "email": "sheronleungs@gmail.com",
+      "displayName": "Sheron",
+      "noShowCount": 0,
+      "profilePic": "",
+      "__v": 0,
+      "friendList": [
+        "56027b848ff1db68160fe359",
+        "56027b3c8ff1db68160fe356"
+      ]
+    },
+    "budget": "$200-300",			// this is string, so this choice maybe options(dropdown?)
+    "description": "BBQ at fanling, ouhk gahering",
+    "eventTime": "night",			// this is string, so this choice maybe options(morning, noon, night)
+    "__v": 0,
+    "modified": "2015-12-08T17:59:42.759Z",
+    "created": "2015-12-08T17:59:42.749Z",
+    "result": {						// summarize the result finally
+      "attend": []
+    },
+    "active": true,
+    "choice": [						//the restaurant choice
+      {
+        "choice": "KFC",
+        "note": "KFC is good",
+        "_id": "56671a8e52b45a6a2d06ff65",
+        "vote": [],					// the user vote for this choice
+        "suggester": [				// the user suggest this choice
+          {
+            "_id": "56027b848ff1db68160fe359",
+            "email": "ching19930622@gmail.com",
+            "displayName": "Hiu Ching",
+            "noShowCount": 0,
+            "profilePic": "",
+            "__v": 0,
+            "friendList": [
+              "56027b3c8ff1db68160fe356"
+            ]
+          }
+        ]
+      }
+    ],
+    "period": [					// available time
+      {
+        "note": "I free on that day only",
+        "_id": "56671a8e52b45a6a2d06ff66",
+        "period": [				//array of string, may be fixed format of date selector
+          "12-12-2015"
+        ],
+        "userId": [
+          {
+            "_id": "56027b848ff1db68160fe359",
+            "email": "ching19930622@gmail.com",
+            "displayName": "Hiu Ching",
+            "noShowCount": 0,
+            "profilePic": "",
+            "__v": 0,
+            "friendList": [
+              "56027b3c8ff1db68160fe356"
+            ]
+          }
+        ]
+      }
+    ],
+    "invited": [
+      {
+        "_id": "56027b3c8ff1db68160fe356",
+        "email": "carrie_ho_1@hotmail.com",
+        "displayName": "Carrie Ho Shuk Wa",
+        "noShowCount": 0,
+        "profilePic": "",
+        "__v": 0,
+        "friendList": [
+          "56027b618ff1db68160fe357",
+          "56027b778ff1db68160fe358"
+        ]
+      }
+    ],
+    "accepted": [
+      {
+        "_id": "56027b848ff1db68160fe359",
+        "email": "ching19930622@gmail.com",
+        "displayName": "Hiu Ching",
+        "noShowCount": 0,
+        "profilePic": "",
+        "__v": 0,
+        "friendList": [
+          "56027b3c8ff1db68160fe356"
+        ]
+      }
+    ]
+  }
+]

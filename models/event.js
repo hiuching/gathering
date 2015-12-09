@@ -5,17 +5,20 @@ var Mail = require('./mail');
 /***************
 sub-schema
 ****************/
-var result = new Schema({
-	userId:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	period: [{type:String}],
-	note: {type:String}
-});
-
-var choiceResult = new Schema({
-	vote:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	choiceresult: String,
+var choiceSchema = new Schema({
+	suggester: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}], //whom suggest this
+	vote: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],  //whom vote for this
+	choice: String,  //KFC, McDonald
 	note: String
 });
+
+var periodSchema = new Schema({
+	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	period: [{type:String}],   //the available times of user 
+	note: String
+});
+
+
 /***************
 schema
 ****************/
@@ -23,44 +26,36 @@ var eventSchema = new Schema({
 	name: {type: String},
 	types:  {type: String},
 	location: {type: String},
-	startDate: {type: Date},
-	endDate: {type: Date},
+	startDate: {type: String},
+	endDate: {type: String},
 	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	member:[{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	budget: {type: String},
-	group: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	description: {type: String},
-	eventTime:{type: String},
-	period:{result},
-	choice:{choiceResult},
-	active{type: boolean},
-	result:{type: mixed}
+	invited: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	description: {type: String},  //<100 char
+	eventTime: {type: String},   //morning, night, noon
+	period: [periodSchema],
+	choice: [choiceSchema],
+	active: {type: Boolean, default: true},
+	result:{
+		time: String,
+		choice: String,
+		attend: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+	}
 }, {collection: 'event'});
 
+var createdModifiedPlugin = require('./plugins/createdModifiedPlugin');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
+eventSchema.plugin(createdModifiedPlugin, { index: false });
+eventSchema.plugin(deepPopulate);
 /***************
 Public method
 ****************/
 eventSchema.statics.create = function (options, callback) {
 	var self = this;
 	options = options || {};
-	Mail.send(options, function(err, res){
-		if (err){
-			callback(err);
-		} else {
-			self.findEventByEmail(options, function(err, event){
-				if (err){
-					callback(err);
-				} else {
-					if (event){
-						event.password = options.password;
-					} else {
-						var event = new self (options);
-					}
-					event.save(callback);  
-				}
-			});
-		}
-	});
+	var event = new self (options);
+	event.save(callback);  
 };
 
 eventSchema.statics.findAll = function (options, callback) {
@@ -79,21 +74,7 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	if (conditions._id != null && conditions._id != '') {
 		q.where("_id").equals(conditions._id);
 	}	
-	if (conditions.email != null && conditions.email != '') {
-		q.where("email").equals(conditions.email);
-	}	
-	if (conditions.password != null && conditions.password != '') {
-		q.where("password").equals(conditions.password);
-	}
-	if (conditions.displayName != null && conditions.displayName != '') {
-		q.where("displayName").equals(conditions.displayName);
-	}
-	if (conditions.select != null && conditions.select != '') {
-		q.select(conditions.select);
-	} if (!conditions.populate){
-		q.populate("friendList");
-	}
-	
+	q.deepPopulate("owner accepted invited period.userId choice.suggester choice.vote");
 	q.exec(callback);
 }; 
 
@@ -119,7 +100,6 @@ eventSchema.statics.updateById = function (id, update, callback) {
 			if (err) {
 				callback(err);
 			} else {
-				delete update.password;
 				callback(null, update);
 			}
 		});
@@ -128,14 +108,5 @@ eventSchema.statics.updateById = function (id, update, callback) {
 /***************
 Private method
 ****************/
-var resetPassword =  function(){
-    var password = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for ( var i=0; i < 8; i++ ) {
-        password += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-    return password;
-};
 
 module.exports = mongoose.model('Event', eventSchema);
