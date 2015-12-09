@@ -48,7 +48,7 @@ userSchema.statics.findAll = function (options, callback) {
 	} else  if (options.action == "findUserByEmailWithPassword"){
 		return this.findUserByEmailWithPassword(options, callback);
 	} else  if (options.action == "findUsersByDisplayName"){
-		return this.findUserByDisplayName(options, callback);
+		return this.findUsersByDisplayName(options, callback);
 	} else  if (options.action == "searchFriends"){
 		return this.searchFriends(options, callback);
 	} else {
@@ -166,7 +166,7 @@ userSchema.statics.findUserByIdWithoutPopulate = function (options, callback) {
 userSchema.statics.findUsersByDisplayName = function (options, callback) {
 	options = options || {};
 	var conditions = {};
-	conditions.displayName = options.displayName;
+	conditions.displayName = new RegExp(options.displayName, 'i');
 	
 	this.findByConditions(conditions, callback);
 };
@@ -175,7 +175,7 @@ userSchema.statics.findUsersByDisplayName = function (options, callback) {
 userSchema.statics.searchFriends = function (options, callback) {
 	options = options || {};
 	var conditions = {};
-	conditions.displayName = options.displayName;
+	conditions.displayName = new RegExp(options.displayName, 'i');
 	conditions.email = options.email;
 	
 	this.findByConditions(conditions, callback);

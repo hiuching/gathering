@@ -1,6 +1,5 @@
 ﻿var mongoose = require('mongoose'), Schema = mongoose.Schema;
 var extend = require('mongoose-schema-extend');
-var Mail = require('./mail');
 
 /***************
 sub-schema
@@ -60,8 +59,8 @@ eventSchema.statics.create = function (options, callback) {
 
 eventSchema.statics.findAll = function (options, callback) {
 	options = options || {};
-	if(options.action == "findEventByEmailAndPassword"){
-		return this.findByConditions(options, callback);
+	if(options.action == "findEventByInvolvedUser"){
+		return this.findEventByInvolvedUser(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
 	}
@@ -74,6 +73,13 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	if (conditions._id != null && conditions._id != '') {
 		q.where("_id").equals(conditions._id);
 	}	
+	if (conditions.user!= null && conditions.user != ''){
+		q.or([
+			{"invited": {$in: [conditions.user]}},
+			{"accepted": {$in: [conditions.user]}},
+			{"owner": {$in: [conditions.user]}}
+		]);
+	}
 	q.deepPopulate("owner accepted invited period.userId choice.suggester choice.vote");
 	q.exec(callback);
 }; 
@@ -83,12 +89,27 @@ eventSchema.statics.findEventById = function (options, callback) {
 	var conditions = {};
 	conditions._id = options.id;
     this.findByConditions(conditions, function(err, events){
-		if(events.length == 1){
+		if (err){
+			callback(err);
+		} else if(events.length == 1){
 			callback(null, events[0]);
 		} else if (events.length == 0){
 			callback({code: 404, message: 'recode not found'});
 		} else {
 			callback({code: 403, message: 'more than one recode'});
+		}
+	});     
+};
+
+eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions.user = options.user;
+    this.findByConditions(conditions, function(err, events){
+		if (err){
+			callback(err);
+		} else {
+			callback(null, events);
 		}
 	});     
 };
