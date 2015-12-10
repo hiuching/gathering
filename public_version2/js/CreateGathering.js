@@ -55,10 +55,22 @@ $(document).ready(function() {
 		var fdId = this.id;
 		var inviteNum = parseInt($('#inviteNum').val());
 		$('#inviteNum').val(inviteNum + 1);
-		$("#joinFd").append("<span id = '" + fdId + "Name' class = 'friend '>" + fdName + "<section class = 'glyphicon glyphicon-remove'></section></span>");
+		$("#joinFd").append("<span id = '" + fdId + "Name' name = '" + fdId + "'class = 'friend '><section class = 'glyphicon glyphicon-remove'>" + fdName + "</section></span>");
 		$('#' + fdId).removeClass("fa-puzzle-piece notInvited");
 		$('#' + fdId).addClass("fa-child invited");
 		joinFdIdArray.push(fdId);
+		console.log(joinFdIdArray);
+	});
+
+	$('#joinFd').on('click', '.friend', function(){
+		var fdName = $(this).attr("name");
+		var fdId = this.id;
+		var inviteNum = parseInt($('#inviteNum').val());
+		$('#inviteNum').val(inviteNum - 1);
+		$('#' + fdId).remove();
+		$('#' + fdName).removeClass("fa-child invited");
+		$('#' + fdName).addClass("fa-puzzle-piece notInvited");
+		joinFdIdArray = $.grep(joinFdIdArray, function(n, i) { return n != fdId; });
 		console.log(joinFdIdArray);
 	});
 
