@@ -1,13 +1,22 @@
 //var userId = "56027b618ff1db68160fe357";
-
+//var friendIdArray = new Array();
 $(document).ready(function() {
+	$('#bigIconImg').removeClass();
+	$('#bigIconImg').addClass("fa fa-cogs fa-2x");
+	$('#bigIcon').text("Settings");
+	
+	loadFdList = false;
 	$('.container, .action').hide();
+	debugger
+	$('#searchFdPannel').hide();
 	/*var displayName = "Sheron";
 	var userEmail = "sheronleungs@gmail.com";*/
 	//$('.container, .action').hide();
 	$('#profilePic').attr("src","img/" + userId + ".png");
-	$('#userName').text(displayName);
-	$('#userEmail').val(userEmail);
+	if (displayName != null){
+		$('#displayName').attr("placeholder",displayName);
+	}
+	$('#userEmail').text(userEmail);
 	var data = {
 		_id: userId,
 	};
@@ -20,22 +29,25 @@ $(document).ready(function() {
 		data: data,
 		dataType: 'json',
 		success: function(user) {
-			console.log('success',user);
+			console.log('lol success',user);
 			friendList = user[0].friendList;
 			$("#list").children().remove();
 			if (friendList.length == 0){
 				$("#list").append("<lo><span>You have no fd lor! toxic jj</span></lo>");
 			}
+			friendIdArray.length = 0;
 			for(var i in friendList){
+				friendIdArray.push(friendList[i]._id);
 				$("#list").append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + friendList[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + friendList[i].noShowCount + "</span><br>" + friendList[i].email + "&nbsp <button id = '" + friendList[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><br>");
 			}
-			console.log(user[0].friendList);
+			console.log(friendIdArray);
+			loadFdList = true;
 		},
 		error: function(err){
 			console.log('failed');
 		}
 	});
-	$('#list').on('click', '.unFdBtn', function(){
+	$('#list, #searchList').on('click', '.unFdBtn', function(){
 		//console.log("clicked");
 		var fdId = this.id;
 		$('#' + fdId).attr("disabled", true);
@@ -56,7 +68,7 @@ $(document).ready(function() {
 				console.log ('success', user);
 				$('#' + fdId).removeClass("unFdBtn btn-danger");
 				$('#' + fdId).addClass("addFd btn-success");
-				$('#' + fdId).text("+friend");
+				$('#' + fdId).text("+Friend");
 				$('#' + fdId).attr("disabled", false);
 				//console.log('changeClass');
 
@@ -69,7 +81,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#list').on('click', '.addFd', function(){
+	$('#list, #searchList').on('click', '.addFd', function(){
 		//console.log("addFd");
 		//console.log(this.id);
 		fdId = this.id;
@@ -102,35 +114,21 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#testAddFd').click(function() {
-		var data = {
-			action: "addFriend",
-			friend: "56027b778ff1db68160fe358"
+	$('.inputEnter').keypress(function (e) {
+		if (e.which == 13) {
+			submitData();
 		}
-		$.support.cors = true;
-		data = JSON.stringify (data);
-		$.ajax({
-			type: 'PUT',
-			contentType: 'application/json',
-			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/' + userId,
-			data: data,
-			dataType: 'json',
-			success: function (user) {
-				console.log ('success', user);
+	});
 
-			},
-			error: function (err){
-				console.log ('failed', err);
-				return;
-			}
-		});
+	$('#save').click(function() {
+		submitData();
 	});
 
 	$('#changePwBtn').click(function() {
 		location.href = "#/ChangePassword";
 	})
-});
-$(window).load(function() {
+
+	//cropbox
 	var options =
 	{
 		thumbBox: '.thumbBox',
@@ -218,7 +216,45 @@ $(window).load(function() {
 		});
 	};
 
+	function submitData() {
+		if ($('#displayName').val() == '')
+			return;
+		else if ($('#displayName').val().length > 26 || $('#displayName').val().length < 3) {
+			$('#msg').css("color", "red");
+			$('#msg').text ("Display name cannot be shorter than 3chars or longer than 26chars");
+			return;
+			}
+		$(".inputEnter").attr("disabled", true);
+		var data = {
+			displayName: $.trim($('#displayName').val())
+		}
+		$.support.cors = true;
+		data = JSON.stringify (data);
+		$.ajax({
+			type: 'PUT',
+			contentType: 'application/json',
+			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/' + userId,
+			data: data,
+			dataType: 'json',
+			success: function (user) {
+				var str = user.displayName;
+				console.log ('success', str);
+				$(".inputEnter").attr("disabled", false);
+				$.jStorage.set("displayName", user.displayName);
+				$('#msg').css("color", "rgb(188,230,35)");
+				$('#msg').text ("Saved!");
+			},
+			error: function (err){
+				console.log ('failed', err);
+				$('#msg').css("color", "red");
+				$('#msg').text ("Something Wrong occured. Please contact to Admin.");
+				$(".inputEnter").attr("disabled", false);
+				return;
+			}
+		});
+	}
 });
+
 function imgError(image) {
 			//console.log("gg");
 			image.src = "img/noImg.jpg";

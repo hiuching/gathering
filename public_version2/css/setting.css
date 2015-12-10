@@ -4,6 +4,7 @@
 }
 .iconContainer {
 	float: left;
+	margin-right: 10px;
 }
 .nodeContainer {
 	height: 120px;
@@ -14,15 +15,15 @@
 }
 #input {
 	float: left;
-	width: 300px;
-	height: 300px;
-}
-#profilePic {
 	width: 200px;
 	height: 200px;
 }
+#profilePic {
+	width: 150px;
+	height: 150px;
+}
 .custom-file-upload {
-	width: 200px;
+	width: 150px;
 	background-color: #2E2E2E;
 	color: white;
 	cursor: pointer;
@@ -34,29 +35,32 @@
 	margin-right: auto;
 }
 .action {
-	width: 100%;
+	width: 150px;
 	height:30px;
-	margin: 10px 0;
+	margin: 2px 0;
 	text-align: center;
-	padding-right: 31%
-	
 }
 .cropped>img {
 	margin-right: 10px;
 }
 
 .container {
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-	height: 220px;
+	margin: 0;
+	//margin-left: auto;
+	//margin-right: auto;
+	width: 150px;
+	//height: 220px;
 }
 #infoContainer {
 	padding-top: 20px;
 }
-#userName {
+#displayName {
 	font-weight: bold;
-	font-size: 32px;
+	font-size: 25px;
+}
+#userEmail {
+	font-weight: bold;
+	font-size: 15px;
 }
 .panel {
 	margin-left: 30px;
@@ -66,8 +70,8 @@
 .textbox {
 	border:1px solid #000000;
 	border-radius:3px;
-	height: 35px;
-	width: 40%;
+	height: 40px;
+	width: 25%;
 	background: #F7F2C4;
 	font-weight: bold;
 	font-size: 15px;
@@ -83,23 +87,29 @@
 	color: red;
 }
 #changePwBtn {
-	margin-left: 28%;
-}
-
-
-#right {
-    float: right;
-    vertical-align: middle;
+	margin-top: 10px;
 }
 .circle-Save {
     font-size: 200%;
     display: table-cell;
-    height: 200px;
-    width: 100px;
+    height: 180px;
+    width: 90px;
     text-align: left;
     padding-left:10%;
     vertical-align: middle;
     border-radius: 100px 0px 0px 100px;
     background: #A9DED1;
     color: #284D57;
+	cursor: pointer;
+}
+#saveContainer {
+	float: right;
+	float: right;
+    position: relative;
+    bottom: 110px;
+	margin-right:-15px;
+}
+#warningBody {
+	height: 200px;
+	width: 100%;
 }

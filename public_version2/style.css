@@ -22,7 +22,7 @@ body {
 	padding-top: -200px;
 }
 #footer {
-    background-color:black;
+    background-color: transparent;
     color:white;
     clear:both;
     text-align:center;
@@ -37,6 +37,7 @@ body {
 	color: rgb(68,98,101);
 	font-weight: bold;
 	font-size: 18px;
+	font-family: "Open Sans",sans-serif;
 }
 #bigIcon{
 	font-weight: bold;
