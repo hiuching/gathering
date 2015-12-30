@@ -1,5 +1,5 @@
 body {
-    background-image: url("images/BK1.jpg");
+    background-image: url("images/BK2.jpg");
     background-color: #cccccc;
 }
 
@@ -22,7 +22,7 @@ body {
 	padding-top: -200px;
 }
 #footer {
-    background-color:black;
+    background-color: transparent;
     color:white;
     clear:both;
     text-align:center;
@@ -37,6 +37,7 @@ body {
 	color: rgb(68,98,101);
 	font-weight: bold;
 	font-size: 18px;
+	font-family: "Open Sans",sans-serif;
 }
 #bigIcon{
 	font-weight: bold;
@@ -244,4 +245,30 @@ body {
 }
 #logOut {
 	float: right;
+}
+.button1 {
+	margin-top: 20px;
+	color:#41AA54;
+	width: 130px;
+	height:40px;
+	background-color:#FFFFFF;
+	font-size:20px;
+	font-weight: bold;
+	text-align: center;
+	display:table-cell;
+	border-radius: 15px;
+	padding: 7px 7px 7px 30px;
+	position:relative;
+}
+.button1 i {
+    position:absolute;
+    left:10px;
+    top:29%;
+    margin-top:-11px;
+}
+#textbtn{
+    position:absolute;
+    left:50px;
+    top:40%;
+    margin-top:-11px;
 }

@@ -34,12 +34,12 @@
     <div class = "box1 col-md-2">
           Event Name </div>
     <div class = "col col-md-4">
-        <input type = "text" class = "form-control" id = "eventname" name="eventname">
+        <input type = "text" class = "form-control inputEvent" id = "eventname" name="eventname">
     </div>
     <div class = "box1 col-md-2">
        Event Type </div>
     <div class =  "col col-md-4">
-       <select class = "form-control" id = "eventtype" name="eventtype" >
+       <select class = "form-control" id = "eventtype" name = "eventtype" >
           <option>BBQ</option>
           <option>Hiking</option>
           <option>Karaoke</option>
@@ -58,17 +58,19 @@
       Event Period
   </div>
   <div class = "col col-md-4">
-      <input id = "date1" type = "text" size = "10" class = "time" placeholder = "From" name="from">
-      
-
-     <input id = "date2" type = "text" size = "10" class = "time2" placeholder = "Till" name="till">
+	<!--Edited by Carrie-->
+    <input id = "date1" type = "text" size = "10" class = "time date inputEvent" placeholder = "From" name="from" readonly>
+    <input id = "date2" type = "text" size = "10" class = "time2 date inputEvent" placeholder = "Till" name="till" readonly>
+	<br/>
+	<!--Edited by Carrie-->
 
    </div> 
    <div class = "box1 col-md-2">
       Location </div>
    <div class = "col col-md-4">
    <div class = "form-group">
-   <select class = "form-control" id = "type" name="type">
+   <!--Edited by Carrie-->
+   <select class = "form-control" id = "location" name = "location">
         <option>Central</option>
         <option>Wan Chai</option>
         <option>Kowloon City </option>
@@ -90,13 +92,28 @@
 </div>
    <!--End of line 2-->
 
+<!--himal edit thursday-->
+ <div class= "col1 col-md-12"><!--start of 3rd line-->
+  <div class =  "box1 col-md-2">
+    Event Time 
+    </div>
+  <div class = "col col-md-4">
+      <select class = "form-control" id = "eventTime" name = "eventTime">
+    <option>Morning</option>
+        <option>Afternoon</option>
+        <option>Night</option>
+        <option>Dawn</option>
+  </select>
+  </div>
+ </div><!--End of line 3 -->
+ <!--end of himal edit-->
 
-<div class= "col1 col-md-12"><!--start of 3rd line-->
+<div class= "col1 col-md-12"><!--start of 4th line-->
   <div class =  "budget col-md-2">
-    <span class = "glyphicon glyphicon-usd"></span>Budget
+    <div class = "glyphicon glyphicon-usd"></div>Budget
   </div>
   <div class = "col col-md-4">
-      <select class = "form-control " id = "budget" name="budget">
+      <select class = "form-control " id = "budget" name = "budget">
           <option>Below $100</option>
           <option>$100-200</option>
           <option>$200-300</option>
@@ -106,26 +123,32 @@
         </select>
   </div>
   <div class = "col-md-6"></div><!--empty div to fix the position-->
- </div><!--End of line 3 -->
+ </div><!--End of line 4 -->
 
 
 
 <div class= "col1 col-md-12"><!--Start of the last line-->
   <div class  =  "box2 col-md-2">
-    <span class  = "glyphicon glyphicon-paperclip" ></span> Description
+    <div class  = "glyphicon glyphicon-paperclip" ></div> Description
   </div>
   <div class = "col col-md-8">
-    <textarea class = "form-control" rows = "5" id = "textarea"  placeholder = "Add more info about the gathering" name="description"></textarea>
+    <textarea class = "form-control" rows = "5" id = "description"  placeholder = "Add more info about the gathering" name="description"></textarea>
   </div>
   <div class  = "box3 col-md-2">
-    <input type  = "submit" class = "btn" value = "Create">
+  <!--Edited by carrie-->
+    <input type  = "button" id = "createBtn" class = "createClassBtn btn" value = "Create">
   </div>
 </div><!--End of line 4 -->
 
 
 <div class = "col col-md-12">
-  Friends to be invite(<input type = "text" id = "inviteNum" value = 0 disabled></input>):
-  <div id = "joinFd"></div>
+	<!--Edited by carrie-->
+	<br/>
+	<h4><span id = "msg"></span></h4><br/>
+	<h2> Friends To be Invited (<input type = "text" id = "inviteNum" value = 0 disabled></input>):</h2>
+  <h3><div id = "joinFd"> </h3></div>
+
+  
 </div>
 </div><!--End of Form-->
 </form>

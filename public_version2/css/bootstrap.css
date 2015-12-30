@@ -5504,6 +5504,7 @@ button.list-group-item-danger.active:focus {
   margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid transparent;
+  border-style: hidden;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
           box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
@@ -5808,30 +5809,31 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #bce8f1;
 }
 .panel-warning {
-  border-color: #FCE832;
+  border-color:#F9C848;
+  border-style: hidden;
 }
 .panel-warning > .panel-heading {
   color: white;
-  background-color: #FCE832;
-  border-color: #FCE832;
+  background-color: #F9C848;
+  border-color: #F9C848;
 }
 .panel-warning > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #faebcc;
+  border-top-color: #F9C848;
 }
 .panel-warning > .panel-heading .badge {
-  color: #fcf8e3;
-  background-color: #8a6d3b;
+  color: #F9C848;
+  background-color: #F9C848;
 }
 .panel-warning > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #faebcc;
+  border-bottom-color: #white;
 }
 .panel-danger {
   border-color: #ebccd1;
 }
 .panel-danger > .panel-heading {
   color: white;
-  background-color: red;
-  border-color: red;
+  background-color: #ec2f2f;
+  border-color: #ec2f2f;
 }
 .panel-danger > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ebccd1;

@@ -60,10 +60,11 @@ $(document).ready(function() {
 				var str = 'email:' + user.email;
 				console.log('success', str);
 				$('#msg').css("color", "rgb(188,230,35)");
-				$('#msg').text ("login successful");
+				$('#msg').text ("Login successful");
 				$.jStorage.set("userEmail", user.email);
 				$.jStorage.set("userId", user._id);
 				$.jStorage.set("displayName", user.displayName);
+				//$.jStorage.set("currentPage", "home");
 				if (user.displayName == null)
 					window.location.href = 'master.html/#setting';
 					else

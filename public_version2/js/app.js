@@ -1,6 +1,6 @@
 var pageCtrl = angular.module('myApp', ['ngRoute'], function($routeProvider) {
 	$routeProvider.when('/', {
-		templateUrl: 'home.html'
+		templateUrl: 'Home.html'
 	}).when('/setting', {
 		templateUrl: 'setting.html'
 	}).when('/aboutus', {

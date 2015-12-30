@@ -1,0 +1,51 @@
+<div id="section">
+	<div id="blank2">
+    
+    	<div id="upper_circle"> 
+            <div id="upper_text">
+                <p>Status of the</p>
+                <p>Event</p> </div>
+                </div>
+                
+        <div id="lower_circle">
+            <div id="lower_text"> 
+                <p> Create </p>
+                <p> Gathering </p> </div>
+     </div>
+</div>
+       
+<div id="scroll">
+	<div id="blank">
+        <div id="rectangle_top1">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>
+		<div id="blank">
+        <div id="rectangle_top2">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>	
+    <div id="blank">
+        <div id="rectangle_top3">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>
+    <div id="blank">
+        <div id="rectangle_top4">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>
+    <div id="blank">
+        <div id="rectangle_top1">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>
+	<div id="blank">
+        <div id="rectangle_top2">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>	
+    <div id="blank">
+        <div id="rectangle_top3">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>
+        <div id="blank">
+        <div id="rectangle_top4">  </div>
+		<div id="rectangle_bottom"> </div>
+    </div>
+</div>
+<button><a href = "#/create">Create Gathering</a></button>
