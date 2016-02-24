@@ -18,16 +18,25 @@ $(document).ready(function() {
 		dataType: 'json',
 		success: function(event) {
 			console.log('success', event);
+			var myEventCount = 0;
 			for(var i in event){
-				$('#ownerImg').attr("src","img/" + event[i].owner._id + ".png");
-				$('#ownerName').text(event[i].owner.displayName);
-				$('#eventName').text(event[i].name);
-				$('#description').text(event[i].description);
-				$('#period').text(event[i].startDate + " - " + event[i].endDate);
-				$('#noOfFd').text(event[i].invited.length);
-				$('#budget').text(event[i].budget);
-				$('#cd-timeline').append($('#appendBlock').html());
+				if(event[i].owner._id == userId) {
+					$('#ownEventName').text(event[i].name);
+					$('#joinNo').text(event[i].accepted.length);
+					$('#ownEventContainer').append($('.blank').html());
+					myEventCount++;
+				} else {
+					$('#ownerImg').attr("src","img/" + event[i].owner._id + ".png");
+					$('#ownerName').text(event[i].owner.displayName);
+					$('#eventName').text(event[i].name);
+					$('#description').text(event[i].description);
+					$('#period').text(event[i].startDate + " - " + event[i].endDate);
+					$('#noOfFd').text(event[i].invited.length);
+					$('#budget').text(event[i].budget);
+					$('#cd-timeline').append($('#appendBlock').html());
+				}
 			}
+			$("#ownEventContainer").css("width", myEventCount * 260 + "px");
 		},
 		error: function(err){
 			console.log('failed', err);

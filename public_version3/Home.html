@@ -14,7 +14,7 @@ NAV
 
 
 
-<div id="section">
+<div id = "section">
 	<div id="blank2">
     
 		<div id="upper_circle"> 
@@ -32,40 +32,18 @@ NAV
 	</div>
 
        
-	<div id="scroll"> 
-		<div id="blank">
-			<div class="rectangle_top color1">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>
-			<div id="blank">
-			<div class="rectangle_top color2">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>	
-		<div id="blank">
-			<div class="rectangle_top color3">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>
-		<div id="blank">
-			<div class="rectangle_top color4">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>
-		<div id="blank">
-			<div class="rectangle_top color1">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>
-		<div id="blank">
-			<div class="rectangle_top color2">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>	
-		<div id="blank">
-			<div class="rectangle_top color3">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>
-			<div id="blank">
-			<div class="rectangle_top color4">  </div>
-			<div class="rectangle_bottom"> </div>
-		</div>
-
+	<div id="scroll" style = "overflow-y: hidden" > 
+		<section id = "ownEventContainer">
+			<div class = "blank" style = "display: none;">
+				<div class = "insideBlank">
+					<div class = "rectangle_top color1"></div>
+					<div class = "rectangle_bottom">
+						<span id = "ownEventName" class = "ownEventText"></span><br>
+						<span class = "ownEventText">Join: </span><span id = "joinNo"></span>
+					</div>
+				</div>
+			</div>
+		</section>
 	</div>
 </div>
 
@@ -79,7 +57,7 @@ NAV
 <!-- User 1 --> 
 <!-- Find these in timeline.css -->
 	<!--<script id="hidden-template" type="text/x-custom-template">-->
-	<div id = "appendBlock"  style="display: none;">
+	<div id = "appendBlock"  style = "display: none;">
 		<div class="cd-timeline-block"> <!--icon on the timeline -->
 			<div class="cd-timeline-img"> 
 				<img id = "ownerImg" alt="Movie" onerror = 'imgError(this)'/>
@@ -109,7 +87,8 @@ NAV
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
 	<!--</script>-->
-</div>
+	</div>
+</section>
 
 
 
