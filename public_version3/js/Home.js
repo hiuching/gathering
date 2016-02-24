@@ -37,6 +37,9 @@ $(document).ready(function() {
 				}
 			}
 			$("#ownEventContainer").css("width", myEventCount * 260 + "px");
+			$('.rectangle_bottom').on("click", function() {
+				console.log("ownEventName = " + $(this).children("#ownEventName").text());
+			})
 		},
 		error: function(err){
 			console.log('failed', err);
@@ -50,6 +53,8 @@ $(document).ready(function() {
 		$('#bigIconImg').addClass("fa fa-users fa-2x");
 		$('#bigIcon').text("Create Gathering");
 	});
+
+	
 });
 
 function imgError(image) {

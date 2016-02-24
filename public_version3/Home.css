@@ -91,6 +91,7 @@ body {
 	height: 140px;
 	background: #FFFFFF;
 	padding-left: 30px;
+	cursor: pointer;
 }
 .blank {
 	display:inline-block;
