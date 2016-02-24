@@ -5,7 +5,7 @@ var Mail = require('./mail');
 schema
 ****************/
 var userSchema = new Schema({
-	email:  {type: String},
+	email:  {type: String, lowercase: true},
 	password: {type: String, select: false},
 	displayName:  {type: String},
 	noShowCount: {type: Number},
@@ -84,7 +84,7 @@ userSchema.statics.findByConditions = function (options, callback) {
 userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 	options = options || {};
 	var conditions = {};
-	conditions.email = options.email;
+	conditions.email = options.email.toLowerCase();
 	conditions.password = options.password;
 	
 	this.findByConditions(conditions, function(err, users){
@@ -103,7 +103,7 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 userSchema.statics.findUserByEmail = function (options, callback) {
 	options = options || {};
 	var conditions = {};
-	conditions.email = options.email;
+	conditions.email = options.email.toLowerCase();
     this.findByConditions(conditions, function(err, users){
 		if(users.length == 1){
 			callback(null, users[0]);
@@ -118,7 +118,7 @@ userSchema.statics.findUserByEmail = function (options, callback) {
 userSchema.statics.findUserByEmailWithPassword = function (options, callback) {
 	options = options || {};
 	var conditions = {};
-	conditions.email = options.email;
+	conditions.email = options.email.toLowerCase();
 	conditions.select = '+password';
     this.findByConditions(conditions, function(err, users){
 		if(users.length == 1){
@@ -176,7 +176,7 @@ userSchema.statics.searchFriends = function (options, callback) {
 	options = options || {};
 	var conditions = {};
 	conditions.displayName = new RegExp(options.displayName, 'i');
-	conditions.email = options.email;
+	conditions.email = options.email.toLowerCase();
 	
 	this.findByConditions(conditions, callback);
 };
