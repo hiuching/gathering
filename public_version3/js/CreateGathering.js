@@ -1,6 +1,10 @@
 var joinFdIdArray = new Array();
+var eventId = $.jStorage.get("eventId");
+var checkOwnEvent = $.jStorage.get("checkOwnEvent");
 
 $(document).ready(function() {
+	console.log("event id = " + eventId);
+	console.log("checkOwnEvent = " + checkOwnEvent);
 	$('#bigIconImg').removeClass();
 	$('#bigIconImg').addClass("fa fa-users fa-2x");
 	$('#bigIcon').text("Create Gathering");
@@ -22,6 +26,37 @@ $(document).ready(function() {
 	/*$('#date2').click(function() {
 		console.log(selectDate);
 	})*/
+	if (checkOwnEvent == true){
+		console.log("if is true");
+		$.support.cors = true;
+		var eventData = {
+			action: "findEventById",
+			id: eventId,
+		};
+		$.ajax({
+			type: 'GET',
+			contentType: 'application/json',
+			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/event',
+			data: eventData,
+			dataType: 'json',
+			success: function(event) {
+				console.log('success', event);
+				$('#eventname').val(event.name);
+				$('#eventtype').val(event.types);
+				$('#date1').val(event.startDate);
+				$('#date2').val(event.endDate);
+				$('#location').val(event.location);
+				$('#eventTime').val(event.eventTime);
+				$('#budget').val(event.budget);
+				$('#description').val(event.description);
+				$('#createBtn').val('Save');
+				console.log("eventname value = " + $('#eventname').val());
+			},
+			error: function(err){
+				console.log('failed');
+			}
+		});
+	}
 	var data = {
 		_id: userId,
 	};
@@ -89,13 +124,51 @@ $(document).ready(function() {
 	$('#createBtn').click(function() {
 		console.log("clicked");
 		$("#createBtn").attr("disabled", true);
-		if($('.inputEvent').val() == '' || $('.inputEvent').val() == null){
+		if($('.inputEvent').val() == '' || $('.inputEvent').val() == null || $('.inputEvent').val() == ' ') {
 			$('#msg').text ("Please Complete the form");
 			$("#createBtn").attr("disabled", false);
 			return false;
 		}
-		postEvent();
+		if($('#createBtn').val() == "Save") putEvent();
+		else postEvent();
 	});
+
+	function putEvent() {
+		var putData = {
+			name: $.trim($('#eventname').val()),
+			types: $('#eventtype').val(),
+			startDate: $('#date1').val(),
+			endDate: $('#date2').val(),
+			location: $('#location').val(),
+			budget: $('#budget').val(),
+			eventTime: $('#eventTime').val(),
+			invited: joinFdIdArray,
+			description: $.trim($('#description').val()),
+		}
+
+		$.support.cors = true;
+		putData = JSON.stringify (putData);
+		$.ajax({
+			type: 'PUT',
+			contentType: 'application/json',
+			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/event/' + eventId,
+			data: putData,
+			dataType: 'json',
+			success: function (event) {
+				console.log ('success', event);
+				$('#msg').css("color", "Green");
+				$('#msg').html("Event details are changed successful. You will be redirected after 5 seconds...");
+				//$("#createBtn").attr("disabled", false);
+				setTimeout(function() {window.location.href = '#/';}, 5000);
+			},
+			error: function (err){
+				console.log ('failed', err);
+				$('#msg').css("color", "red");
+				$('#msg').text ("Something Wrong. Please contact Administrater");
+				$("#createBtn").attr("disabled", false);
+			}
+		});
+	}
 
 	function postEvent() {
 		var data = {
@@ -106,8 +179,9 @@ $(document).ready(function() {
 			endDate: $('#date2').val(),
 			location: $('#location').val(),
 			budget: $('#budget').val(),
-			invited: joinFdIdArray,
-			description: $('#description').val(),
+			eventTime: $('#eventTime').val(),
+			//invited: joinFdIdArray,
+			description: $.trim($('#description').val()),
 		}
 		$.support.cors = true;
 		data = JSON.stringify (data);

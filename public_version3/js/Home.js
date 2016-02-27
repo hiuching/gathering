@@ -4,6 +4,29 @@ $(document).ready(function() {
 	$('#bigIconImg').removeClass();
 	$('#bigIconImg').addClass("fa fa-home fa-2x");
 	$('#bigIcon').text("Home");
+	$('#ownEventContainer').empty;
+
+	function topColor(count) {
+		var color = count % 4;
+		switch(color) {
+			case 0:
+				$('#rectangle_top').css("background", "#A9D2D1");
+				break;
+
+			case 1:
+				$('#rectangle_top').css("background", "#F9C848");
+				break;
+
+			case 2:
+				$('#rectangle_top').css("background", "#F63D3D");
+				break;
+
+			case 3:
+				$('#rectangle_top').css("background", "#00B498");
+				break;
+
+		}
+	}
 	//console.log("in");
 	var data = {
 		action: "findEventByInvolvedUser",
@@ -23,6 +46,8 @@ $(document).ready(function() {
 				if(event[i].owner._id == userId) {
 					$('#ownEventName').text(event[i].name);
 					$('#joinNo').text(event[i].accepted.length);
+					$('#ownEventId').text(event[i]._id);
+					topColor(myEventCount);
 					$('#ownEventContainer').append($('.blank').html());
 					myEventCount++;
 				} else {
@@ -38,7 +63,10 @@ $(document).ready(function() {
 			}
 			$("#ownEventContainer").css("width", myEventCount * 260 + "px");
 			$('.rectangle_bottom').on("click", function() {
-				console.log("ownEventName = " + $(this).children("#ownEventName").text());
+				console.log("ownEventId = " + $(this).children("#ownEventId").text());
+				$.jStorage.set("eventId", $(this).children("#ownEventId").text());
+				$.jStorage.set("checkOwnEvent", true);
+				window.location.href = "#/create";
 			})
 		},
 		error: function(err){

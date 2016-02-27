@@ -37,6 +37,10 @@ body {
 #ownEventContainer {
 	display: inline-block;
 }
+#ownEventName {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
 .insideBlank {
 	float: left;
 	margin-right: 10px;
@@ -67,8 +71,9 @@ body {
      -webkit-border-radius: 0 0px 90px 90px;
      background: #00B498;
 	 vertical-align: center;
+	 cursor: pointer;
 }
-.rectangle_top{
+#rectangle_top{
 	width: 210px;
 	height: 13px;
 	border-radius: 5px 5px 0 0 ;
