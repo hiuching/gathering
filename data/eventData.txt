@@ -29,8 +29,8 @@ return:
   {
     "_id": "56671a8e52b45a6a2d06ff64",
     "name": "BBQ gathering",		// name of event
-    "types": "BBQ",					// type of event, maybe options(dropdown?)
-    "location": "north",			// location of event, maybe options of district(dropdown?)
+    "types": "BBQ","Hotpot","Karaoke","Bicycle",				// type of event, maybe options(dropdown?)
+    "location": "north","ShaTin","Kowloon","TaiPo",			// location of event, maybe options of district(dropdown?)
     "startDate": "1-12-2015",		
     "endDate": "31-12-2015",		// event can hold on 1-12-2015 to 31-12-2015
     "owner": {						// the person create this event
