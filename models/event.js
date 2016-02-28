@@ -5,15 +5,15 @@ var extend = require('mongoose-schema-extend');
 sub-schema
 ****************/
 var choiceSchema = new Schema({
-	suggester: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}], //whom suggest this
-	vote: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],  //whom vote for this
+	suggester: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}], //whom suggest this
+	vote: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],  //whom vote for this
 	choice: String,  //KFC, McDonald
 	note: String
 });
 
 var periodSchema = new Schema({
-	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	period: [{type:String}],   //the available times of user 
+	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
+	period: [{type:String, required: true}],   //the available times of user 
 	note: String
 });
 
@@ -22,17 +22,17 @@ var periodSchema = new Schema({
 schema
 ****************/
 var eventSchema = new Schema({
-	name: {type: String},
-	types:  {type: String},
-	location: {type: String},
-	startDate: {type: String},
-	endDate: {type: String},
-	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	name: {type: String, required: true},
+	types:  {type: String, required: true},
+	location: {type: String, required: true},
+	startDate: {type: String, required: true},
+	endDate: {type: String, required: true},
+	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
 	budget: {type: String},
-	invited: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	invited: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
 	description: {type: String},  //<100 char
-	eventTime: {type: String},   //morning, night, noon
+	eventTime: {type: String, required: true},   //morning, night, noon
 	period: [periodSchema],
 	choice: [choiceSchema],
 	active: {type: Boolean, default: true},
