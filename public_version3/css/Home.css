@@ -1,0 +1,138 @@
+/* Home */
+body {
+    background-image: url("images/BK1.jpg");
+    background-color: #cccccc;
+}
+
+.text {
+	font-size:18px;
+	font-family: calibri;
+	padding-top: 0px;
+	text-align:center;
+	line-height: 12px;
+
+
+}
+.upper{
+	color: #20353F;
+	margin-top: -90px;
+	padding-top: 30px;
+}
+
+.lower {
+	color: #CCCCCC;	
+	padding-top: 10px;
+}
+
+#scroll{
+	width: 80%; 
+	height: 200px; 
+	border: 0px solid black; 
+	overflow: auto; 
+	white-space: nowrap;
+	font-size: 14px;
+	display:inline-block;
+	margin-top: 50px;
+}
+.img{
+	width:100px;
+	height:100x;
+}
+#upper_circle{
+     height:75px;
+     width:150px;
+     border-radius: 90px 90px 0 0px;
+     -moz-border-radius: 90px 90px 0 0px;
+     -webkit-border-radius: 90px 90px 0 0px;
+     background:#F9C848;
+	 vertical-align: center;
+}
+#lower_circle{
+     height:75px;
+     width:150px;
+     border-radius: 0 0px 90px 90px;
+     -moz-border-radius: 0 0px 90px 90px;
+     -webkit-border-radius: 0 0px 90px 90px;
+     background: #00B498;
+	 vertical-align: center;
+}
+.rectangle_top{
+	width: 210px;
+	height: 13px;
+	border-radius: 5px 5px 0 0 ;
+	padding-left: 30px;
+}
+.rectangle_top.color1 {
+	background: #A9D2D1;
+}
+.rectangle_top.color2 {
+	background: #F9C848;
+}
+.rectangle_top.color3 {
+	background: #F63D3D;
+}
+.rectangle_top.color4 {
+	background: #00B498;
+}
+.rectangle_bottom {
+	width: 210px;
+	height: 140px;
+	background: #FFFFFF;
+	padding-left: 30px;
+}
+#blank {
+	display:inline-block;
+	padding-left: 30px;
+
+}
+#blank2 {
+	display:inline-block;
+	padding-left: 30px;
+
+}
+.joinbtn{
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:0px solid #18ab29;
+	width: 100px;
+	height: 50px;
+	color:#ffffff;
+	font-family: Calibri;
+	font-size: 27px;
+
+}
+.joinbtn.red{
+	background-color:#80C41C;
+	font-size: 27px;
+}
+.joinbtn.green{
+	background-color:#F63D3D;
+	font-size: 22px;
+}
+td, #td {
+	font-family: Calibri;
+	/*Academy Engraved LET;*/
+	font-size: 20px;
+}
+
+.hor-line{
+    border: 3px solid white;
+    background: #999;
+	text-align: center;
+	width: 80%;
+	margin-left: 8%;
+	
+}
+#footertext{
+	font-size: 30px;
+	font-family: Calibri;
+	padding-left: 10%;
+	color: white;
+
+}
+.username{
+	font-size: 20px;
+	margin-left: -120px;
+	color: white;
+	}

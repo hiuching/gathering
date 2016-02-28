@@ -1,0 +1,141 @@
+<link rel = "stylesheet" href = "css/CreateGathering.css">
+<script src = "js/CreateGathering.js"></script>
+
+
+<!-- Start of code-->
+<div class = "container-fluid maxWidth" >
+<div class = "left col col-md-3 "><!--the left box-->
+	<h2> Invite your friends </h2>
+	<div id = "fdContainer">
+		<ul id = "inviteList"></ul>
+	</div>
+</div><!--end of invite box-->
+
+
+<div class = "right col-md-8 " ><!--start of right boxes-->
+	<div class = "row">
+		<!--<div class = "searchbox col-md-4">
+			Search box
+		</div>-->
+	<div class = "col col-md-8">
+	</div>
+	</div>
+  <!--end of search box-->
+
+   
+ <div class = "row" id = "yellow"><!--start of yellow box-->
+  <h1> Gathering Information</h1>
+ 
+ 
+
+  <!--the form begins-->
+<form method = "post" role = "form">
+  <div class= "col1 col-md-12"><!--start of 1st line-->
+    <div class = "box1 col-md-2">
+          Event Name </div>
+    <div class = "col col-md-4">
+        <input type = "text" class = "form-control" id = "eventname" name="eventname">
+    </div>
+    <div class = "box1 col-md-2">
+       Event Type </div>
+    <div class =  "col col-md-4">
+       <select class = "form-control" id = "eventtype" name="eventtype" >
+          <option>BBQ</option>
+          <option>Hiking</option>
+          <option>Karaoke</option>
+          <option>Movies</option>
+          <option>Board Games</option>
+          <option>Camping</option>
+          <option>Cycling</option>
+           <option>Sightseeing</option>
+         </select>
+       </div>
+   </div><!-- end of line 1 -->
+
+
+<div class= "col1 col-md-12"><!--start of 2nd line-->
+  <div class = "box1 col-md-2">
+      Event Period
+  </div>
+  <div class = "col col-md-4">
+      <input id = "date1" type = "text" size = "10" class = "time" placeholder = "From" name="from">
+      
+
+     <input id = "date2" type = "text" size = "10" class = "time2" placeholder = "Till" name="till">
+
+   </div> 
+   <div class = "box1 col-md-2">
+      Location </div>
+   <div class = "col col-md-4">
+   <div class = "form-group">
+   <select class = "form-control" id = "type" name="type">
+        <option>Central</option>
+        <option>Wan Chai</option>
+        <option>Kowloon City </option>
+        <option>Kwun Tong</option>
+        <option>Kwai Tsing</option>
+        <option>Mongkok</option>
+        <option>Wong Tai Sin</option>
+        <option>Sham Shui Po</option>
+        <option>Sai Kung</option>
+        <option>Sha Tin</option>
+        <option>Tai Po</option>
+        <option>Tsuen Wan</option>
+        <option>Tuen Mun</option>
+        <option>Tsim Tsa tui</option>
+        <option>Yuen Long</option>
+   </select>
+   </div>
+   </div>
+</div>
+   <!--End of line 2-->
+
+
+<div class= "col1 col-md-12"><!--start of 3rd line-->
+  <div class =  "budget col-md-2">
+    <span class = "glyphicon glyphicon-usd"></span>Budget
+  </div>
+  <div class = "col col-md-4">
+      <select class = "form-control " id = "budget" name="budget">
+          <option>Below $100</option>
+          <option>$100-200</option>
+          <option>$200-300</option>
+          <option>$300-400</option>
+          <option>$400-500</option>
+          <option>Above 500</option>
+        </select>
+  </div>
+  <div class = "col-md-6"></div><!--empty div to fix the position-->
+ </div><!--End of line 3 -->
+
+
+
+<div class= "col1 col-md-12"><!--Start of the last line-->
+  <div class  =  "box2 col-md-2">
+    <span class  = "glyphicon glyphicon-paperclip" ></span> Description
+  </div>
+  <div class = "col col-md-8">
+    <textarea class = "form-control" rows = "5" id = "textarea"  placeholder = "Add more info about the gathering" name="description"></textarea>
+  </div>
+  <div class  = "box3 col-md-2">
+    <input type  = "submit" class = "btn" value = "Create">
+  </div>
+</div><!--End of line 4 -->
+
+
+<div class = "col col-md-12">
+  Friends to be invite(<input type = "text" id = "inviteNum" value = 0 disabled></input>):
+  <div id = "joinFd"></div>
+</div>
+</div><!--End of Form-->
+</form>
+</div>
+
+
+ </div> <!--End of the right box-->
+ </div>
+ </div> <!--End of the container box-->
+
+
+</div><!--End of the whole boxes-->
+

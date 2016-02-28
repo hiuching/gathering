@@ -1,0 +1,96 @@
+ <!-- CSS -->
+<link rel="stylesheet" href="Home.css">
+<link rel="stylesheet" href="css/timeline.css">
+<script src="js/modernizr.js"></script>
+<script src="js/main.js"></script> 
+<script src="js/Home.js"></script> 
+<!-- Resource jQuery -->
+
+
+<!-- 
+<div id="nav">
+NAV
+</div>  -->
+
+
+
+<div id = "section">
+	<div id="blank2">
+    
+		<div id="upper_circle"> 
+            <div class="text upper">
+                <p>Status of the</p>
+                <p>Event</p> </div>
+                </div>
+                
+        <div id="lower_circle">
+            <div class="text lower" id="createLink"> 
+				<p> Create </p>
+				<p> Gathering </p>
+			</div>
+		</div>
+	</div>
+
+       
+	<div id="scroll" style = "overflow-y: hidden" > 
+		<section id = "ownEventContainer">
+			<div class = "blank" style = "display: none;">
+				<div class = "insideBlank">
+					<div id = "rectangle_top" class = "color1"></div>
+					<div class = "rectangle_bottom">
+						<span id = "ownEventName" class = "ownEventText"></span><br>
+						<span id = "ownEventId" style = "display: none;"></span>
+						<span class = "ownEventText">Join: </span><span id = "joinNo"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+
+
+
+<div id="footer">
+<div id="footertext"> Coming Up Event </div>
+<hr class="hor-line">  </hr> 
+<section id="cd-timeline" class="cd-container">
+
+<!-- User 1 --> 
+<!-- Find these in timeline.css -->
+	<!--<script id="hidden-template" type="text/x-custom-template">-->
+	<div id = "appendBlock"  style = "display: none;">
+		<div class="cd-timeline-block"> <!--icon on the timeline -->
+			<div class="cd-timeline-img"> 
+				<img id = "ownerImg" alt="Movie" onerror = 'imgError(this)'/>
+			</div> 
+			
+			<div class = "username"><span id = "ownerName" style = "float: left"></div> <!--user name -->
+			
+			<div class="cd-timeline-content"> <!--white div -->
+				<table width="100%" border="0" style = "color: black">
+				  <tr>
+					<td><span id = "eventName"></span></td>
+					<td rowspan="4"><span class = "tdPara">Description:</span>
+					<div class = "tdPara" id = "description"></div></td>
+					<td rowspan="2"><p><button type="button" class="joinbtn red">Join</button></p></td>
+				  </tr>
+				  <tr>
+					<td>Period: <span id = "period"></span></td>
+				  </tr>
+				  <tr>
+					<td>Friend Invited: <span id = "noOfFd"></span></td>
+					<td rowspan="2"><p><button type="button" class="joinbtn green">Not Join</button></p></td>
+				  </tr>
+				  <tr>
+					<td>Budget: <span id = "budget"></span></td>
+				  </tr>
+				</table>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+	<!--</script>-->
+	</div>
+</section>
+
+
+
+
