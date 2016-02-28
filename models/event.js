@@ -5,16 +5,13 @@ var extend = require('mongoose-schema-extend');
 sub-schema
 ****************/
 var choiceSchema = new Schema({
-	suggester: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}], //whom suggest this
-	vote: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],  //whom vote for this
-	choice: String,  //KFC, McDonald
-	note: String
+	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],  //whom vote for this
+	suggestion: String  //KFC, McDonald
 });
 
 var periodSchema = new Schema({
-	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	period: [{type:String}],   //the available times of user 
-	note: String
+	userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	period: [{type:String}]   //the available times of user, e.g.['15/03/2016', '16/03/2016']
 });
 
 
@@ -22,11 +19,11 @@ var periodSchema = new Schema({
 schema
 ****************/
 var eventSchema = new Schema({
-	name: {type: String},
+	name: {type: String, trim: true},
 	types:  {type: String},
 	location: {type: String},
-	startDate: {type: String},
-	endDate: {type: String},
+	startDate: {type: String, trim: true},
+	endDate: {type: String, trim: true},
 	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	budget: {type: String},
@@ -61,6 +58,8 @@ eventSchema.statics.findAll = function (options, callback) {
 	options = options || {};
 	if(options.action == "findEventByInvolvedUser"){
 		return this.findEventByInvolvedUser(options, callback);
+	} else if(options.action == "findEventById"){
+		return this.findEventById(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
 	}
@@ -117,6 +116,53 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 eventSchema.statics.updateById = function (id, update, callback) {
 	update = update || {};
 	var self = this;
+	if (update.action == 'reject'){
+		this.findEventById({id: id}, function(err, event){
+			if(err){
+				callback(err);
+			} else {
+				event = new self(event);
+				event.accepted.forEach( function(user, index){
+					if (update.reject == user){
+						event.accepted.splice(index, 1);
+					}
+				});
+				self.update({ _id: id }, event,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, update);
+					}
+				});
+			}
+		});
+	}	else if (update.action == 'period'){
+		this.findEventById({id: id}, function(err, event){
+			if(err){
+				callback(err);
+			} else {
+				event = new self(event);
+				event.period.push(update.period);
+				var checkChoice = false;
+				event.choice.forEach(function(choice, index){
+					console.log(typeof choice.suggestion, typeof update.choice.suggestion)
+					if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
+						checkChoice = true;
+					}
+				});
+				if (!checkChoice){
+					event.choice.push(update.choice);
+				}
+				self.update({ _id: id }, event,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, update);
+					}
+				});
+			}
+		});
+	} else {
 		this.update({ _id: id }, update,  function(err, noOfUpdate) {
 			if (err) {
 				callback(err);
@@ -124,6 +170,7 @@ eventSchema.statics.updateById = function (id, update, callback) {
 				callback(null, update);
 			}
 		});
+	}
 };
 
 /***************

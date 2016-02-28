@@ -5,8 +5,8 @@ var Mail = require('./mail');
 schema
 ****************/
 var userSchema = new Schema({
-	email:  {type: String, lowercase: true},
-	password: {type: String, select: false},
+	email:  {type: String, lowercase: true, default: true},
+	password: {type: String, select: false, default: true, trim: true},
 	displayName:  {type: String},
 	noShowCount: {type: Number},
 	profilePic: {type: String},
