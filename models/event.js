@@ -19,9 +19,9 @@ var periodSchema = new Schema({
 schema
 ****************/
 var eventSchema = new Schema({
-	name: {type: String, trim: true},
-	types:  {type: String},
-	location: {type: String},
+	name: {type: String, required: true, trim: true},
+	types:  {type: String, required: true},
+	location: {type: String, required: true},
 	startDate: {type: String, trim: true},
 	endDate: {type: String, trim: true},
 	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -50,8 +50,15 @@ Public method
 eventSchema.statics.create = function (options, callback) {
 	var self = this;
 	options = options || {};
-	var event = new self (options);
-	event.save(callback);  
+	validateEvent(options, function(err, data){
+		if(err){
+			callback(err);
+		} else {
+			var event = new self (data);
+			event.accepted = event.invited;
+			event.save(callback);  
+		}
+	});
 };
 
 eventSchema.statics.findAll = function (options, callback) {
@@ -74,9 +81,9 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	}	
 	if (conditions.user!= null && conditions.user != ''){
 		q.or([
-			{"invited": {$in: [conditions.user]}},
+			// {"invited": {$in: [conditions.user]}},
 			{"accepted": {$in: [conditions.user]}},
-			{"owner": {$in: [conditions.user]}}
+			{"owner": conditions.user}
 		]);
 	}
 	q.deepPopulate("owner accepted invited period.userId choice.suggester choice.vote");
@@ -176,5 +183,14 @@ eventSchema.statics.updateById = function (id, update, callback) {
 /***************
 Private method
 ****************/
+var validateEvent = function(options, callback){
+	options = options || {};
+	console.log(options.invited.length);
+	if(options.name && options.name != '' && options.location && options.location != '' && options.invited && options.invited.length > 0){
+		callback(null, options);
+	} else {
+		callback({code: 403, message: 'invaild record'});
+	}
+};
 
 module.exports = mongoose.model('Event', eventSchema);
