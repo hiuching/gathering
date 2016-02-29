@@ -8,11 +8,7 @@ var userSchema = new Schema({
 	email:  {type: String, lowercase: true, required: true},
 	password: {type: String, select: false, required: true, trim: true},
 	displayName:  {type: String},
-<<<<<<< HEAD
-	noShowCount: {type: Number, default:0},
-=======
 	noShowCount: {type: Number, default: 0},
->>>>>>> c91ee4e1c5d7d505a5eeeb24b053a93be78062f4
 	profilePic: {type: String},
 	friendList: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 }, {collection: 'user'});
@@ -54,10 +50,8 @@ userSchema.statics.findAll = function (options, callback) {
 	} else  if (options.action == "findUsersByDisplayName"){
 		return this.findUsersByDisplayName(options, callback);
 	} else  if (options.action == "searchFriends"){
-		console.log('line53', options);
 		return this.searchFriends(options, callback);
 	} else {
-		
 		return this.findByConditions(options, callback);
 	}
 };

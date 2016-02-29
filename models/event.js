@@ -5,18 +5,6 @@ var extend = require('mongoose-schema-extend');
 sub-schema
 ****************/
 var choiceSchema = new Schema({
-<<<<<<< HEAD
-	suggester: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}], //whom suggest this
-	vote: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],  //whom vote for this
-	choice: String,  //KFC, McDonald
-	note: String
-});
-
-var periodSchema = new Schema({
-	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
-	period: [{type:String, required: true}],   //the available times of user 
-	note: String
-=======
 	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],  //whom vote for this
 	suggestion: String  //KFC, McDonald
 });
@@ -24,7 +12,6 @@ var periodSchema = new Schema({
 var periodSchema = new Schema({
 	userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	period: [{type:String}]   //the available times of user, e.g.['15/03/2016', '16/03/2016']
->>>>>>> c91ee4e1c5d7d505a5eeeb24b053a93be78062f4
 });
 
 
@@ -32,15 +19,6 @@ var periodSchema = new Schema({
 schema
 ****************/
 var eventSchema = new Schema({
-<<<<<<< HEAD
-	name: {type: String, required: true},
-	types:  {type: String, required: true},
-	location: {type: String, required: true},
-	startDate: {type: String, required: true},
-	endDate: {type: String, required: true},
-	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
-=======
 	name: {type: String, required: true, trim: true},
 	types:  {type: String, required: true},
 	location: {type: String, required: true},
@@ -48,11 +26,10 @@ var eventSchema = new Schema({
 	endDate: {type: String, trim: true},
 	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
->>>>>>> c91ee4e1c5d7d505a5eeeb24b053a93be78062f4
 	budget: {type: String},
-	invited: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
+	invited: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	description: {type: String},  //<100 char
-	eventTime: {type: String, required: true},   //morning, night, noon
+	eventTime: {type: String},   //morning, night, noon
 	period: [periodSchema],
 	choice: [choiceSchema],
 	active: {type: Boolean, default: true},
