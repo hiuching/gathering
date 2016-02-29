@@ -5,10 +5,14 @@ var Mail = require('./mail');
 schema
 ****************/
 var userSchema = new Schema({
-	email:  {type: String, lowercase: true},
-	password: {type: String, select: false},
+	email:  {type: String, lowercase: true, required: true},
+	password: {type: String, select: false, required: true, trim: true},
 	displayName:  {type: String},
+<<<<<<< HEAD
 	noShowCount: {type: Number, default:0},
+=======
+	noShowCount: {type: Number, default: 0},
+>>>>>>> c91ee4e1c5d7d505a5eeeb24b053a93be78062f4
 	profilePic: {type: String},
 	friendList: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 }, {collection: 'user'});

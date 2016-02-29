@@ -5,6 +5,7 @@ var extend = require('mongoose-schema-extend');
 sub-schema
 ****************/
 var choiceSchema = new Schema({
+<<<<<<< HEAD
 	suggester: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}], //whom suggest this
 	vote: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],  //whom vote for this
 	choice: String,  //KFC, McDonald
@@ -15,6 +16,15 @@ var periodSchema = new Schema({
 	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
 	period: [{type:String, required: true}],   //the available times of user 
 	note: String
+=======
+	userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],  //whom vote for this
+	suggestion: String  //KFC, McDonald
+});
+
+var periodSchema = new Schema({
+	userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	period: [{type:String}]   //the available times of user, e.g.['15/03/2016', '16/03/2016']
+>>>>>>> c91ee4e1c5d7d505a5eeeb24b053a93be78062f4
 });
 
 
@@ -22,6 +32,7 @@ var periodSchema = new Schema({
 schema
 ****************/
 var eventSchema = new Schema({
+<<<<<<< HEAD
 	name: {type: String, required: true},
 	types:  {type: String, required: true},
 	location: {type: String, required: true},
@@ -29,6 +40,15 @@ var eventSchema = new Schema({
 	endDate: {type: String, required: true},
 	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
+=======
+	name: {type: String, required: true, trim: true},
+	types:  {type: String, required: true},
+	location: {type: String, required: true},
+	startDate: {type: String, trim: true},
+	endDate: {type: String, trim: true},
+	owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	accepted: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+>>>>>>> c91ee4e1c5d7d505a5eeeb24b053a93be78062f4
 	budget: {type: String},
 	invited: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
 	description: {type: String},  //<100 char
@@ -53,14 +73,23 @@ Public method
 eventSchema.statics.create = function (options, callback) {
 	var self = this;
 	options = options || {};
-	var event = new self (options);
-	event.save(callback);  
+	validateEvent(options, function(err, data){
+		if(err){
+			callback(err);
+		} else {
+			var event = new self (data);
+			event.accepted = event.invited;
+			event.save(callback);  
+		}
+	});
 };
 
 eventSchema.statics.findAll = function (options, callback) {
 	options = options || {};
 	if(options.action == "findEventByInvolvedUser"){
 		return this.findEventByInvolvedUser(options, callback);
+	} else if(options.action == "findEventById"){
+		return this.findEventById(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
 	}
@@ -75,9 +104,9 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	}	
 	if (conditions.user!= null && conditions.user != ''){
 		q.or([
-			{"invited": {$in: [conditions.user]}},
+			// {"invited": {$in: [conditions.user]}},
 			{"accepted": {$in: [conditions.user]}},
-			{"owner": {$in: [conditions.user]}}
+			{"owner": conditions.user}
 		]);
 	}
 	q.deepPopulate("owner accepted invited period.userId choice.suggester choice.vote");
@@ -117,6 +146,53 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 eventSchema.statics.updateById = function (id, update, callback) {
 	update = update || {};
 	var self = this;
+	if (update.action == 'reject'){
+		this.findEventById({id: id}, function(err, event){
+			if(err){
+				callback(err);
+			} else {
+				event = new self(event);
+				event.accepted.forEach( function(user, index){
+					if (update.reject == user){
+						event.accepted.splice(index, 1);
+					}
+				});
+				self.update({ _id: id }, event,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, update);
+					}
+				});
+			}
+		});
+	}	else if (update.action == 'period'){
+		this.findEventById({id: id}, function(err, event){
+			if(err){
+				callback(err);
+			} else {
+				event = new self(event);
+				event.period.push(update.period);
+				var checkChoice = false;
+				event.choice.forEach(function(choice, index){
+					console.log(typeof choice.suggestion, typeof update.choice.suggestion)
+					if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
+						checkChoice = true;
+					}
+				});
+				if (!checkChoice){
+					event.choice.push(update.choice);
+				}
+				self.update({ _id: id }, event,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, update);
+					}
+				});
+			}
+		});
+	} else {
 		this.update({ _id: id }, update,  function(err, noOfUpdate) {
 			if (err) {
 				callback(err);
@@ -124,10 +200,20 @@ eventSchema.statics.updateById = function (id, update, callback) {
 				callback(null, update);
 			}
 		});
+	}
 };
 
 /***************
 Private method
 ****************/
+var validateEvent = function(options, callback){
+	options = options || {};
+	console.log(options.invited.length);
+	if(options.name && options.name != '' && options.location && options.location != '' && options.invited && options.invited.length > 0){
+		callback(null, options);
+	} else {
+		callback({code: 403, message: 'invaild record'});
+	}
+};
 
 module.exports = mongoose.model('Event', eventSchema);
