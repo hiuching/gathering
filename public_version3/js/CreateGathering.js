@@ -8,26 +8,25 @@ $(document).ready(function() {
 	$('#bigIconImg').removeClass();
 	$('#bigIconImg').addClass("fa fa-users fa-2x");
 	$('#bigIcon').text("Create Gathering");
+	console.log("datepicker value = " + $('#date1').val());
 
 	var nowDate = new Date();
 	var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
     
 	$('#date1').datepicker({
 		dateFormat: 'mm/dd/yyyy',
-		startDate: today
+		startDate: today,
+		autoclose: true
+	}).on('changeDate', function (ev) {
+		$('#date2').datepicker({
+			dateFormat: 'mm/dd/yyyy',
+			autoclose: true,
+		}).datepicker('setStartDate', ev.date);
+		$("#date2").focus();
 	});
-	/*var date1Val = $('#date1').date();
-	var selectDate = new Date(date1Val);
-	var filterDate = new Date(selectDate.getFullYear(), selectDate.getMonth(), selectDate.getFullYear(), 0, 0, 0, 0);*/
-	$('#date2').datepicker({
-		dateFormat: 'mm/dd/yyyy',
-		startDate: today
-	});
-	/*$('#date2').click(function() {
-		console.log(selectDate);
-	})*/
+
 	if (checkOwnEvent == true){
-		console.log("if is true");
+		//console.log("if is true");
 		$.support.cors = true;
 		var eventData = {
 			action: "findEventById",
@@ -50,40 +49,48 @@ $(document).ready(function() {
 				$('#budget').val(event.budget);
 				$('#description').val(event.description);
 				$('#createBtn').val('Save');
-				console.log("eventname value = " + $('#eventname').val());
+				console.log(event.period);
+				for(var key in event.invited) {
+					$("#inviteList").append("<lo><div class = 'loContainer'><img src = 'img/" + event.invited[key]._id + ".png' class = 'icon' onerror = 'imgError(this)'></img><span class='defaultspan'style='font-weight: bold; font-size: 12px'>" + event.invited[key].displayName + "</span></div></div></div></lo><br>");
+				}
+				for(var msgKey in event.period) {
+					$("#joinFd").append("<span><section class = 'glyphicon'>" + event.period[msgKey].userId.displayName + "</section></span>");
+				}
+				$('#invitedAndJoin').text("Join");
+				$('#inviteNum').val(event.period.length);
+			},
+			error: function(err){
+				console.log('failed');
+			}
+		});
+	}else {
+		var data = {
+			_id: userId,
+		};
+		$.support.cors = true;
+		$.ajax({
+			type: 'GET',
+			contentType: 'application/json',
+			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/',
+			data: data,
+			dataType: 'json',
+			success: function(user) {
+				console.log('success',user);
+				friendList = user[0].friendList;
+				$("#inviteList").children().remove();
+				if (friendList.length == 0){
+					$("#inviteList").append("<lo><span>You have no fd lor! toxic jj</span></lo>");
+				}
+				for(var i in friendList){
+					$("#inviteList").append("<lo><div class = 'loContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'></img><span class='defaultspan'style='font-weight: bold; font-size: 12px'>" + friendList[i].displayName + "</span><i id = '" + friendList[i]._id + "' name = '" + friendList[i].displayName + "' class = ' notInvited fa fa-puzzle-piece fa-3x'></i></div></div></div></lo><br>");
+				}
+				console.log(user[0].friendList);
 			},
 			error: function(err){
 				console.log('failed');
 			}
 		});
 	}
-	var data = {
-		_id: userId,
-	};
-	$.support.cors = true;
-	//data = JSON.stringify(data);
-	$.ajax({
-		type: 'GET',
-		contentType: 'application/json',
-		url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/',
-		data: data,
-		dataType: 'json',
-		success: function(user) {
-			console.log('success',user);
-			friendList = user[0].friendList;
-			$("#inviteList").children().remove();
-			if (friendList.length == 0){
-				$("#inviteList").append("<lo><span>You have no fd lor! toxic jj</span></lo>");
-			}
-			for(var i in friendList){
-				$("#inviteList").append("<lo><div class = 'loContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'></img><span class='defaultspan'style='font-weight: bold; font-size: 12px'>" + friendList[i].displayName + "</span><i id = '" + friendList[i]._id + "' name = '" + friendList[i].displayName + "' class = ' notInvited fa fa-puzzle-piece fa-3x'></i></div></div></div></lo><br>");
-			}
-			console.log(user[0].friendList);
-		},
-		error: function(err){
-			console.log('failed');
-		}
-	});
 
 	$('#inviteList').on('click', '.notInvited', function(){
 		var fdName = $(this).attr("name");
@@ -124,13 +131,29 @@ $(document).ready(function() {
 	$('#createBtn').click(function() {
 		console.log("clicked");
 		$("#createBtn").attr("disabled", true);
-		if($('.inputEvent').val() == '' || $('.inputEvent').val() == null || $('.inputEvent').val() == ' ') {
+		var trimedInputEvent = $.trim($('.inputEvent').val());
+		if(trimedInputEvent == '' || trimedInputEvent == null) {
 			$('#msg').text ("Please Complete the form");
 			$("#createBtn").attr("disabled", false);
 			return false;
 		}
+
+		if($('#date1').val() == '' || $('#date1').val() == null || $('#date2').val() == '' || $('#date2').val() == null) {
+			$('#msg').text ("Please Complete the form");
+			$("#createBtn").attr("disabled", false);
+			return false;
+		}
+
 		if($('#createBtn').val() == "Save") putEvent();
-		else postEvent();
+		else {
+			console.log(joinFdIdArray);
+			if(joinFdIdArray == "" || joinFdIdArray == null) {
+				$('#msg').text ("Please invite your friends to join.");
+				$("#createBtn").attr("disabled", false);
+				return false;
+			}
+			postEvent();
+		}
 	});
 
 	function putEvent() {
@@ -142,7 +165,7 @@ $(document).ready(function() {
 			location: $('#location').val(),
 			budget: $('#budget').val(),
 			eventTime: $('#eventTime').val(),
-			invited: joinFdIdArray,
+			//invited: joinFdIdArray,
 			description: $.trim($('#description').val()),
 		}
 
@@ -180,7 +203,7 @@ $(document).ready(function() {
 			location: $('#location').val(),
 			budget: $('#budget').val(),
 			eventTime: $('#eventTime').val(),
-			//invited: joinFdIdArray,
+			invited: joinFdIdArray,
 			description: $.trim($('#description').val()),
 		}
 		$.support.cors = true;

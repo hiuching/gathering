@@ -73,32 +73,41 @@ body {
 	 vertical-align: center;
 	 cursor: pointer;
 }
-#rectangle_top{
+.rectangle_top_class, #rectangle_top{
 	width: 210px;
 	height: 13px;
 	border-radius: 5px 5px 0 0 ;
 	padding-left: 30px;
 }
-.rectangle_top.color1 {
+.color1 {
 	background: #A9D2D1;
 }
-.rectangle_top.color2 {
+.color2 {
 	background: #F9C848;
 }
-.rectangle_top.color3 {
+.color3 {
 	background: #F63D3D;
 }
-.rectangle_top.color4 {
+.color4 {
 	background: #00B498;
 }
-.rectangle_bottom {
+
+.rectangle_bottom{
 	width: 210px;
 	height: 140px;
 	background: #FFFFFF;
 	padding-left: 30px;
 	cursor: pointer;
 }
-.blank {
+.rectangle_bottom_none {
+	width: 210px;
+	height: 140px;
+	background: #FFFFFF;
+	cursor: pointer;
+	padding-top: 54px;
+	text-align: center;
+}
+.blank ,.board {
 	display:inline-block;
 	padding-left: 30px;
 
@@ -120,11 +129,11 @@ body {
 	font-size: 27px;
 
 }
-.joinbtn.red{
+.joinbtn.green{
 	background-color:#80C41C;
 	font-size: 27px;
 }
-.joinbtn.green{
+.joinbtn.red{
 	background-color:#F63D3D;
 	font-size: 22px;
 }

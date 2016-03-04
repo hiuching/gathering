@@ -45,6 +45,36 @@ NAV
 				</div>
 			</div>
 		</section>
+		<!---Edited by Carrie-->
+		<section id = "noEventContainer">
+			<div class = "board" style = "display: none;">
+				<div class = "board" >
+					<div class="rectangle_top_class color1">  </div>
+					<div class="rectangle_bottom_none">
+						<span class = "ownEventText">Create New Gathering</span>
+					</div>
+				</div>
+				<div class = "board" >
+					<div class="rectangle_top_class color2">  </div>
+					<div class="rectangle_bottom_none">
+						<span class = "ownEventText">Create New Gathering</span>
+					</div>
+				</div>	
+				<div class = "board" >
+					<div class="rectangle_top_class color3">  </div>
+					<div class="rectangle_bottom_none">
+						<span class = "ownEventText">Create New Gathering</span>
+					</div>
+				</div>
+				<div class = "board" >
+					<div class="rectangle_top_class color4">  </div>
+					<div class="rectangle_bottom_none">
+						<span class = "ownEventText">Create New Gathering</span>
+					</div>
+				</div>
+			</div>
+			
+		</section>
 	</div>
 </div>
 
@@ -67,19 +97,20 @@ NAV
 			<div class = "username"><span id = "ownerName" style = "float: left"></div> <!--user name -->
 			
 			<div class="cd-timeline-content"> <!--white div -->
+				<span id = "eventId" style = "display:none"></span>
 				<table width="100%" border="0" style = "color: black">
 				  <tr>
 					<td><span id = "eventName"></span></td>
 					<td rowspan="4"><span class = "tdPara">Description:</span>
 					<div class = "tdPara" id = "description"></div></td>
-					<td rowspan="2"><p><button type="button" class="joinbtn red">Join</button></p></td>
+					<td rowspan="2"><p><button type="button" class="joinbtn green">Join</button></p></td>
 				  </tr>
 				  <tr>
 					<td>Period: <span id = "period"></span></td>
 				  </tr>
 				  <tr>
 					<td>Friend Invited: <span id = "noOfFd"></span></td>
-					<td rowspan="2"><p><button type="button" class="joinbtn green">Not Join</button></p></td>
+					<td rowspan="2"><p><button type="button" class="joinbtn red">Not Join</button></p></td>
 				  </tr>
 				  <tr>
 					<td>Budget: <span id = "budget"></span></td>

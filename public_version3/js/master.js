@@ -32,7 +32,7 @@ $(document).ready(function() {
 			return;
 		window.location.href = "#/setting";
 		$('#searchList').children().remove();
-		$('#searchList').append("<span style = 'font-weight: bold'>Loding...</span>");
+		$('#searchList').append("<span style = 'font-weight: bold'>Loading...</span>");
 		var data = {
 			_id: userId
 		};
@@ -41,7 +41,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: 'GET',
 			contentType: 'application/json',
-			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/',
+			url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user',
 			data: data,
 			dataType: 'json',
 			success: function(user) {
@@ -64,7 +64,7 @@ $(document).ready(function() {
 				$.ajax({
 					type: 'GET',
 					contentType: 'application/json',
-					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user/',
+					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user',
 					data: data,
 					dataType: 'json',
 					success: function(user) {
