@@ -1,5 +1,7 @@
 ﻿var File  = require('../models/file');
 var fs = require('fs');
+var networkHelper = require('../lib/networkHelper');
+
 var FileController = function (){
 };
 
@@ -10,11 +12,7 @@ FileController.prototype.findAll = function (req, res) {
 FileController.prototype.add = function (req, res) {
 	var options = req.body;
 	File.create(options, function(err, data){
-		if(err) {
-			res.status(500).send(err);   
-		} else {
-			res.status(200).send(data);   
-		}
+		networkHelper.response(err, {data: data, res: res});
 	});
 };
 
