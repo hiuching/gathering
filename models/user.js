@@ -84,6 +84,8 @@ userSchema.statics.findByConditions = function (options, callback) {
 userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 	options = options || {};
 	var conditions = {};
+	
+	options.email = options.email || '';
 	conditions.email = options.email.toLowerCase();
 	conditions.password = options.password;
 	
@@ -103,6 +105,7 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 userSchema.statics.findUserByEmail = function (options, callback) {
 	options = options || {};
 	var conditions = {};
+	options.email = options.email || '';
 	conditions.email = options.email.toLowerCase();
     this.findByConditions(conditions, function(err, users){
 		if(users.length == 1){
@@ -118,6 +121,7 @@ userSchema.statics.findUserByEmail = function (options, callback) {
 userSchema.statics.findUserByEmailWithPassword = function (options, callback) {
 	options = options || {};
 	var conditions = {};
+	options.email = options.email || '';
 	conditions.email = options.email.toLowerCase();
 	conditions.select = '+password';
     this.findByConditions(conditions, function(err, users){
@@ -175,6 +179,7 @@ userSchema.statics.findUsersByDisplayName = function (options, callback) {
 userSchema.statics.searchFriends = function (options, callback) {
 	options = options || {};
 	var conditions = {};
+	options.email = options.email || '';
 	conditions.displayName = new RegExp(options.displayName, 'i');
 	conditions.email = options.email.toLowerCase();
 	

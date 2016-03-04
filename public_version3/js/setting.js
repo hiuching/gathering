@@ -5,8 +5,8 @@ $(document).ready(function() {
 	$('#bigIconImg').addClass("fa fa-cogs fa-2x");
 	$('#bigIcon').text("Settings");
 	
-	console.log("aaaaaaaaaaaaaaaaaaaaaaa");
-	console.log(searchedUser);
+	//console.log("aaaaaaaaaaaaaaaaaaaaaaa");
+	//console.log(searchedUser);
 	loadFdList = false;
 	$('.container, .action').hide();
 	if(!isSearch){
@@ -18,11 +18,11 @@ $(document).ready(function() {
 			for(var i in searchedUser) {
 			console.log("inArray", $.inArray(searchedUser[i]._id, friendIdArray));
 				if(searchedUser[i]._id == userId)
-					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "</div></div></lo><br>");
+					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "</div></div></lo><hr>");
 				else if(($.inArray(searchedUser[i]._id, friendIdArray)) > -1)
-					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><br>");
+					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><hr>");
 				else
-					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-success addFd'>+Friend</button></div></div></lo><br>");
+					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-success addFd'>+Friend</button></div></div></lo><hr>");
 				}
 		}
 	}
@@ -55,7 +55,7 @@ $(document).ready(function() {
 			//friendIdArray.length = 0;
 			for(var i in friendList){
 				//friendIdArray.push(friendList[i]._id);
-				$("#list").append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + friendList[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + friendList[i].noShowCount + "</span><br>" + friendList[i].email + "&nbsp <button id = '" + friendList[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><br>");
+				$("#list").append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + friendList[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + friendList[i].noShowCount + "</span><br>" + friendList[i].email + "&nbsp <button id = '" + friendList[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><hr>");
 			}
 			console.log(friendIdArray);
 			loadFdList = true;
