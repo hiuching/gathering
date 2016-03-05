@@ -98,7 +98,8 @@ userSchema.statics.findByConditions = function (options, callback) {
 	}
 	if (conditions.select != null && conditions.select != '') {
 		q.select(conditions.select);
-	} if (!conditions.populate){
+	} 
+	if (!conditions.populate){
 		q.populate("friendList");
 	}
 	

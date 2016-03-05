@@ -86,7 +86,10 @@ eventSchema.statics.findByConditions = function (options, callback) {
 			{"owner": conditions.user}
 		]);
 	}
-	q.deepPopulate("owner accepted invited period.userId choice.suggester choice.vote");
+	if (!conditions.populate){
+	q.deepPopulate("owner accepted invited period.userId choice.userId");
+	}
+
 	q.exec(callback);
 }; 
 
@@ -94,6 +97,24 @@ eventSchema.statics.findEventById = function (options, callback) {
 	options = options || {};
 	var conditions = {};
 	conditions._id = options.id;
+    this.findByConditions(conditions, function(err, events){
+		if (err){
+			callback(err);
+		} else if(events.length == 1){
+			callback(null, events[0]);
+		} else if (events.length == 0){
+			callback({code: 404, message: 'recode not found'});
+		} else {
+			callback({code: 403, message: 'more than one recode'});
+		}
+	});     
+};
+
+eventSchema.statics.findEventByIdWithoutPopulate = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions._id = options.id;
+	conditions.populate = true;
     this.findByConditions(conditions, function(err, events){
 		if (err){
 			callback(err);
@@ -122,7 +143,7 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 
 eventSchema.statics.reject = function (id, update, callback) {
 	var self = this;
-	this.findEventById({id: id}, function(err, event){
+	this.findEventByIdWithoutPopulate({id: id}, function(err, event){
 		if(err){
 			callback(err);
 		} else {
@@ -145,31 +166,41 @@ eventSchema.statics.reject = function (id, update, callback) {
 
 eventSchema.statics.votePeriod = function (id, update, callback) {
 	var self = this;
-	this.findEventById({id: id}, function(err, event){
+	this.findEventByIdWithoutPopulate({id: id}, function(err, event){
 		if(err){
 			callback(err);
 		} else {
 			event = new self(event);
-			event.period.push(update.period);
-			var checkChoice = false;
-			update.choice.suggestion = update.choice.suggestion.trim();
-			event.choice.forEach(function(choice, index){
-				if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
-					checkChoice = true;
+			var periodExist = false;
+			event.period.forEach(function(period, index){
+				if(period.userId == update.period.userId){
+					periodExist = true;
 				}
 			});
-			if (!checkChoice){
-				event.choice.push(update.choice);
-			}
-			self.update({ _id: id }, event,  function(err, noOfUpdate) {
-				if (err) {
-					callback(err);
-				} else {
-					callback(null, update);
-				}
-			});
-		}
+			if (!periodExist){
+				event.period.push(update.period);
 
+				var choiceExist = false;
+				update.choice.suggestion = update.choice.suggestion.trim();
+				event.choice.forEach(function(choice, index){
+					if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
+						choiceExist = true;
+					}
+				});
+				if (!choiceExist){
+					event.choice.push(update.choice);
+				}
+				self.update({ _id: id }, event,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, update);
+					}
+				});
+			} else {
+				callback({code: 403, message: 'user already vote'});
+			}
+		}
 	});    
 };
 
@@ -187,13 +218,19 @@ eventSchema.statics.updateById = function (id, update, callback) {
 
 eventSchema.statics.updateEvent = function (id, update, callback) {
 	var self = this;
-	this.update({ _id: id}, update,  function(err, noOfUpdate) {
-		if (err) {
+	validateEvent(update, function(err, data){
+		if(err){
 			callback(err);
 		} else {
-			callback(null, update);
+			this.findEventByIdWithoutPopulate({ _id: id}, update,  function(err, noOfUpdate) {
+				if (err) {
+					callback(err);
+				} else {
+					callback(null, update);
+				}
+			});
 		}
-	});   
+	}); 
 };
 /***************
 Private method
@@ -201,7 +238,7 @@ Private method
 var validateEvent = function(options, callback){
 	options = options || {};
 	console.log(options.invited.length);
-	if(options.name && options.name != '' && options.location && options.location != '' && options.invited && options.invited.length > 0){
+	if(options.name && options.name != '' && options.location && options.location != '' && options.invited && options.invited.length > 0 && options.startDate && options.startDate != '' && options.endDate && options.endDate != '' && (options.startDate <= options.endDate)){
 		callback(null, options);
 	} else {
 		callback({code: 403, message: 'invaild record'});
