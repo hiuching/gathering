@@ -17,7 +17,8 @@ var userSchema = new Schema({
 Public method
 ****************/
 
-userSchema.statics.addFriend = function (options, callback) {
+userSchema.statics.addFriend = function (id, update, callback) {
+	var self = this;
 	this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
 		if (err) {
 			callback(err);
@@ -198,7 +199,8 @@ userSchema.statics.findUserByIdWithoutPopulate = function (options, callback) {
 	});     
 };
 
-userSchema.statics.removeFriend = function (options, callback) {
+userSchema.statics.removeFriend = function (id, update, callback) {
+	var self = this;
 	this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
 		if (err) {
 			callback(err);
@@ -230,7 +232,8 @@ userSchema.statics.searchFriends = function (options, callback) {
 	this.findByConditions(conditions, callback);
 };
 
-userSchema.statics.setPassword = function (options, callback) {
+userSchema.statics.setPassword = function (id, update, callback) {
+	var self = this;
 	this.findUserById({id: id}, function (err, user) {
 		if (err) {
 			callback(err);
@@ -266,7 +269,8 @@ userSchema.statics.updateById = function (id, update, callback) {
 	}
 };
 
-userSchema.statics.updateUser = function (options, callback) {
+userSchema.statics.updateUser = function (id, update, callback) {
+	var self = this;
 	this.update({ _id: id }, update,  function(err, noOfUpdate) {
 		if (err) {
 			callback(err);

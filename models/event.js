@@ -121,6 +121,7 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 };
 
 eventSchema.statics.reject = function (id, update, callback) {
+	var self = this;
 	this.findEventById({id: id}, function(err, event){
 		if(err){
 			callback(err);
@@ -143,6 +144,7 @@ eventSchema.statics.reject = function (id, update, callback) {
 };
 
 eventSchema.statics.votePeriod = function (id, update, callback) {
+	var self = this;
 	this.findEventById({id: id}, function(err, event){
 		if(err){
 			callback(err);
@@ -150,8 +152,8 @@ eventSchema.statics.votePeriod = function (id, update, callback) {
 			event = new self(event);
 			event.period.push(update.period);
 			var checkChoice = false;
+			update.choice.suggestion = update.choice.suggestion.trim();
 			event.choice.forEach(function(choice, index){
-				console.log(typeof choice.suggestion, typeof update.choice.suggestion)
 				if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
 					checkChoice = true;
 				}
@@ -184,6 +186,7 @@ eventSchema.statics.updateById = function (id, update, callback) {
 };
 
 eventSchema.statics.updateEvent = function (id, update, callback) {
+	var self = this;
 	this.update({ _id: id}, update,  function(err, noOfUpdate) {
 		if (err) {
 			callback(err);
