@@ -16,6 +16,29 @@ var userSchema = new Schema({
 /***************
 Public method
 ****************/
+
+userSchema.statics.addFriend = function (options, callback) {
+	this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
+		if (err) {
+			callback(err);
+		} else {
+			if (user.friendList.indexOf(update.friend) == -1){
+				user.friendList.push(update.friend);
+				self.update({ _id: id }, user,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						delete user.password;
+						callback(null, user);
+					}
+				});
+			} else {
+				callback({code: 403, message: 'You have this friend already'});
+			}
+		}
+	});
+};
+
 userSchema.statics.create = function (options, callback) {
 	var self = this;
 	options = options || {};
@@ -81,6 +104,30 @@ userSchema.statics.findByConditions = function (options, callback) {
 	q.exec(callback);
 }; 
 
+userSchema.statics.findUsersByDisplayName = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	conditions.displayName = new RegExp(options.displayName, 'i');
+	
+	this.findByConditions(conditions, callback);
+};
+
+userSchema.statics.findUserByEmail = function (options, callback) {
+	options = options || {};
+	var conditions = {};
+	options.email = options.email || '';
+	conditions.email = options.email.toLowerCase();
+    this.findByConditions(conditions, function(err, users){
+		if(users.length == 1){
+			callback(null, users[0]);
+		} else if (users.length == 0){
+			callback(null);
+		} else {
+			callback({code: 403, message: 'more than one recode'});
+		}
+	});     
+};
+
 userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 	options = options || {};
 	var conditions = {};
@@ -100,22 +147,6 @@ userSchema.statics.findUserByEmailAndPassword = function (options, callback) {
 			}
 		}
 	});    
-};
-
-userSchema.statics.findUserByEmail = function (options, callback) {
-	options = options || {};
-	var conditions = {};
-	options.email = options.email || '';
-	conditions.email = options.email.toLowerCase();
-    this.findByConditions(conditions, function(err, users){
-		if(users.length == 1){
-			callback(null, users[0]);
-		} else if (users.length == 0){
-			callback(null);
-		} else {
-			callback({code: 403, message: 'more than one recode'});
-		}
-	});     
 };
 
 userSchema.statics.findUserByEmailWithPassword = function (options, callback) {
@@ -167,14 +198,27 @@ userSchema.statics.findUserByIdWithoutPopulate = function (options, callback) {
 	});     
 };
 
-userSchema.statics.findUsersByDisplayName = function (options, callback) {
-	options = options || {};
-	var conditions = {};
-	conditions.displayName = new RegExp(options.displayName, 'i');
-	
-	this.findByConditions(conditions, callback);
+userSchema.statics.removeFriend = function (options, callback) {
+	this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
+		if (err) {
+			callback(err);
+		} else {
+			for (var i=0; i<user.friendList.length; i++){
+				if (update.friend == user.friendList[i]){
+					user.friendList.splice(i, 1);
+				}
+			};
+			self.update({ _id: id }, user,  function(err, noOfUpdate) {
+				if (err) {
+					callback(err);
+				} else {
+					delete user.password;
+					callback(null, user);
+				}
+			});
+		}
+	});
 };
-
 
 userSchema.statics.searchFriends = function (options, callback) {
 	options = options || {};
@@ -186,82 +230,53 @@ userSchema.statics.searchFriends = function (options, callback) {
 	this.findByConditions(conditions, callback);
 };
 
-userSchema.statics.updateById = function (id, update, callback) {
-	update = update || {};
-	var self = this;
-	if (update.action == 'setPassword') {
-		this.findUserById({id: id}, function (err, user) {
-			if (err) {
-				callback(err);
-			} else {
-				if (user.password == update.currentPassword) {
-					user.password = update.newPassword;
-					self.update({ _id: id }, user,  function(err, noOfUpdate) {
-						if (err) {
-							callback(err);
-						} else {
-							user.password = undefined;
-							callback(null, user);
-						}
-					});
-				} else {
-					callback({code: 401, message: 'incorrect password'});
-				}
-			}
-		});
-	} else if (update.action == 'addFriend') {
-		this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
-			if (err) {
-				callback(err);
-			} else {
-				if (user.friendList.indexOf(update.friend) == -1){
-					user.friendList.push(update.friend);
-					self.update({ _id: id }, user,  function(err, noOfUpdate) {
-						if (err) {
-							callback(err);
-						} else {
-							delete user.password;
-							callback(null, user);
-						}
-					});
-				} else {
-					callback({code: 403, message: 'You have this friend already'});
-				}
-			}
-		});
-		
-	} else if (update.action == 'removeFriend') {
-		this.findUserByIdWithoutPopulate({id: id}, function (err, user) {
-			if (err) {
-				callback(err);
-			} else {
-				for (var i=0; i<user.friendList.length; i++){
-					if (update.friend == user.friendList[i]){
-						user.friendList.splice(i, 1);
-					}
-				};
+userSchema.statics.setPassword = function (options, callback) {
+	this.findUserById({id: id}, function (err, user) {
+		if (err) {
+			callback(err);
+		} else {
+			if (user.password == update.currentPassword) {
+				user.password = update.newPassword;
 				self.update({ _id: id }, user,  function(err, noOfUpdate) {
 					if (err) {
 						callback(err);
 					} else {
-						delete user.password;
+						user.password = undefined;
 						callback(null, user);
 					}
 				});
-			}
-		});
-	}
-	else {
-		this.update({ _id: id }, update,  function(err, noOfUpdate) {
-			if (err) {
-				callback(err);
 			} else {
-				delete update.password;
-				callback(null, update);
+				callback({code: 401, message: 'incorrect password'});
 			}
-		});
+		}
+	});
+};
+
+userSchema.statics.updateById = function (id, update, callback) {
+	update = update || {};
+	var self = this;
+	if (update.action == 'setPassword') {
+		return this.setPassword(id, update, callback);
+	} else if (update.action == 'addFriend') {
+		return this.addFriend(id, update, callback);	
+	} else if (update.action == 'removeFriend') {
+		return this.removeFriend(id, update, callback);	
+	}	else {
+		return this.updateUser(id, update, callback);	
 	}
 };
+
+userSchema.statics.updateUser = function (options, callback) {
+	this.update({ _id: id }, update,  function(err, noOfUpdate) {
+		if (err) {
+			callback(err);
+		} else {
+			delete update.password;
+			callback(null, update);
+		}
+	});
+};
+
 
 /***************
 Private method

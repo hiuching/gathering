@@ -120,66 +120,78 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 	});     
 };
 
+eventSchema.statics.reject = function (id, update, callback) {
+	this.findEventById({id: id}, function(err, event){
+		if(err){
+			callback(err);
+		} else {
+			event = new self(event);
+			event.accepted.forEach( function(user, index){
+				if (update.reject == user){
+					event.accepted.splice(index, 1);
+				}
+			});
+			self.update({ _id: id }, event,  function(err, noOfUpdate) {
+				if (err) {
+					callback(err);
+				} else {
+					callback(null, update);
+				}
+			});
+		}
+	});     
+};
+
+eventSchema.statics.votePeriod = function (id, update, callback) {
+	this.findEventById({id: id}, function(err, event){
+		if(err){
+			callback(err);
+		} else {
+			event = new self(event);
+			event.period.push(update.period);
+			var checkChoice = false;
+			event.choice.forEach(function(choice, index){
+				console.log(typeof choice.suggestion, typeof update.choice.suggestion)
+				if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
+					checkChoice = true;
+				}
+			});
+			if (!checkChoice){
+				event.choice.push(update.choice);
+			}
+			self.update({ _id: id }, event,  function(err, noOfUpdate) {
+				if (err) {
+					callback(err);
+				} else {
+					callback(null, update);
+				}
+			});
+		}
+
+	});    
+};
+
 eventSchema.statics.updateById = function (id, update, callback) {
 	update = update || {};
 	var self = this;
 	if (update.action == 'reject'){
-		this.findEventById({id: id}, function(err, event){
-			if(err){
-				callback(err);
-			} else {
-				event = new self(event);
-				event.accepted.forEach( function(user, index){
-					if (update.reject == user){
-						event.accepted.splice(index, 1);
-					}
-				});
-				self.update({ _id: id }, event,  function(err, noOfUpdate) {
-					if (err) {
-						callback(err);
-					} else {
-						callback(null, update);
-					}
-				});
-			}
-		});
+		return	this.reject(id, update, callback);
 	}	else if (update.action == 'period'){
-		this.findEventById({id: id}, function(err, event){
-			if(err){
-				callback(err);
-			} else {
-				event = new self(event);
-				event.period.push(update.period);
-				var checkChoice = false;
-				event.choice.forEach(function(choice, index){
-					console.log(typeof choice.suggestion, typeof update.choice.suggestion)
-					if(choice.suggestion.toLowerCase() == update.choice.suggestion.toLowerCase()){
-						checkChoice = true;
-					}
-				});
-				if (!checkChoice){
-					event.choice.push(update.choice);
-				}
-				self.update({ _id: id }, event,  function(err, noOfUpdate) {
-					if (err) {
-						callback(err);
-					} else {
-						callback(null, update);
-					}
-				});
-			}
-		});
+		return	this.votePeriod(id, update, callback);
 	} else {
-		this.update({ _id: id }, update,  function(err, noOfUpdate) {
-			if (err) {
-				callback(err);
-			} else {
-				callback(null, update);
-			}
-		});
+		return	this.updateEvent(id, update, callback);
 	}
 };
 
+eventSchema.statics.updateEvent = function (id, update, callback) {
+	this.update({ _id: id}, update,  function(err, noOfUpdate) {
+		if (err) {
+			callback(err);
+		} else {
+			callback(null, update);
+		}
+	});   
+};
 /***************
 Private method
 ****************/
