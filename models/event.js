@@ -1,5 +1,6 @@
 ﻿var mongoose = require('mongoose'), Schema = mongoose.Schema;
 var extend = require('mongoose-schema-extend');
+var Mail = require('./mail');
 
 /***************
 sub-schema
@@ -56,7 +57,35 @@ eventSchema.statics.create = function (options, callback) {
 		} else {
 			var event = new self (data);
 			event.accepted = event.invited;
-			event.save(callback);  
+			event.save(function(err, savedEvent){
+				if(err){
+					callback(err);
+				} else {
+					self.findEventById({id: savedEvent._id}, function(err, foundEvent){
+						if(err){
+							callback(err);
+						} else {
+							var emails = [];
+							foundEvent.invited.forEach(function(user){
+								emails.push(user.email);
+							})
+							var mailOption = {
+								email: emails,
+								subject: foundEvent.owner.displayName + " invite you to attend " + event.name,
+								html: "<div>You have a new invitation. Event details: </div><div>name: " + event.name + "</div><div>location: " + event.location + "</div><div>types: " + event.types + "</div><div>Date: " + event.startDate + " - " +  event.endDate + "</div><div>Please reply your available date within 2 days.",
+							}
+							// console.log('mailOption', mailOption);
+							Mail.send(mailOption, function(err){
+								if(err){
+									callback(err);
+								} else {
+									callback(null, event);		
+								}
+							});
+						}
+					});
+				}
+			});  
 		}
 	});
 };
@@ -237,11 +266,27 @@ Private method
 ****************/
 var validateEvent = function(options, callback){
 	options = options || {};
-	console.log(options.invited.length);
-	if(options.name && options.name != '' && options.location && options.location != '' && options.invited && options.invited.length > 0 && options.startDate && options.startDate != '' && options.endDate && options.endDate != '' && (options.startDate <= options.endDate)){
-		callback(null, options);
+	// console.log(options.invited.length);
+	if (options.name && options.name != ''){
+		if (options.location && options.location != '' ){
+			if(options.invited && options.invited.length > 0 ){
+				if(options.startDate && options.startDate != '' && options.endDate && options.endDate != '' && (options.startDate <= options.endDate) ){
+					if(options.choice && options.choice.length > 0 && options.choice[0].suggestion != ''){
+						callback(null, options);
+					} else {
+						callback({code: 403, message: 'invaild choice'});
+					}
+				} else {
+					callback({code: 403, message: 'invaild startDate/endDate'});
+				}
+			} else {
+				callback({code: 403, message: 'no invited person'});
+			}
+		} else {
+				callback({code: 403, message: 'invaild location'});
+		}
 	} else {
-		callback({code: 403, message: 'invaild record'});
+				callback({code: 403, message: 'no invited name'});
 	}
 };
 

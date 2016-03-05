@@ -15,8 +15,8 @@ Mail.send = function(options, callback){
 	var mailOptions = {
 		from: "gathering <gathering7710@gmail.com>", // sender address
 		to: options.email, // list of receivers
-		subject: "thank you for register gathering", // Subject line
-		html: "<div>Welcome gathering!</div><div>Your new password is <b>" + options.password  + "</b>.</div><div>Please login to edit your profile.</div>" // html body
+		subject: options.subject || "Thank you for register gathering", // Subject line
+		html: options.html || "<div>Welcome gathering!</div><div>Your new password is <b>" + options.password  + "</b>.</div><div>Please login to edit your profile.</div>" // html body
 	};
 
 	smtpTransport.sendMail(mailOptions, function(err, res){
@@ -24,7 +24,6 @@ Mail.send = function(options, callback){
 			console.log(err);
 			callback(err);
 		}else{
-			console.log("Message sent: " + res.message);
 			callback(null, res);
 		}
 	});	
