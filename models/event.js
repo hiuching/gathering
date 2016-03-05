@@ -74,7 +74,6 @@ eventSchema.statics.create = function (options, callback) {
 								subject: foundEvent.owner.displayName + " invite you to attend " + event.name,
 								html: "<div>You have a new invitation. Event details: </div><div>name: " + event.name + "</div><div>location: " + event.location + "</div><div>types: " + event.types + "</div><div>Date: " + event.startDate + " - " +  event.endDate + "</div><div>Please reply your available date within 2 days.",
 							}
-							// console.log('mailOption', mailOption);
 							Mail.send(mailOption, function(err){
 								if(err){
 									callback(err);
@@ -266,7 +265,6 @@ Private method
 ****************/
 var validateEvent = function(options, callback){
 	options = options || {};
-	// console.log(options.invited.length);
 	if (options.name && options.name != ''){
 		if (options.location && options.location != '' ){
 			if(options.invited && options.invited.length > 0 ){
