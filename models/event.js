@@ -117,7 +117,7 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	if (!conditions.populate){
 	q.deepPopulate("owner accepted invited period.userId choice.userId");
 	}
-
+	q.sort({"created": -1})
 	q.exec(callback);
 }; 
 
@@ -246,19 +246,13 @@ eventSchema.statics.updateById = function (id, update, callback) {
 
 eventSchema.statics.updateEvent = function (id, update, callback) {
 	var self = this;
-	validateEvent(update, function(err, data){
-		if(err){
+	this.update({ _id: id}, update,  function(err, noOfUpdate) {
+		if (err) {
 			callback(err);
 		} else {
-			this.findEventByIdWithoutPopulate({ _id: id}, update,  function(err, noOfUpdate) {
-				if (err) {
-					callback(err);
-				} else {
-					callback(null, update);
-				}
-			});
+			callback(null, update);
 		}
-	}); 
+	});
 };
 /***************
 Private method
