@@ -41,13 +41,22 @@
     <div class =  "col col-md-4">
        <select class = "form-control" id = "eventtype" name = "eventtype" >
           <option>BBQ</option>
-          <option>Hiking</option>
-          <option>Karaoke</option>
-          <option>Movies</option>
+          <option>Breakfast</option>
           <option>Board Games</option>
+          <option>Birthday Party</option>
           <option>Camping</option>
           <option>Cycling</option>
-           <option>Sightseeing</option>
+          <option>Dinner</option>
+          <option>Fishing</option>
+          <option>Gaming House</option>
+          <option>Hiking</option>
+          <option>High Tea</option>
+          <option>House Party</option>
+          <option>Karaoke</option>
+          <option>Lunch</option>
+          <option>Movies</option>
+          <option>Sightseeing</option>
+          <option>Others</option>
          </select>
        </div>
    </div><!-- end of line 1 -->
@@ -71,21 +80,26 @@
    <div class = "form-group">
    <!--Edited by Carrie-->
    <select class = "form-control" id = "location" name = "location">
-        <option>Central</option>
+        <option>Central </option>
+        <option>Eastern</option>
         <option>Wan Chai</option>
         <option>Kowloon City </option>
         <option>Kwun Tong</option>
         <option>Kwai Tsing</option>
         <option>Mongkok</option>
+        <option>North</option>
+        <option>Islands</option>
         <option>Wong Tai Sin</option>
         <option>Sham Shui Po</option>
         <option>Sai Kung</option>
+        <option>Southern</option>
         <option>Sha Tin</option>
         <option>Tai Po</option>
         <option>Tsuen Wan</option>
         <option>Tuen Mun</option>
         <option>Tsim Tsa tui</option>
         <option>Yuen Long</option>
+
    </select>
    </div>
    </div>
@@ -99,12 +113,18 @@
     </div>
   <div class = "col col-md-4">
       <select class = "form-control" id = "eventTime" name = "eventTime">
-    <option>Morning</option>
+        <option>Morning</option>
         <option>Afternoon</option>
         <option>Night</option>
         <option>Dawn</option>
   </select>
   </div>
+  <div class =  "box1 col-md-2">
+    Suggestions 
+    </div>
+     <div class = "col col-md-4">
+         <textarea class = "form-control inputEvent" rows = "3" id = "suggestions"  placeholder = "Suggestions for the event" name="Suggestions" required></textarea>
+    </div>
  </div><!--End of line 3 -->
  <!--end of himal edit-->
 
@@ -123,6 +143,7 @@
         </select>
   </div>
   <div class = "col-md-6"></div><!--empty div to fix the position-->
+
  </div><!--End of line 4 -->
 
 
@@ -142,10 +163,10 @@
 
 
 <div class = "col col-md-12">
-	<!--Edited by carrie on 29/2/2016-->
+	<!--Edited by carrie-->
 	<br/>
 	<h4><span id = "msg"></span></h4><br/>
-	<h2><span id = "invitedAndJoin">Friends To be Invited </span>(<input type = "text" id = "inviteNum" value = 0 disabled></input>):</h2>
+	<h2> <span id = "invitedAndJoin">Friends To be Invited </span>(<input type = "text" id = "inviteNum" value = 0 disabled></input>):</h2>
   <h3><div id = "joinFd"> </h3></div>
 
   

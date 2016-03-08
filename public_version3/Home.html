@@ -15,7 +15,6 @@ NAV
 
 
 <div id = "section">
-	<div id="blank2">
     
 		<div id="upper_circle"> 
             <div class="text upper">
@@ -29,7 +28,7 @@ NAV
 				<p> Gathering </p>
 			</div>
 		</div>
-	</div>
+
 
        
 	<div id="scroll" style = "overflow-y: hidden" > 
@@ -98,7 +97,9 @@ NAV
 			
 			<div class="cd-timeline-content"> <!--white div -->
 				<span id = "eventId" style = "display:none"></span>
-				<table width="100%" border="0" style = "color: black">
+				
+				<!--table from carrie 
+				<table width="100%" border="3" style = "color: black">
 				  <tr>
 					<td><span id = "eventName"></span></td>
 					<td rowspan="4"><span class = "tdPara">Description:</span>
@@ -115,7 +116,30 @@ NAV
 				  <tr>
 					<td>Budget: <span id = "budget"></span></td>
 				  </tr>
-				</table>
+				</table> -->
+				
+				<!--table from sheron-->
+<table width="100%" border="0" style = "color: black" >
+  <tr>
+	<td colspan="2" style="font-size:35px;">Event Name: </strong> <span id = "eventName"></span></td>
+	<td rowspan="4"><span class = "tdPara">Description:</span>
+					<div class = "tdPara" id = "description"></div></td>
+	<td rowspan="2"><p><button type="button" class="joinbtn green">Join</button></p></td>	
+  </tr>	
+  <tr>
+	<td id="tableFloat">Period:</td>
+    <td id="tableFloat" > <span id = "period"></span></td>
+  </tr>
+  <tr>
+    <td id="tableFloat">Friend Invited:</td>
+    <td id="tableFloat"><span id = "noOfFd"></span></td>
+    <td rowspan="2"><p><button type="button" class="joinbtn red">Not Join</button></p></td>
+  </tr>
+  <tr>
+    <td id="tableFloat">Budget:</td>
+    <td id="tableFloat"><span id = "budget"></span></td>
+  </tr>
+</table>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
 	<!--</script>-->

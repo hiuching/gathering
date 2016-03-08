@@ -139,16 +139,8 @@ function setNotJoinFunction() {
 	});
 }
 
-function double_confirm() {
-	$('.cd-timeline-content').on('click', '.green', function(){
-		console.log("confirm");
-		var confirm1 = confirm('Are you sure?');
-		if (confirm1 === true) {
-			return confirm('Are you really sure?');
-		}
-		return false;
-	});
-}
+
+
 function imgError(image) {
 	//console.log("gg");
 	image.src = "img/noImg.jpg";

@@ -48,7 +48,6 @@ $(document).ready(function() {
 				$('#eventTime').val(event.eventTime);
 				$('#budget').val(event.budget);
 				$('#description').val(event.description);
-				$('#suggestions').val(event.choice[0].suggestion);
 				$('#createBtn').val('Save');
 				console.log(event.period);
 				for(var key in event.invited) {
@@ -113,7 +112,7 @@ $(document).ready(function() {
 		$('#' + fdId).remove();
 		$('#' + fdName).removeClass("fa-child invited");
 		$('#' + fdName).addClass("fa-puzzle-piece notInvited");
-		joinFdIdArray = $.grep(joinFdIdArray, function(n, i) { return n != fdName; });
+		joinFdIdArray = $.grep(joinFdIdArray, function(n, i) { return n != fdId; });
 		console.log(joinFdIdArray);
 	});
 
@@ -132,9 +131,8 @@ $(document).ready(function() {
 	$('#createBtn').click(function() {
 		console.log("clicked");
 		$("#createBtn").attr("disabled", true);
-		var trimedSuggestions = $.trim($('#suggestions').val());
-		var trimedEventName = $.trim($('#eventname').val());
-		if(trimedSuggestions == '' || trimedSuggestions == null || trimedEventName == '' || trimedEventName == null) {
+		var trimedInputEvent = $.trim($('.inputEvent').val());
+		if(trimedInputEvent == '' || trimedInputEvent == null) {
 			$('#msg').text ("Please Complete the form");
 			$("#createBtn").attr("disabled", false);
 			return false;
@@ -169,9 +167,6 @@ $(document).ready(function() {
 			eventTime: $('#eventTime').val(),
 			//invited: joinFdIdArray,
 			description: $.trim($('#description').val()),
-			choice: {
-					"suggestion" : $.trim($('#suggestions').val())
-				}
 		}
 
 		$.support.cors = true;
@@ -199,7 +194,6 @@ $(document).ready(function() {
 	}
 
 	function postEvent() {
-		console.log("suggest = " + $.trim($('#Suggestions').val()));
 		var data = {
 			owner: userId,
 			name: $.trim($('#eventname').val()),
@@ -211,11 +205,7 @@ $(document).ready(function() {
 			eventTime: $('#eventTime').val(),
 			invited: joinFdIdArray,
 			description: $.trim($('#description').val()),
-			choice: [{
-					"suggestion" : $.trim($('#suggestions').val())
-				}]
 		}
-		console.log("data = " + data.choice);
 		$.support.cors = true;
 		data = JSON.stringify (data);
 		$.ajax({
