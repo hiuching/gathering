@@ -7,11 +7,13 @@
 	margin-right: 10px;
 }
 .nodeContainer {
-	height: 120px;
+	height: 100px;
 }
 .unFdBtn, .addFd {
 	float: right;
 	width: 80px;
+	position: relative;
+	bottom: 10px;
 }
 #input {
 	float: left;

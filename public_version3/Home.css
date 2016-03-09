@@ -1,6 +1,6 @@
 /* Home */
 body {
-    background-image: url("images/BK1.jpg");
+    background-image: url("images/BK2.jpg");
     background-color: #cccccc;
 }
 
@@ -20,18 +20,18 @@ body {
 }
 
 .lower {
-	color: #CCCCCC;	
+	color: #fff;	
 	padding-top: 20px;
 }
 #scroll {
-	width: 80%; 
+	width: 75%; 
 	height: 200px; 
 	border: 0px solid black; 
 	overflow: auto; 
 	white-space: nowrap;
 	font-size: 14px;
 	display: inline-block;
-	margin-top: -180px;
+	margin-top: -210px;
 	margin-left: 320px;
 }
 #ownEventContainer {
@@ -59,7 +59,7 @@ body {
      width:200px;
      border-radius: 115px 115px 0 0px;
      background:#F9C848;
-	margin-top: 150px;
+	margin-top: 110px;
 	margin-left: 70px;
 
 }
@@ -152,7 +152,6 @@ td, #td {
 #footertext{
 	font-size: 30px;
 	font-family: Calibri;
-	padding-left: 10%;
 	color: white;
 
 }

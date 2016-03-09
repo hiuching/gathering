@@ -9,6 +9,7 @@ if (userId == null ||userEmail == null)
 var loadFdList;
 var isSearch = false;
 var searchedUser = new Array();
+var searchFinished = false;
 $(document).ready(function() {
 	
 	$('#logOut').click(function() {
@@ -46,6 +47,8 @@ $(document).ready(function() {
 			dataType: 'json',
 			success: function(user) {
 				console.log('---success',user);
+				//$('#searchList').children().remove();
+				//$('#searchList').append("<span style = 'font-weight: bold'>Loading...</span>");
 				if (user != '') {
 					friendList = user[0].friendList;
 					friendIdArray.length = 0;
@@ -55,51 +58,47 @@ $(document).ready(function() {
 					}
 				}
 				console.log(friendIdArray);
-				data = {
-				action: "searchFriends",
-				displayName: $.trim($('#searchBox').val())
-				};
-
-				//show search result
-				$.ajax({
-					type: 'GET',
-					contentType: 'application/json',
-					url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user',
-					data: data,
-					dataType: 'json',
-					success: function(user) {
-						console.log('success search', user);
-						//console.log("abc");
-						//$('#searchFdPannel').show();
-						$('#searchList').children().remove();
-						console.log("removed");
-						//console.log("inArray", $.inArray(user[i]._id, friendIdArray));
-						if(user == '') {
-							searchedUser = new Array();
-							//$('#searchList').append("<span style = 'font-weight: bold'>No result</span>");
-						} else {
-							searchedUser = user;
-							/*
-							for(var i in user) {
-							console.log("inArray", $.inArray(user[i]._id, friendIdArray));
-							if(user[i]._id == userId)
-								$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + user[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + user[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + user[i].noShowCount + "</span><br>" + user[i].email + "</div></div></lo><br>");
-							else if(($.inArray(user[i]._id, friendIdArray)) > -1)
-								$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + user[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + user[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + user[i].noShowCount + "</span><br>" + user[i].email + "&nbsp <button id = '" + user[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><br>");
-							else
-								$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + user[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + user[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + user[i].noShowCount + "</span><br>" + user[i].email + "&nbsp <button id = '" + user[i]._id + "' class = 'btn btn-success addFd'>+Friend</button></div></div></lo><br>");
+				if(isValidEmailAddress($.trim($('#searchBox').val()))) {
+					data = {
+						action: "searchUserByEmail",
+						email: $.trim($('#searchBox').val())
+					};
+				}else {
+					data = {
+						action: "searchFriends",
+						displayName: $.trim($('#searchBox').val())
+					};
+				}
+					//show search result
+					$.ajax({
+						type: 'GET',
+						contentType: 'application/json',
+						url: 'http://ec2-52-68-199-65.ap-northeast-1.compute.amazonaws.com:8081/gathering/user',
+						data: data,
+						dataType: 'json',
+						success: function(user) {
+							console.log('success search', user);
+							$('#searchList').children().remove();
+							console.log("removed");
+							//console.log("inArray", $.inArray(user[i]._id, friendIdArray));
+							if(user == '') {
+								searchedUser = new Array();
+								searchFinished = true;
+								//$('#searchList').append("<span style = 'font-weight: bold'>No result</span>");
+							} else {
+								searchedUser = user;
+								console.log("search user = " + searchedUser)
 							}
-							*/
+							window.location.href = "#/setting#searchFdPannel";
+							//$('#searchFdPannel').show();
+							searchFinished = true;
+							isSearch = false;
+						},
+						error: function(err){
+							console.log('failed');
+							isSearch = false;
 						}
-						window.location.href = "#/setting#searchFdPannel";
-						//$('#searchFdPannel').show();
-						isSearch = false;
-					},
-					error: function(err){
-						console.log('failed');
-						isSearch = false;
-					}
-				});
+					});
 			},
 			error: function(err){
 				console.log('failed');
@@ -111,3 +110,8 @@ $(document).ready(function() {
 
 	//function showResult(user) {}
 });
+
+function isValidEmailAddress(emailAddress) {
+	var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+	return pattern.test(emailAddress);
+};

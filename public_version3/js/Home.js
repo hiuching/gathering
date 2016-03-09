@@ -63,6 +63,7 @@ $(document).ready(function() {
 					$('#period').text(event[i].startDate + " - " + event[i].endDate);
 					$('#noOfFd').text(event[i].invited.length);
 					$('#budget').text(event[i].budget);
+					$('#eventType').text(event[i].types);
 					$('#cd-timeline').append($('#appendBlock').html());
 				}
 			}

@@ -154,6 +154,7 @@ b{
 	color:#294957;
 	background-color: white;
 	padding-left: 15px;
+	font-size: 20px;
 }
 section{
     color:white;
@@ -162,4 +163,10 @@ section{
 	margin-right:10px;
 	text-align:left;
 	padding:5px 5px 5px 5px;
+}
+.labelIcon {
+	padding-top: 5.5px;
+}
+.nameTagText {
+	font-family: calibri;
 }

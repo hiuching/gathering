@@ -80,10 +80,10 @@ $(document).ready(function() {
 				friendList = user[0].friendList;
 				$("#inviteList").children().remove();
 				if (friendList.length == 0){
-					$("#inviteList").append("<lo><span>You have no fd lor! toxic jj</span></lo>");
+					$("#inviteList").append("<lo><span>Let's make some friends first!</span></lo>");
 				}
 				for(var i in friendList){
-					$("#inviteList").append("<lo><div class = 'loContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'></img><span class='defaultspan'style='font-weight: bold; font-size: 12px'>" + friendList[i].displayName + "</span><i id = '" + friendList[i]._id + "' name = '" + friendList[i].displayName + "' class = ' notInvited fa fa-puzzle-piece fa-3x'></i></div></div></div></lo><br>");
+					$("#inviteList").append("<lo><div class = 'loContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'></img><span class='defaultspan'style='font-weight: bold;'>" + friendList[i].displayName + "</span><i id = '" + friendList[i]._id + "' name = '" + friendList[i].displayName + "' class = ' notInvited fa fa-puzzle-piece fa-3x'></i></div></div></div></lo><br>");
 				}
 				console.log(user[0].friendList);
 			},
@@ -98,7 +98,7 @@ $(document).ready(function() {
 		var fdId = this.id;
 		var inviteNum = parseInt($('#inviteNum').val());
 		$('#inviteNum').val(inviteNum + 1);
-		$("#joinFd").append("<span id = '" + fdId + "Name' name = '" + fdId + "'class = 'friend '><section class = 'glyphicon glyphicon-remove'>" + fdName + "</section></span>");
+		$("#joinFd").append("<span id = '" + fdId + "Name' name = '" + fdId + "'class = 'friend '><section class = 'glyphicon glyphicon-remove'><span class = 'nameTagText'>"+ fdName + "</span></section></span>");
 		$('#' + fdId).removeClass("fa-puzzle-piece notInvited");
 		$('#' + fdId).addClass("fa-child invited");
 		joinFdIdArray.push(fdId);
@@ -140,8 +140,26 @@ $(document).ready(function() {
 			return false;
 		}
 
+		if($('#description').val().length > 50){
+			$('#msg').text ("Description cannot more than 50 characters");
+			$("#createBtn").attr("disabled", false);
+			return false;
+		}
+
+		if($('#eventname').val().length > 50){
+			$('#msg').text ("Event Name cannot more than 50 characters");
+			$("#createBtn").attr("disabled", false);
+			return false;
+		}
+
 		if($('#date1').val() == '' || $('#date1').val() == null || $('#date2').val() == '' || $('#date2').val() == null) {
 			$('#msg').text ("Please Complete the form");
+			$("#createBtn").attr("disabled", false);
+			return false;
+		}
+
+		if(stringToDate($('#date1').val()) > stringToDate($('#date2').val())) {
+			$('#msg').text ("Start Date cannot later than End date");
 			$("#createBtn").attr("disabled", false);
 			return false;
 		}
@@ -246,4 +264,9 @@ function imgError(image) {
 	image.src = "img/noImg.jpg";
 	image.onerror = "";
 	return true;
+}
+
+function stringToDate(dateStr) {
+	var date = new Date(dateStr);
+	return date;
 }

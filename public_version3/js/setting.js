@@ -4,6 +4,7 @@ $(document).ready(function() {
 	$('#bigIconImg').removeClass();
 	$('#bigIconImg').addClass("fa fa-cogs fa-2x");
 	$('#bigIcon').text("Settings");
+	displayName = $.jStorage.get("displayName");
 	
 	//console.log("aaaaaaaaaaaaaaaaaaaaaaa");
 	//console.log(searchedUser);
@@ -12,17 +13,19 @@ $(document).ready(function() {
 	if(!isSearch){
 		$('#searchFdPannel').hide();
 	} else {
-		if (searchedUser.length <= 0) {
+		if (searchedUser.length <= 0 && searchFinished == true) {
 			$('#searchList').append("<span style = 'font-weight: bold'>No result</span>");
-		} else {
+		} else if (searchedUser.length <= 0 && searchFinished == false){
+			$('#searchList').append("<span style = 'font-weight: bold'>Loading...</span>");
+		}else {
 			for(var i in searchedUser) {
 			console.log("inArray", $.inArray(searchedUser[i]._id, friendIdArray));
 				if(searchedUser[i]._id == userId)
-					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "</div></div></lo><hr>");
+					$('#searchList').append("<li class = 'list-group-item'><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span><br><span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "</div></div></li>");
 				else if(($.inArray(searchedUser[i]._id, friendIdArray)) > -1)
-					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><hr>");
+					$('#searchList').append("<li class = 'list-group-item'><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span><br><span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-danger unFdBtn " + searchedUser[i]._id + "'>unFriend</button></div></div></li>");
 				else
-					$('#searchList').append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-success addFd'>+Friend</button></div></div></lo><hr>");
+					$('#searchList').append("<li class = 'list-group-item'><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + searchedUser[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + searchedUser[i].displayName + "</span><br><span>No Show:" + searchedUser[i].noShowCount + "</span><br>" + searchedUser[i].email + "&nbsp <button id = '" + searchedUser[i]._id + "' class = 'btn btn-success addFd " + searchedUser[i]._id + "'>+Friend</button></div></div></li>");
 				}
 		}
 	}
@@ -50,12 +53,12 @@ $(document).ready(function() {
 			friendList = user[0].friendList;
 			$("#list").children().remove();
 			if (friendList.length == 0){
-				$("#list").append("<lo><span>You have no fd lor! toxic jj</span></lo>");
+				$("#list").append("<li class = 'list-group-item'><span>Let's make some friends!</span></li>");
 			}
 			//friendIdArray.length = 0;
 			for(var i in friendList){
 				//friendIdArray.push(friendList[i]._id);
-				$("#list").append("<lo><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + friendList[i].displayName + "</span>&nbsp;&nbsp;<span>No Show:" + friendList[i].noShowCount + "</span><br>" + friendList[i].email + "&nbsp <button id = '" + friendList[i]._id + "' class = 'btn btn-danger unFdBtn'>unFriend</button></div></div></lo><hr>");
+				$("#list").append("<li class = 'list-group-item'><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + friendList[i]._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + friendList[i].displayName + "</span><br><span>No Show:" + friendList[i].noShowCount + "</span><br>" + friendList[i].email + "&nbsp <button id = '" + friendList[i]._id + "' class = 'btn btn-danger unFdBtn " + friendList[i]._id + "'>unFriend</button></div></div></li>");
 			}
 			console.log(friendIdArray);
 			loadFdList = true;
@@ -67,7 +70,7 @@ $(document).ready(function() {
 	$('#list, #searchList').on('click', '.unFdBtn', function(){
 		//console.log("clicked");
 		var fdId = this.id;
-		$('#' + fdId).attr("disabled", true);
+		$('.' + fdId).attr("disabled", true);
 		console.log(fdId);
 		var data = {
 			action: "removeFriend",
@@ -83,16 +86,18 @@ $(document).ready(function() {
 			dataType: 'json',
 			success: function (user) {
 				console.log ('success', user);
-				$('#' + fdId).removeClass("unFdBtn btn-danger");
-				$('#' + fdId).addClass("addFd btn-success");
-				$('#' + fdId).text("+Friend");
-				$('#' + fdId).attr("disabled", false);
+				$('.' + fdId).removeClass("unFdBtn btn-danger");
+				$('.' + fdId).addClass("addFd btn-success");
+				$('.' + fdId).text("+Friend");
+				$('.' + fdId).attr("disabled", false);
 				//console.log('changeClass');
 
 			},
 			error: function (err){
 				console.log ('failed', err);
-				$('#' + fdId).attr("disabled", false);
+				$('.' + fdId).attr("disabled", false);
+				alert("He/She is not your friend already!");
+				location.reload();
 				return;
 			}
 		});
@@ -102,7 +107,7 @@ $(document).ready(function() {
 		//console.log("addFd");
 		//console.log(this.id);
 		fdId = this.id;
-		$('#' + fdId).attr("disabled", true);
+		$('.' + fdId).attr("disabled", true);
 		var data = {
 			action: "addFriend",
 			friend: fdId
@@ -117,15 +122,24 @@ $(document).ready(function() {
 			dataType: 'json',
 			success: function (user) {
 				console.log ('success', user);
-				$('#' + fdId).addClass("unFdBtn btn-danger");
-				$('#' + fdId).removeClass("addFd btn-success");
-				$('#' + fdId).text("unFriend");
-				$('#' + fdId).attr("disabled", false);
-
+				$('.' + fdId).addClass("unFdBtn btn-danger");
+				$('.' + fdId).removeClass("addFd btn-success");
+				$('.' + fdId).text("unFriend");
+				$('.' + fdId).attr("disabled", false);
+				var fdResult = $.grep(friendList, function(e){ return e._id == fdId; })[0];
+				if (fdResult == undefined) {
+					fdResult = $.grep(searchedUser, function(e){ return e._id == fdId; })[0];
+				}
+				console.log(fdResult);
+				if ($('#list').find($('.' + fdId)).length < 1) {
+					$('#list').append("<li class = 'list-group-item'><div class = 'nodeContainer'><div class = 'iconContainer'><img src = 'img/" + fdResult._id + ".png' class = 'icon' onerror = 'imgError(this)'</img></div><div><span style='font-weight: bold; font-size: 16px'>" + fdResult.displayName + "</span><br><span>No Show:" + fdResult.noShowCount + "</span><br>" + user.email + "&nbsp <button id = '" + fdResult._id + "' class = 'btn btn-danger unFdBtn " + fdResult._id + "'>unFriend</button></div></div></li>");
+				}
 			},
 			error: function (err){
 				console.log ('failed', err);
-				$('#' + fdId).attr("disabled", false);
+				$('.' + fdId).attr("disabled", false);
+				alert("He/She is your friend already!");
+				location.reload();
 				return;
 			}
 		});
