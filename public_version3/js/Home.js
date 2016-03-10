@@ -66,6 +66,9 @@ $(document).ready(function() {
 					$('#eventType').text(event[i].types);
 					$('#startDate').text(event[i].startDate);
 					$('#endDate').text(event[i].endDate);
+					$('#vote').css('background-color', '#80C41C');
+					$('#vote').text('vote');
+					$('#vote').attr('disabled', false);
 					for(var j in event[i].period) {
 						if(event[i].period[j].userId._id == userId) {
 							console.log('event : ' + i);
@@ -73,12 +76,7 @@ $(document).ready(function() {
 							$('#vote').text('voted');
 							$('#vote').attr('disabled', true);
 							break;
-						}/* else {
-							$('#vote').css('background-color', '#80C41C');
-							$('#vote').text('vote');
-							$('#vote').attr('disabled', false);
-							
-						}*/
+						}
 					}
 					$('#cd-timeline').append($('#appendBlock').html());
 				}

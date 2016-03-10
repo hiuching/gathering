@@ -186,8 +186,8 @@ $(document).ready(function() {
 });
 
 function toDate(dateStr) {
-    var parts = dateStr.split("-");
-	parts[2] = parseInt(parts[2]) + 1;
-    var date = parts[0] + "-" + parts[1] + "-" + parts[2];
+    var date = new Date(dateStr);
+	date.setDate(date.getDate() + 1);
+	date = moment(date).format("YYYY-MM-DD")
 	return date;
 }
