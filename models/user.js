@@ -206,19 +206,25 @@ userSchema.statics.removeFriend = function (id, update, callback) {
 		if (err) {
 			callback(err);
 		} else {
+			var success = false;
 			for (var i=0; i<user.friendList.length; i++){
 				if (update.friend == user.friendList[i]){
 					user.friendList.splice(i, 1);
+					success = true;
 				}
 			};
-			self.update({ _id: id }, user,  function(err, noOfUpdate) {
-				if (err) {
-					callback(err);
-				} else {
-					delete user.password;
-					callback(null, user);
-				}
-			});
+			if(success){
+				self.update({ _id: id }, user,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						delete user.password;
+						callback(null, user);
+					}
+				});
+			} else {
+				callback({code: 403, message: 'This is not your friend.'});
+			}
 		}
 	});
 };
