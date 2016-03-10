@@ -14,12 +14,12 @@ $(document).ready(function() {
 	var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
     
 	$('#date1').datepicker({
-		dateFormat: 'yyyy-mm-dd',
+		format: 'yyyy-mm-dd',
 		startDate: today,
 		autoclose: true
 	}).on('changeDate', function (ev) {
 		$('#date2').datepicker({
-			dateFormat: 'yyyy-mm-dd',
+			format: 'yyyy-mm-dd',
 			autoclose: true,
 		}).datepicker('setStartDate', ev.date);
 		$("#date2").focus();

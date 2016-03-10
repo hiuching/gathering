@@ -1,0 +1,68 @@
+.col1{
+	padding: 10px;
+	margin: 10px;
+	font-size: large;
+	text-decoration: bold;
+}
+
+.ename{
+	padding: 4px;
+	margin: 4px;
+	text-align: center;
+	background-color: #a9ded1;
+	font-weight: bolder;
+	border-radius: 5px;
+	
+}
+
+.edate{
+	padding: 4px;
+	margin: 4px;
+	color: #cccccc;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bolder;
+	background-color: #ffffff;
+
+}
+
+.etype{
+	padding: 4px;
+	margin: 4px;
+	background-color: #cccccc;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bolder;
+	color: #ffffff;
+
+}
+
+
+.col2{
+	
+}
+
+.timeline{
+	background-color: transparent;
+	height: 160px;
+	margin: 10px;
+	border-radius: 10px;
+ 
+}
+
+.middle{
+	background-color: blue;
+	height: 160px ;
+	margin: 10px;
+	color: #ffffff;
+	border-radius: 10px;
+
+}
+
+.calender{
+	background-color: #ffffff;
+	max-height: 100%;
+	margin: 10px;
+	border-radius: 10px;
+}
+

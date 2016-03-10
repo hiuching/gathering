@@ -64,6 +64,22 @@ $(document).ready(function() {
 					$('#noOfFd').text(event[i].invited.length);
 					$('#budget').text(event[i].budget);
 					$('#eventType').text(event[i].types);
+					$('#startDate').text(event[i].startDate);
+					$('#endDate').text(event[i].endDate);
+					for(var j in event[i].period) {
+						if(event[i].period[j].userId._id == userId) {
+							console.log('event : ' + i);
+							$('#vote').css('background-color', 'grey');
+							$('#vote').text('voted');
+							$('#vote').attr('disabled', true);
+							break;
+						}/* else {
+							$('#vote').css('background-color', '#80C41C');
+							$('#vote').text('vote');
+							$('#vote').attr('disabled', false);
+							
+						}*/
+					}
 					$('#cd-timeline').append($('#appendBlock').html());
 				}
 			}
@@ -84,6 +100,7 @@ $(document).ready(function() {
 				window.location.href = "#/create";
 			});
 			setNotJoinFunction();
+			setVoteFunction();
 			//double_confirm();
 
 		},
@@ -140,7 +157,23 @@ function setNotJoinFunction() {
 	});
 }
 
-
+function setVoteFunction() {
+	$('.cd-timeline-content').on('click', '.green', function(){
+		$(this).attr("disabled", true);
+		parentDiv = $(this).parent().parent().parent().parent().parent().parent();
+		var startDate = parentDiv.children("#startDate").text();
+		var endDate = parentDiv.children("#endDate").text();
+		var voteEventId = parentDiv.children("#eventId").text();
+		//period = period.split("-");
+		$.jStorage.set("startDate", startDate);
+		$.jStorage.set("endDate", endDate);
+		$.jStorage.set("voteEventId", voteEventId);
+		console.log(startDate);
+		console.log(endDate);
+		console.log("voteEventId =" + voteEventId);
+		window.location.href = "#/vote";
+	});
+}
 
 function imgError(image) {
 	//console.log("gg");

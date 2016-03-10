@@ -1,0 +1,17 @@
+<html>
+<!--<script src = ""></script>-->
+<!--temporary-->
+<script>
+	$(document).ready(function() {
+		$('#bigIconImg').removeClass();
+		$('#bigIconImg').addClass("fa fa-cubes fa-2x");
+		$('#bigIcon').text("Voting");
+		var startDate = $.jStorage.get("startDate");
+		var endDate = $.jStorage.get("endDate");
+		var voteEventId = $.jStorage.get("voteEventId");
+		console.log("startDate = " + startDate);
+		console.log("endDate = " + endDate);
+		console.log("voteEventId = " + voteEventId);
+	});
+</script>
+</html>

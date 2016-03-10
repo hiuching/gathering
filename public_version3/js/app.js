@@ -9,6 +9,8 @@ var pageCtrl = angular.module('myApp', ['ngRoute'], function($routeProvider) {
 		templateUrl: 'CreateGathering.html'
 	}).when('/ChangePassword', {
 		templateUrl: 'ChangePassword.html'
+	}).when('/vote', {
+		templateUrl: 'vote.html'
 	}).otherwise({
 		redirectTo: '/'
 	});

@@ -1,0 +1,97 @@
+<html>
+
+<!--Useful codes below this-->
+
+  <link rel = "stylesheet" href = "css/Vote.css">
+  <link rel="stylesheet" href="Home.css">
+  <link rel =" stylesheet" href=" http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" >
+  <link rel =" stylesheet" href="time.css" >
+  <link rel='stylesheet' href='css/fullcalendar.css' />
+  <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src ="js/jquery-1.11.2.js"></script>
+  <script src ="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type= "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <script src ='js/jquery-1.11.2.js'></script>
+  <script src ='js/moment.min.js'></script>
+  <script src ='js/fullcalendar.js'></script>
+  <script src ='js/testingCalendar.js'></script>
+  <script src ='js/scheduler.min.js'></script>
+  <script src = "js/Vote.js"></script>
+  <script src = "js/app.js"></script>
+  <script src = "js/jstorage.js"></script>
+  <script src = "js/master.js"></script>
+
+
+<div class = "container-fluid maxWidth" > <!--the main container-->
+
+  <div class = "col1 col-md-12"><!--start of 1st line-->
+
+   <div class = "ename col-md-2">
+     <span id = "name"></span>
+     </div>
+   <div class = "edate col-md-2">
+     <span id = "period"></span>
+     </div>
+   <div class = "etype col-md-1">
+     <span id = "eventType"></span>
+   </div>
+
+
+
+  
+  </div><!--end of the event detail boxes-->
+
+   <div class = "col2 col-md-12"><!--start of 3 boxes-->
+
+
+   <div class = "col-md-3"><!--the timeline box-->
+ 
+   <div class = "container">
+ <ul class = "timelines" >
+ <b> 
+   <li>
+      <i class= "ion-ios-circle-filled"></i>
+   </li> 
+   
+   <li><div class = "datebox" > Date  </div>
+      <i class= " icon ion-record"> </i>
+      <div class=" timebox">Choose  an available date </div>
+   </li>
+   <li><div class = "yellowBox" >Suggest Event </div>
+      <i class= "icon ion-record"></i>
+    <form  method = "post" >
+    <textarea class = "form-control suggestionBox" rows = "3" id = "suggest"  placeholder = "Add your suggestions for the event" name = "Suggestions" required></textarea>
+    
+   </li>
+   <li><div class = "voteSuggestbox" >Vote Suggestion </div>
+      <i class= "icon ion-record"></i> 
+      <div class=" votebox"> Voting for Suggestion </div>
+   </li>
+   <li><div class = "Result" >Result </div>
+      <i class= "icon1 ion-flag"></i>
+
+   </li>
+  
+   
+   </b>
+
+  </ul>
+  </div>
+
+  </div><!--end of timeline box-->
+
+   <div class = "middle col-md-3">  <!--The middle box-->
+     <h2> Other Suggestions </h2>
+     <span id = "listid"></span>
+     <button type = "submit"  id="submit"> Submit Date & Suggestions</button></form>
+   </div><!--End of the middle box-->
+
+   <div class = "calender col-md-4" > <!--The calender box-->
+   <div id='calendar'></div>
+   </div><!--end of the calender box-->
+   </div> <!--end of the three boxes-->
+   </div> <!--end of the all boxes-->
+
+
+</html>
