@@ -194,6 +194,8 @@ eventSchema.statics.reject = function (id, update, callback) {
 
 eventSchema.statics.votePeriod = function (id, update, callback) {
 	var self = this;
+	update.period =  update.period || {};
+	update.choice =  update.choice || {};
 	this.findEventByIdWithoutPopulate({id: id}, function(err, event){
 		if(err){
 			callback(err);
