@@ -1,0 +1,95 @@
+.container{
+	background-color:transparent;
+	max-width: 100% ;
+
+}
+	.timelines{
+	list-style: none;
+	position: relative;
+	font-family: arial;
+	margin-left:25px;
+
+}
+.icon{
+	color: #a9ded1;
+}
+.timelines li {
+	color: #a9ded1;
+	margin-top:40px;
+	font-size:20px;
+
+}
+.timelines li i{
+	width: 40px;
+	height: 40px;
+	display: block;
+	text-align: center;
+	line-height: 30px;	
+	background-color: transparent; 
+}
+
+.timelines:after {
+	content: '';
+	width: 5px;
+	height: 90%;
+	background-color: #a9ded1;
+	position: absolute;
+	top : 7px;
+	left: 57.5px;
+	
+
+}
+.container{
+	padding: 20px;
+}
+.timebox{
+	margin-left: 40px;
+	margin-top: -40px;
+}
+.datebox{
+	margin-bottom: -20px;
+	margin-left: -40px;
+	color: #ffffff;
+}
+
+.suggestionBox{
+	border: 1px;
+	border-color: #000000;
+	border-style: none;
+	margin-left: 40px;
+	margin-top: -40px;
+	background-color: #ffffff;
+	border-radius: 5px;
+}
+.votebox{
+	margin-left: 40px;
+	margin-top: -40px;
+	color: #cccccc;
+}
+.icon1{
+	color: #f37134;
+	margin-top:00px;
+	font-size: 50px;
+	margin-left:16px;
+}
+.yellowBox{
+	margin-bottom: -20px;
+	margin-left: -70px;
+	color: #f37134;
+	width:100px;
+	padding-right:10px;
+
+}
+.voteSuggestbox{
+	margin-bottom: -20px;
+	margin-left: -70px;
+	color: #cccccc;
+	width:100px;
+	font-size:75%;
+}
+.Result{
+	margin-bottom: -20px;
+	margin-left: -50px;
+	color: #f63d3d;
+
+}

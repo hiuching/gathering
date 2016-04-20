@@ -1,0 +1,176 @@
+/* Home */
+body {
+    background-image: url("images/BK2.jpg");
+    background-color: #cccccc;
+}
+
+.text {
+	font-size:25px;
+	font-family: calibri;
+	padding-top: 0px;
+	text-align:center;
+	line-height: 12px;
+
+
+}
+.upper{
+	color: #20353F;
+	margin-top: -90px;
+	padding-top: 45px;
+}
+
+.lower {
+	color: #fff;	
+	padding-top: 20px;
+}
+#scroll {
+	width: 75%; 
+	height: 200px; 
+	border: 0px solid black; 
+	overflow: auto; 
+	white-space: nowrap;
+	font-size: 14px;
+	display: inline-block;
+	margin-top: -210px;
+	margin-left: 320px;
+}
+#ownEventContainer {
+	display: inline-block;
+}
+#ownEventName {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+.insideBlank {
+	float: left;
+	margin-right: 10px;
+	width: 250px;
+}
+.ownEventText {
+	font-weight: bold;
+	font-size: 17px;
+}
+.img{
+	width:100px;
+	height:100x;
+}
+#upper_circle{
+    height: 100px;
+    width: 200px;
+    border-radius: 115px 115px 0 0px;
+    background: #F9C848;
+	margin-top: 110px;
+	margin-left: 70px;
+
+}
+#lower_circle{
+     height:100px;
+     width:200px;
+     border-radius: 0 0px 115px 115px;
+     background: #00B498;
+	 cursor: pointer;
+	margin-left: 70px;
+}
+.rectangle_top_class, #rectangle_top{
+	width: 210px;
+	height: 13px;
+	border-radius: 5px 5px 0 0 ;
+	padding-left: 30px;
+}
+.color1 {
+	background: #A9D2D1;
+}
+.color2 {
+	background: #F9C848;
+}
+.color3 {
+	background: #F63D3D;
+}
+.color4 {
+	background: #00B498;
+}
+
+.rectangle_bottom{
+	width: 210px;
+	height: 140px;
+	background: #FFFFFF;
+	padding-left: 30px;
+	cursor: pointer;
+}
+.rectangle_bottom_none {
+	width: 210px;
+	height: 140px;
+	background: #FFFFFF;
+	cursor: pointer;
+	padding-top: 54px;
+	text-align: center;
+}
+.blank ,.board {
+	display:inline-block;
+	padding-left: 30px;
+
+}
+#blank2 {
+	/*display:inline-block;*/
+	padding-left: 30px;
+
+}
+.joinbtn{
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:0px solid #18ab29;
+	width: 100px;
+	height: 40px;
+	color:#ffffff;
+	font-family: Calibri;
+	font-size: 27px;
+
+}
+.joinbtn.green {
+	background-color: #80C41C;
+	font-size: 22px;
+}
+.joinbtn.red {
+	background-color: #F63D3D;
+	font-size: 22px;
+}
+.joinbtn.blue {
+	background-color: #8CADFA;
+	font-size: 22px;
+}
+.joinbtn.yellow {
+	background-color: #F9C848;
+	font-size: 22px;
+	color: black;
+}
+td, #td {
+	font-family: Calibri;
+	/*Academy Engraved LET;*/
+	font-size: 20px;
+}
+
+.hor-line{
+    border: 3px solid white;
+    background: #999;
+	text-align: center;
+	width: 80%;
+	margin-left: 8%;
+	
+}
+#footertext{
+	font-size: 30px;
+	font-family: Calibri;
+	color: white;
+
+}
+.username{
+	font-size: 20px;
+	margin-left: -140px;
+	color: white;
+	float:left;
+	}
+
+#tableFloat{
+text-align: left;
+}

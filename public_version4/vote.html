@@ -1,0 +1,90 @@
+<html>
+	<head>
+<!--Useful codes below this-->
+
+	  <link rel = "stylesheet" href = "css/Vote.css">
+	  <link rel =" stylesheet" href=" http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" >
+	  <link rel =" stylesheet" href="time.css" >
+	  <link rel='stylesheet' href='css/fullcalendar.css' />
+	  <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+	  <script src ='js/moment.min.js'></script>
+	  <script src ='js/fullcalendar.js'></script>
+	   <script src ='js/scheduler.min.js'></script>
+	  <script src ='js/testingCalendar.js'></script>
+	</head>
+ 
+
+<body>
+	<div class = "container-fluid maxWidth" > <!--the main container-->
+
+	  <div class = "col1 col-md-12"><!--start of 1st line-->
+
+	   <div class = "ename col-md-4">
+		 <span id = "name"></span>
+		 </div>
+	   <div class = "edate col-md-4">
+		 <span id = "period"></span>
+		 </div>
+	   <div class = "etype col-md-3">
+		 <span id = "eventType"></span>
+	   </div>
+
+
+
+	  
+	  </div><!--end of the event detail boxes-->
+
+	   <div class = "col2 col-md-12"><!--start of 3 boxes-->
+
+
+	   <div class = "col-md-3"><!--the timeline box-->
+	 
+	   <div class = "container">
+	 <ul class = "timelines" >
+	 <b> 
+	   <li>
+		  <i class= "ion-ios-circle-filled"></i>
+	   </li> 
+	   
+	   <li><div class = "datebox" > Date  </div>
+		  <i class= " icon ion-record"> </i>
+		  <div class=" timebox">Choose  an available date </div>
+	   </li>
+	   <li><div class = "yellowBox" >Suggest Event </div>
+		  <i class= "icon ion-record"></i>
+		<form  method = "post" >
+		<textarea class = "form-control suggestionBox" rows = "3" id = "suggest"  placeholder = "Add your suggestion for the event" name = "Suggestions"></textarea>
+		
+	   </li>
+	   <li><div class = "voteSuggestbox" >Vote Suggestion </div>
+		  <i class= "icon ion-record"></i> 
+		  <div class=" votebox"> Voting for Suggestion </div>
+	   </li>
+	   <li><div class = "Result" >Result </div>
+		  <i class= "icon1 ion-flag"></i>
+
+	   </li>
+	  
+	   
+	   </b>
+
+	  </ul>
+	  </div>
+
+	  </div><!--end of timeline box-->
+	</form>
+	   <div class = "middle col-md-2">  <!--The middle box-->
+		 <h4> Other Suggestions </h4>
+		 <span id = "listid" class="listid"></span>
+		 <button type = "submit"  id="submit" class="suggestButton"> Submit Date & Suggestions</button>
+	   </div><!--End of the middle box-->
+
+	   <div class = "calender col-md-6" > <!--The calender box-->
+	   <b> Choose your date below: </b>
+	   <div id='calendar'></div>
+	   </div><!--end of the calender box-->
+	   </div> <!--end of the three boxes-->
+	   </div> <!--end of the all boxes-->
+</body>
+
+</html>
