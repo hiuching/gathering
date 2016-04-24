@@ -1,0 +1,101 @@
+.col1{
+	padding: 10px;
+	margin: 10px;
+	font-size: large;
+	text-decoration: bold;
+}
+
+.ename{
+	padding: 4px;
+	margin: 4px;
+	text-align: center;
+	background-color: #a9ded1;
+	font-weight: bolder;
+	border-radius: 5px;
+	
+}
+
+.edate{
+	padding: 4px;
+	margin: 4px;
+	color: #cccccc;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bolder;
+	background-color: #ffffff;
+
+}
+
+.etype{
+	padding: 4px;
+	margin: 4px;
+	background-color: #cccccc;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bolder;
+	color: #ffffff;
+
+}
+
+
+.col2{
+	
+}
+
+.timeline{
+	background-color: transparent;
+	height: 160px;
+	
+	border-radius: 10px;
+ 
+}
+
+.middle{
+	 margin-left: 40px;
+	height: 100% ;
+	color: #f37134;
+	border-radius: 10px;
+	max-width:100%;
+
+}
+
+.calender{
+	float: top;
+	max-height: 100%;
+	border-radius: 10px;
+	color: #f37134 ;
+	font-size: 170% ;
+	padding: 10px;
+}
+
+.listid{
+	list-style: none;
+	font-family: Arial;
+	font-weight: bolder;
+	font-size: 130%;
+	color: #ffffff;
+	text-align: left;
+}
+
+.listid li{
+	padding-left: 30px;
+	margin-bottom: 10px ;
+}
+.suggestButton{
+	margin: 5px;
+	background-color: #f37134;
+	color: #ffffff;
+	border-radius:5px;
+	border-color: #f37134;
+	border-style: none;
+	padding-left: 10px;
+	font-weight:bolder;
+	font-size:130%;
+}
+#calendar{
+background-color: #ffffff;
+color:#000000;
+margin-top: 3px;
+border-radius: 15px;
+padding: 10px;
+}

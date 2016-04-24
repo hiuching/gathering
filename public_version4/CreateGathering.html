@@ -1,0 +1,185 @@
+<link rel = "stylesheet" href = "css/CreateGathering.css">
+<script src = "js/CreateGathering.js"></script>
+
+
+<!-- Start of code-->
+<div class = "container-fluid maxWidth" >
+<div class = "left col col-md-3 "><!--the left box-->
+	<h2> Invite your friends </h2>
+	<div id = "fdContainer">
+		<ul id = "inviteList"></ul>
+	</div>
+</div><!--end of invite box-->
+
+
+<div class = "right col-md-8 " ><!--start of right boxes-->
+	<div class = "row">
+		<!--<div class = "searchbox col-md-4">
+			Search box
+		</div>-->
+	<div class = "col col-md-8">
+	</div>
+	</div>
+  <!--end of search box-->
+
+   
+ <div class = "row" id = "yellow"><!--start of yellow box-->
+  <h1> Gathering Information</h1>
+ 
+ 
+
+  <!--the form begins-->
+<form method = "post" role = "form">
+  <div class= "col1 col-md-12"><!--start of 1st line-->
+    <div class = "box1 col-md-2">
+          Event Name </div>
+    <div class = "col col-md-4">
+        <input type = "text" class = "form-control inputEvent" id = "eventname" name="eventname">
+    </div>
+    <div class = "box1 col-md-2">
+       Event Type </div>
+    <div class =  "col col-md-4">
+       <select class = "form-control" id = "eventtype" name = "eventtype" >
+          <option>BBQ</option>
+          <option>Breakfast</option>
+          <option>Board Games</option>
+          <option>Birthday Party</option>
+          <option>Camping</option>
+          <option>Cycling</option>
+          <option>Dinner</option>
+          <option>Fishing</option>
+          <option>Gaming House</option>
+          <option>Hiking</option>
+          <option>High Tea</option>
+          <option>House Party</option>
+          <option>Karaoke</option>
+          <option>Lunch</option>
+          <option>Movies</option>
+          <option>Sightseeing</option>
+          <option>Others</option>
+         </select>
+       </div>
+   </div><!-- end of line 1 -->
+
+
+<div class= "col1 col-md-12"><!--start of 2nd line-->
+  <div class = "box1 col-md-2">
+      Event Period
+  </div>
+  <div class = "col col-md-4">
+	<!--Edited by Carrie-->
+    <input id = "date1" type = "text" size = "10" class = "time date inputEvent" placeholder = "From" name="from" readonly>
+    <input id = "date2" type = "text" size = "10" class = "time2 date inputEvent" placeholder = "Till" name="till" readonly>
+	<br/>
+	<!--Edited by Carrie-->
+
+   </div> 
+   <div class = "box1 col-md-2">
+      Location </div>
+   <div class = "col col-md-4">
+   <div class = "form-group">
+   <!--Edited by Carrie-->
+   <select class = "form-control" id = "location" name = "location">
+        <option>Central </option>
+        <option>Eastern</option>
+        <option>Wan Chai</option>
+        <option>Kowloon City </option>
+        <option>Kwun Tong</option>
+        <option>Kwai Tsing</option>
+        <option>Mongkok</option>
+        <option>North</option>
+        <option>Islands</option>
+        <option>Wong Tai Sin</option>
+        <option>Sham Shui Po</option>
+        <option>Sai Kung</option>
+        <option>Southern</option>
+        <option>Sha Tin</option>
+        <option>Tai Po</option>
+        <option>Tsuen Wan</option>
+        <option>Tuen Mun</option>
+        <option>Tsim Tsa tui</option>
+        <option>Yuen Long</option>
+
+   </select>
+   </div>
+   </div>
+</div>
+   <!--End of line 2-->
+
+<!--himal edit thursday-->
+ <div class= "col1 col-md-12"><!--start of 3rd line-->
+  <div class =  "box1 col-md-2">
+    Event Time 
+    </div>
+  <div class = "col col-md-4">
+      <select class = "form-control" id = "eventTime" name = "eventTime">
+        <option>Morning</option>
+        <option>Afternoon</option>
+        <option>Night</option>
+        <option>Dawn</option>
+  </select>
+  </div>
+  <div class =  "box1 col-md-2">
+    Suggestion
+    </div>
+     <div class = "col col-md-4">
+         <textarea class = "form-control inputEvent" rows = "3" id = "suggestions"  placeholder = "Suggestion for the event" name="Suggestions" required></textarea>
+    </div>
+ </div><!--End of line 3 -->
+ <!--end of himal edit-->
+
+<div class= "col1 col-md-12"><!--start of 4th line-->
+  <div class =  "budget col-md-2">
+    <span class = "glyphicon glyphicon-usd labelIcon"></span>&nbsp;<span>Budget</span>
+  </div>
+  <div class = "col col-md-4">
+      <select class = "form-control " id = "budget" name = "budget">
+          <option>Below $100</option>
+          <option>$100-200</option>
+          <option>$200-300</option>
+          <option>$300-400</option>
+          <option>$400-500</option>
+          <option>Above 500</option>
+        </select>
+  </div>
+  <div class = "col-md-6"></div><!--empty div to fix the position-->
+
+ </div><!--End of line 4 -->
+
+
+
+<div class= "col1 col-md-12"><!--Start of the last line-->
+  <div class  =  "box2 col-md-2">
+    <span class  = "glyphicon glyphicon-paperclip labelIcon" ></span>&nbsp;<span>Description</span>
+  </div>
+  <div class = "col col-md-8">
+    <textarea class = "form-control" rows = "5" id = "description"  placeholder = "Add more info about the gathering" name="description"></textarea>
+  </div>
+  <div class  = "box3 col-md-2">
+  <!--Edited by carrie-->
+    <input type  = "button" id = "createBtn" class = "createClassBtn btn" value = "Create">
+  </div>
+</div><!--End of line 4 -->
+
+
+<div class = "col col-md-12">
+	<!--Edited by carrie-->
+	<br/>
+	<h4><span id = "msg"></span></h4><br/>
+	<h2> <span id = "invitedAndJoin">Friends To be Invited </span>(<input type = "text" id = "inviteNum" value = 0 disabled></input>):</h2>
+  <h3><div id = "joinFd"> </h3></div>
+
+  
+</div>
+</div><!--End of Form-->
+</form>
+</div>
+
+
+ </div> <!--End of the right box-->
+ </div>
+ </div> <!--End of the container box-->
+
+
+</div><!--End of the whole boxes-->
+

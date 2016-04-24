@@ -1,0 +1,172 @@
+#index1 {
+	width: 30px;
+	height: 30px;
+}
+
+#invite{
+	float:left;
+	height:200px;
+	
+
+}
+
+#ginfo{
+	float:right;
+	height:200px;
+}
+
+.content{
+	border-radius:10px;
+	 border-collapse: separate;
+    border-spacing: 8px 8px;
+}
+
+.left{
+	background-color:white;
+	border-radius:15px;
+	height: 500px;
+	margin-right:20px;
+	margin-top:10px;
+
+}
+.right{
+	padding: 0 5px 0 5px;
+	border-radius:10px;
+
+	
+}
+#yellow{
+	border-radius:15px;
+	background-color:#f9c848;
+	padding-left:20px;
+}
+.searchbox{
+	border-radius:10px;
+	background-color:white;
+	margin-bottom:20px;
+}
+
+.box1{
+	background-color:#20353f;
+	color:white;
+	font-size:149%;
+	border-radius:5px;
+	margin-bottom:5px;
+
+
+}
+.box2{
+	background-color:#a9ded1;
+	color:#20353f;
+	font-size:136.2%;
+	border-radius:5px;
+	
+
+
+}
+.col{
+	border-radius:10px;
+	margin-bottom:8px;
+
+
+}
+.createClassBtn{
+	background-color:#41aa54;
+	font-weight:bold;
+	font-size:large;
+	color:white;
+	border-radius:10px;
+	margin-top: 50%
+}
+.time{
+	border-radius:5px;
+	float:left;
+	margin-right:40px;
+}
+
+.time2{
+	border-radius:5px;
+	float:left;
+}
+
+b{
+	text-align: left;
+}
+.filler{
+	background-color:#f9c848;
+
+
+}
+.maxWidth {
+       max-width:1800px;
+}
+
+.budget{
+	background-color:#a9ded1;
+	color:#20353f;
+	font-size:150%;
+	border-radius:5px;
+
+	}
+
+.col-md-4{
+  height:40px;
+}
+
+#fdContainer {
+	background-color: white;
+	height: 80%;
+	overflow-y: scroll;
+}
+#inviteNum {
+	background-color: transparent;
+	border: 0;
+	width: 20px;
+}
+.icon {
+	width: 80px;
+	height: 80px;
+}
+.notInvited {
+	padding-top:15px;
+	color: green;
+	cursor: pointer;
+	float:right;
+	padding-right: 8%;
+}
+.invited {
+	padding-top: 15px;
+	color: #F9C848;
+	cursor: pointer;
+	float:right;
+	padding-right: 8%;
+}
+#inviteList {
+	padding-left: 0;
+}
+.loContainer {
+	margin-top: 5px;
+}
+#fdName{
+	color:red;
+}
+.defaultspan{
+	color:#294957;
+	background-color: white;
+	padding-left: 15px;
+	font-size: 20px;
+}
+section{
+    color:white;
+	background-color:#294957;
+	border-radius:5px;
+	margin-right:10px;
+	text-align:left;
+	padding:5px 5px 5px 5px;
+}
+.labelIcon {
+	padding-top: 5.5px;
+}
+.nameTagText {
+	font-family: calibri;
+}
