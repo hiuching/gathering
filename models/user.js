@@ -200,6 +200,12 @@ userSchema.statics.findUserByIdWithoutPopulate = function (options, callback) {
 	});     
 };
 
+userSchema.statics.incrementNoShowCount = function (id) {
+	this.update({ _id: id }, {$inc: {noShowCount: 1}},  function(err, noOfUpdate) {
+		return;
+	});   
+};
+
 userSchema.statics.removeFriend = function (id, update, callback) {
 	var self = this;
 	this.findUserByIdWithoutPopulate({id: id}, function (err, user) {

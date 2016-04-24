@@ -173,8 +173,23 @@ var interfaces = os.networkInterfaces();
     var interface = interfaces[name];
     interface.forEach(function(entry) {
       if (entry.family === "IPv4")   {
-                app.listen(8081, entry.address);
-                console.log('connecting to ' + entry.address);
+				app.listen(8081, entry.address);
+				console.log('connecting to ' + entry.address);
       }
     });
 }
+
+
+/*
+ * (secords minutes hours DayOfMonth Months DayOfWeek)
+ * ((0-59) (0-59) (0-23) (1-31) (0-11) (0-6))
+ * exactly time format: (00 00 00 * * *)
+ * every 10 secords format: (*\/10 * * * * *)
+ * every weekday (11:30:00) format: (00 30 23 * * 1-5)
+ */
+ 
+var CronJob = require('cron').CronJob;
+var Event = require('./models/event')
+new CronJob('00 00 00 * * *', function(){
+  Event.getResult();
+}, null, true, "Asia/Chita");

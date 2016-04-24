@@ -1,7 +1,9 @@
 ﻿var mongoose = require('mongoose'), Schema = mongoose.Schema;
 var extend = require('mongoose-schema-extend');
 var Mail = require('./mail');
-
+var User = require('./user');
+var moment = require('moment');
+var arrayHelper = require('../lib/arrayHelper');
 /***************
 sub-schema
 ****************/
@@ -35,7 +37,7 @@ var eventSchema = new Schema({
 	choice: [choiceSchema],
 	active: {type: Boolean, default: true},
 	result:{
-		time: String,
+		date: String,
 		choice: String,
 		attend: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 	}
@@ -48,6 +50,40 @@ eventSchema.plugin(deepPopulate);
 /***************
 Public method
 ****************/
+eventSchema.statics.chooseSuggestion = function (id, update, callback) {
+	var self = this;
+	update.choice =  update.choice || {};
+	this.findEventByIdWithoutPopulate({id: id}, function(err, event){
+		if(err){
+			callback(err);
+		} else {
+			event = new self(event);
+			var choiceExist = false;
+			event.choice.forEach(function(choice, index){
+				if(choice.userId.indexOf(update.userId)!=-1){
+					choiceExist = true;
+				}
+			});
+			if (!choiceExist){
+				event.choice.forEach(function(choice, index){
+					if(choice.suggestion == update.suggestion){
+						choice.userId.push(update.userId);
+					}
+				});
+				self.update({ _id: id }, event,  function(err, noOfUpdate) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, update);
+					}
+				});
+			} else {
+				callback({code: 403, message: 'user already vote'});
+			}
+		}
+	});    
+};
+
 eventSchema.statics.create = function (options, callback) {
 	var self = this;
 	options = options || {};
@@ -107,6 +143,10 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	if (conditions._id != null && conditions._id != '') {
 		q.where("_id").equals(conditions._id);
 	}	
+	if(conditions.expire != null){
+		var expire = conditions.expire;
+		q.where("created").equals(conditions.expire);
+	}
 	if (conditions.user!= null && conditions.user != ''){
 		q.or([
 			// {"invited": {$in: [conditions.user]}},
@@ -115,7 +155,7 @@ eventSchema.statics.findByConditions = function (options, callback) {
 		]);
 	}
 	if (!conditions.populate){
-	q.deepPopulate("owner accepted invited period.userId choice.userId");
+		q.deepPopulate("owner accepted invited result.attend period.userId choice.userId");
 	}
 	q.sort({"created": -1})
 	q.exec(callback);
@@ -167,6 +207,94 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 			callback(null, events);
 		}
 	});     
+};
+
+eventSchema.statics.getResult = function () {
+	var self = this;
+	var conditions = {};
+	var expire = new Date();
+	expire = expire.setDate(expire.getDate() - 2);
+	conditions.expire = {$lt: expire};
+	conditions.active = true;
+	// var conditions = {
+		// _id: id
+	// }
+	this.findByConditions(conditions, function(err, array){
+	
+		var update = function(item, done){
+			var Item = new self(item);
+			var result = item.result || {};
+			var obj = {};
+			var votedPeople = [];
+			var startDate = moment(item.startDate);
+			var endDate = moment(item.endDate).add(1, 'day');
+			var dateStr = '';
+			if(! (result.date && result.date == '')){
+				/*prepare obj*/
+				for(var i = startDate; startDate.isBefore(endDate, 'day'); startDate.add(1, 'day')){ //compare in day
+					
+					dateStr = startDate.format('YYYY-MM-DD');
+					obj[dateStr] = [];
+				}
+				/*prepare period result*/
+				item.period.forEach(function(period, index){
+					period.period.forEach(function(date){
+						obj[date].push(period.userId);
+						votedPeople.push(period.userId);
+					});
+				});
+				
+				var max = 0;
+				for (var prop in obj) {
+					if(obj[prop].length > max){
+						max = obj[prop].length;
+						result.date = prop;
+						result.attend = obj[prop];
+					}
+				}
+				item.accepted.forEach(function(user){
+					if(votedPeople.indexOf(user) == -1){
+						User.incrementNoShowCount(user);
+					}
+				});
+				
+				/*confirm choice result if only one suggest*/
+				if (item.choice.length == 1){
+					result.choice = item.choice[0].suggestion;
+					Item.active = false;
+				}
+			}
+			var voteExpire = new Date();
+			voteExpire.setDate(voteExpire.getDate() - 4);
+			
+			/*confirm choice result after 4 day*/
+			if (item.created.getTime() < voteExpire.getTime()){
+				if(!(item.result.choice && item.result.choice != '')){
+					var maxVote = 0;
+					item.choice.forEach(function(choice){
+				
+						if(choice.userId.length >= maxVote){
+							maxVote = choice.userId.length;
+							result.choice = choice.suggestion;
+							Item.active = false;
+						}
+					});
+				}
+			}
+			
+			Item.result = result;
+			self.update({ _id: Item._id}, Item,  function(err, noOfUpdate) {
+				if (err) {
+					done(err);
+				} else {
+					done(null, result);
+				}
+			});
+		};
+		arrayHelper.walkArray(array, {}, update, function(err, records){
+			return;
+		});
+	});        
 };
 
 eventSchema.statics.reject = function (id, update, callback) {
@@ -239,7 +367,11 @@ eventSchema.statics.updateById = function (id, update, callback) {
 	var self = this;
 	if (update.action == 'reject'){
 		return	this.reject(id, update, callback);
-	}	else if (update.action == 'period'){
+	}	else if (update.action == 'getResult'){
+		return	this.getResult(id, update, callback);
+	}	else if (update.action == 'choice'){
+		return	this.chooseSuggestion(id, update, callback);
+	} else if (update.action == 'period'){
 		return	this.votePeriod(id, update, callback);
 	} else {
 		return	this.updateEvent(id, update, callback);

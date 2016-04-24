@@ -13,6 +13,7 @@
     "express": "~4.9.0",
     "express-spa": "0.0.2",
     "marionette": "*",
+    "moment": "^2.12.0",
     "mongodb": "*",
     "mongoose": "*",
     "mongoose-schema-extend": "^0.1.7",
