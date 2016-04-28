@@ -1,0 +1,117 @@
+
+.tab {
+	background: blue;
+	margin-left: 5px;
+	height: 50px;
+	width: 100px;
+}
+.tabDiv {
+	display: -webkit-inline-box;
+}
+.okButton{
+	border-color: #ffffff;
+	color: #ffffff;
+	background: transparent;
+	font-weight: bolder;
+	text-align: center;
+	border-width: 5px;
+	font-size:200%;
+	padding: 5px 10px 5px 10px;
+	margin-right: 20px;
+	border-style: solid;
+}
+.resetButton{
+	border-color: #F63D3D;
+	color: #ffffff;
+	background: transparent;
+	font-weight: bolder;
+	text-align: center;
+	border-width: 5px;
+	border-style: solid;
+	font-size:200%;
+	padding: 5px 10px 5px 10px;
+}
+.eName{
+	background-color: #A9DED1;
+	color: #294D57;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+	text-align: center;
+}
+.eDate{
+	background-color: #41AA54;
+	color: #ffffff;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+	text-align: center;
+}
+.eType{
+	background-color: #F9C848;
+	color: #294D57;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+	text-align: center;
+
+}
+.timeLineBox{
+	padding-left: 10%;
+
+}
+
+.notChoose{
+	color: #294D57;
+	font-size: 150%;
+	width: 200px;
+	height: 100px;
+	min-width: 80%;
+	min-height:100%;
+	padding:20px 30px 20px 30px;
+	margin: 40px 0 40px 0;
+	text-align: center;
+	cursor: pointer;
+	background-color: #F9C848;
+	border-width: 5px;
+	border-color: #294D57;
+	border-style: solid;
+
+}
+.choose{
+	color: #ffffff;
+	font-size: 150%;
+	width: 200px;
+	min-width: 80%;
+	height: 100px;
+	min-height:100%;
+	margin: 40px 0 40px 0;
+	padding:20px 30px 20px 30px;
+	text-align: center;
+	border-color: #41AA54;
+	border-width: 5px;
+	border-style: solid;
+	background: transparent;
+	cursor: pointer;
+}
+.resultBox{
+	text-align: right;
+	min-width: 50%;
+	margin-left: 15%;
+	-webkit-box-pack:center;
+    -webkit-box-align:center;
+	-moz-box-pack:center;
+    -moz-box-align:center;
+}
+.buttonBox{
+	text-align: right;
+	min-width: 50%;
+	margin-left: 20%;
+	-webkit-box-pack:center;
+    -webkit-box-align:center;
+	-moz-box-pack:center;
+    -moz-box-align:center;
+}

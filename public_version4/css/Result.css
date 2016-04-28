@@ -1,0 +1,72 @@
+
+
+.tabDiv {
+	display: -webkit-inline-box;                              
+}
+.homeLink {
+	cursor: pointer;
+	border-width: 0;
+	border-radius: 5px;
+	background-color: #f37134;
+	color: #ffffff;
+	font-size: 150%;
+	padding: 10px;
+
+}
+.resultText{
+	color: #ffffff;
+	margin-bottom: 10px;
+	font-weight:  bold;
+	font-size: 200%;
+	text-align: left;
+
+}
+.list{
+	list-style-type: none;
+
+}
+.listid{
+	border-color: #a9ded1;
+	min-width: 80%;
+ 	margin-top: 5px;
+	color: #ffffff;
+	font-size:150%;
+	padding: 3px;
+	border-width: 2px;
+	border-style: solid;
+}
+.eName{
+	background-color: #A9DED1;
+	color: #294D57;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+	text-align: center;
+}
+.eDate{
+	background-color: #41AA54;
+	color: #ffffff;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+	text-align: center;
+}
+.eType{
+	background-color: #F9C848;
+	color: #294D57;
+	border-radius: 5px;
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+	text-align: center;
+
+}
+.timeLineBox{
+	margin-left: 10%;
+}
+.ResultBox{
+	min-width: 35%;
+	
+}

@@ -1,4 +1,66 @@
 <!--insert js and css link here-->
+<link rel = "stylesheet" href = "css/SecondVote.css">
+<link rel =" stylesheet" href=" http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" >
+<link rel =" stylesheet" href="time.css" >
+<script src ='js/moment.min.js'></script>
+<script src = "js/SecondVote.js"></script>
+<div class = "container-fluid maxWidth" > <!--the main container-->
+
+	<div class = "col1 col-md-12"><!--start of the detail boxes-->
+		<div class = "eName col-md-4">
+			<span id = "eventNameTab"></span>
+		</div>
+		<div class = "eDate col-md-4">
+			<span id = "confirmDateTab"></span>
+		</div>
+		<div class = "eType col-md-3">
+			<span id = "eventType"> Voting:Event Suggestion</span>
+		</div>
+	</div><!--end of the event detail boxes-->
+
+	<div class = "col2 col-md-12"><!--container for timeline and Suggestion BOxes boxes-->
+
+		<div class = " timeLineBox col-md-3" ><!--the timeline box-->
+			
+			<ul class = "timelines" >
+			<b> 
+				<li><i class= "ion-ios-circle-filled"></i></li> 
+				<li>
+					<div class = "timeLineText1" > Date  </div>
+					<i class= " icon ion-record"> </i>
+				</li>
+				<li>
+					<div class = "timeLineText2" >Vote Suggestion </div>
+					<i class= "icon ion-record"></i>
+				</li>
+				<li>
+					<div class = "timeLineText3" >Result </div>
+					<i class= "icon2 ion-flag"></i>
+				</li>
+			</b>
+			</ul>
+			
+		</div><!--end of timeline box-->
 
 
-<div></div>
+		<!--the result box-->
+		<div class = "col-md-5 resultBox">
+			<section id = "suggestionContainer">
+				<div class = "blank" style = "display: none">
+					<div class = "suggestionButton col-md-4">
+						<button class = "notChoose">
+							<span id = "suggestionText"></span>
+						</button>
+					</div>
+				</div>
+			</section>
+		
+		</div><!--End of suggestion container-->
+
+		<div class = "col-md-5 buttonBox" ><!--container for the reset and ok button-->
+			<button id = "submit" class = "col-md-3 okButton">OK</button>
+			<button id = "reset" class = "col-md-3 resetButton">Reset</button>
+		</div><!--end of the rest and ok container-->
+	</div> <!--End of timeline and suggestion container-->
+</div><!--#End of the whole container-->
+

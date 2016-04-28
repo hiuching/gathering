@@ -67,7 +67,9 @@ $(document).ready(function() {
 				currentDate.setDate(currentDate.getDate() + 1);
 				//console.log(currentDateStr);
 			}
-			console.log(between);
+			$('#chosenDate').text(between.sort(function(a,b){
+				return new Date(b.date) - new Date(a.date);
+			}));
 		},
 		events: function(start, end, timezone, callback) {
 				var events = [];
@@ -121,7 +123,7 @@ $(document).ready(function() {
 							end: eventEndDate,
 							overlap: true,
 							rendering: 'background',
-							color: '#FFDDD5'
+							color: '#FCB6A6'
 						});
 						callback(events);
 						//console.log(joinName);
@@ -139,6 +141,7 @@ $(document).ready(function() {
 		
 		
     });
+	$('#calendar').fullCalendar('gotoDate', startDate);
 
 	$('#submit').click(function(){
 		$("#submit").attr("disabled", true);

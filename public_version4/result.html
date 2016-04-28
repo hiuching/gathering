@@ -1,4 +1,65 @@
 <!--insert js and css link here-->
+<link rel = "stylesheet" href = "css/Result.css">
+<link rel =" stylesheet" href=" http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" >
+<link rel =" stylesheet" href="time.css" >
+<script src ='js/moment.min.js'></script>
+<script src ='js/result.js'></script>
+
+<div class = "container-fluid maxWidth" > <!--the main container-->
+
+	<div class = "col1 col-md-12"><!--start of the detail boxes-->
+		<div class = "eName col-md-4">
+			<span id = "eventNameTab"></span>
+		</div>
+		<div class = "eDate col-md-4">
+			<span id = "confirmDateTab"></span>
+		</div>
+		<div class = "eType col-md-3">
+			<span id = "eventType"> Voting:Event Suggestion</span>
+		</div>
+	</div><!--end of the event detail boxes-->
 
 
-<div></div>
+	<div class = "col2 col-md-12"><!--container for timeline and result boxes-->
+
+		<div class = "timeLineBox col-md-3"><!--the timeline box-->
+			
+			<ul class = "timelines" >
+			<b> 
+				<li><i class= "ion-ios-circle-filled"></i></li> 
+				<li>
+					<div class = "timeLineText1" > Date  </div>
+					<i class= " icon ion-record"> </i>
+				</li>
+				<li>
+					<div class = "timeLineText2" >Vote Suggestion </div>
+					<i class= "icon ion-record"></i>
+				</li>
+				<li>
+					<div class = "timeLineText3" >Result </div>
+					<i class= "icon2 ion-flag"></i>
+				</li>
+			</b>
+			</ul>
+			
+		</div><!--end of timeline box-->
+
+
+		<!--the result box-->
+		<div class = "container col-md-5">
+			<div class = "resultText" >
+					Result
+			</div>
+				
+			<div class = "resultContainer">
+				<ul id = "list" class = "list">
+					<li class = "listid"><span id = "eventName" ></span></li>
+					<li class = "listid"><span id = "confirmedDate"></span></li>
+					<li class = "listid"><span id = "voted"></span></li>
+					<li class = "listid"><span id = "attendee"></span></li>
+				</ul>
+			</div>
+				<button id = "backToHome" class = "homeLink">Back To Home</button>
+		</div><!--End of result box-->
+	</div> <!--end of both result and timeline box-->
+</div> <!--End of the main container-->

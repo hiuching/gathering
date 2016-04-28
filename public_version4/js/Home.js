@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 		}
 	}
-	//console.log("in");
+	
 	var data = {
 		action: "findEventByInvolvedUser",
 		user: userId
@@ -66,16 +66,49 @@ $(document).ready(function() {
 					$('#eventType').text(event[i].types);
 					$('#startDate').text(event[i].startDate);
 					$('#endDate').text(event[i].endDate);
-					$('#vote').css('background-color', '#80C41C');
-					$('#vote').text('vote');
+					//$('#vote').css('background-color', '#80C41C');
+					//$('#vote').text('vote');
 					$('#vote').attr('disabled', false);
 					for(var j in event[i].period) {
 						if(event[i].period[j].userId._id == userId) {
-							console.log('event : ' + i);
-							$('#vote').css('background-color', 'grey');
-							$('#vote').text('voted');
-							$('#vote').attr('disabled', true);
-							break;
+							if(event[i].result.choice != null && event[i].result.choice != '' && event[i].result.choice != undefined) {
+								console.log("result choice" + event[i].result.choice)
+								$('#vote').css('background-color', '#F9C848');
+								$('#vote').removeClass('green');
+								$('#vote').addClass('yellow');
+								$('#vote').text('Result');
+								$('#notJoin').css('background-color', 'grey');
+								$('#notJoin').attr('disabled', true);
+								break;
+							} else if(event[i].result.date != null && event[i].result.date != '' && event[i].result.date != undefined) {
+								var isVote = false;
+								for(var x in event[i].choice) {
+									for(var y in event[i].choice[x].userId) {
+										console.log("choice userId " + event[i].choice[x].userId[y]);
+										if(event[i].choice[x].userId[y]._id == userId) {
+											$('#vote').css('background-color', 'grey');
+											$('#vote').text('Voted');
+											$('#vote').attr('disabled', true);
+											isVote = true;
+											break;
+										}
+									}
+									if(isVote) break;
+								}
+								if(!isVote) {
+									$('#vote').css('background-color', '#8CADFA');
+									$('#vote').removeClass('green');
+									$('#vote').addClass('blue');
+									$('#vote').text('Vote');
+									break;
+								}
+							} else{
+								console.log('event : ' + i);
+								$('#vote').css('background-color', 'grey');
+								$('#vote').text('Joined');
+								$('#vote').attr('disabled', true);
+								break;
+							}
 						}
 					}
 					$('#cd-timeline').append($('#appendBlock').html());
@@ -98,7 +131,7 @@ $(document).ready(function() {
 				window.location.href = "#/create";
 			});
 			setNotJoinFunction();
-			setVoteFunction();
+			setJoinFunction();
 			//double_confirm();
 
 		},
@@ -113,14 +146,6 @@ $(document).ready(function() {
 		$('#bigIconImg').removeClass();
 		$('#bigIconImg').addClass("fa fa-users fa-2x");
 		$('#bigIcon').text("Create Gathering");
-	});
-
-	$('.blue').click(function() {
-		window.location.href = "#/secondVote";
-	});
-
-	$('.yellow').click(function() {
-		window.location.href = "#/result";
 	});
 	
 });
@@ -160,7 +185,7 @@ function setNotJoinFunction() {
 	});
 }
 
-function setVoteFunction() {
+function setJoinFunction() {
 	$('.cd-timeline-content').on('click', '.green', function(){
 		$(this).attr("disabled", true);
 		parentDiv = $(this).parent().parent().parent().parent().parent().parent();
@@ -175,6 +200,29 @@ function setVoteFunction() {
 		console.log(endDate);
 		console.log("voteEventId =" + voteEventId);
 		window.location.href = "#/vote";
+	});
+
+	$('.cd-timeline-content').on('click', '.blue', function(){
+		$(this).attr("disabled", true);
+		parentDiv = $(this).parent().parent().parent().parent().parent().parent();
+		//var startDate = parentDiv.children("#startDate").text();
+		//var endDate = parentDiv.children("#endDate").text();
+		var voteEventId = parentDiv.children("#eventId").text();
+		console.log("blue");
+		//period = period.split("-");
+		$.jStorage.set("voteEventId", voteEventId);
+		window.location.href = "#/secondVote";
+	});
+
+	$('.cd-timeline-content').on('click', '.yellow', function(){
+		$(this).attr("disabled", true);
+		parentDiv = $(this).parent().parent().parent().parent().parent().parent();
+		//var startDate = parentDiv.children("#startDate").text();
+		//var endDate = parentDiv.children("#endDate").text();
+		var voteEventId = parentDiv.children("#eventId").text();
+		//period = period.split("-");
+		$.jStorage.set("voteEventId", voteEventId);
+		window.location.href = "#/result";
 	});
 }
 
