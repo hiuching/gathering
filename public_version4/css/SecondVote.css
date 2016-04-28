@@ -100,10 +100,18 @@
 .resultBox{
 	text-align: right;
 	min-width: 50%;
-	margin-left: 10%;
+	margin-left: 15%;
+	-webkit-box-pack:center;
+    -webkit-box-align:center;
+	-moz-box-pack:center;
+    -moz-box-align:center;
 }
 .buttonBox{
 	text-align: right;
 	min-width: 50%;
 	margin-left: 20%;
+	-webkit-box-pack:center;
+    -webkit-box-align:center;
+	-moz-box-pack:center;
+    -moz-box-align:center;
 }
