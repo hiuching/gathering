@@ -66,7 +66,9 @@ $(document).ready(function() {
 					$('#eventType').text(event[i].types);
 					$('#startDate').text(event[i].startDate);
 					$('#endDate').text(event[i].endDate);
-					//$('#vote').css('background-color', '#80C41C');
+					//$('#vote').css('background-color', '#8
+					$('#vote').css('background-color', '#80C41C');
+					$('#vote').text('Join');
 					//$('#vote').text('vote');
 					$('#vote').attr('disabled', false);
 					for(var j in event[i].period) {

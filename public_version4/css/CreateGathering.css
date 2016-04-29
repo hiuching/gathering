@@ -166,6 +166,9 @@ section{
 }
 .labelIcon {
 	padding-top: 5.5px;
+	padding-right: 17px;
+	width: 5px;
+	height: 5px;
 }
 .nameTagText {
 	font-family: calibri;
