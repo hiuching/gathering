@@ -131,6 +131,8 @@ eventSchema.statics.findAll = function (options, callback) {
 		return this.findEventByInvolvedUser(options, callback);
 	} else if(options.action == "findEventById"){
 		return this.findEventById(options, callback);
+	} else if(options.action == "getResult"){
+		return this.getResult(options, callback);
 	} else {
 		return this.findByConditions(options, callback);
 	}
@@ -156,6 +158,9 @@ eventSchema.statics.findByConditions = function (options, callback) {
 	}
 	if (!conditions.populate){
 		q.deepPopulate("owner accepted invited result.attend period.userId choice.userId");
+	}
+	if (conditions.active != null){
+		q.where("active").equals(conditions.active);
 	}
 	q.sort({"created": -1})
 	q.exec(callback);
@@ -209,13 +214,14 @@ eventSchema.statics.findEventByInvolvedUser = function (options, callback) {
 	});     
 };
 
-eventSchema.statics.getResult = function () {
+eventSchema.statics.getResult = function (options, callback) {
 	var self = this;
 	var conditions = {};
 	var expire = new Date();
 	expire = expire.setDate(expire.getDate() - 2);
 	conditions.expire = {$lt: expire};
 	conditions.active = true;
+	// conditions.populate = false;
 	// var conditions = {
 		// _id: id
 	// }
@@ -224,6 +230,7 @@ eventSchema.statics.getResult = function () {
 		var update = function(item, done){
 			var Item = new self(item);
 			var result = item.result || {};
+			var emails = []
 			var obj = {};
 			var votedPeople = [];
 			var startDate = moment(item.startDate);
@@ -237,11 +244,11 @@ eventSchema.statics.getResult = function () {
 					obj[dateStr] = [];
 				}
 				/*prepare period result*/
-				item.period.forEach(function(period, index){
-					period.period.forEach(function(date){
-						obj[date].push(period.userId);
-						votedPeople.push(period.userId);
+				item.period.forEach(function(periodChoice, index){
+					periodChoice.period.forEach(function(date){
+						obj[date].push(periodChoice.userId);
 					});
+					votedPeople.push(periodChoice.userId._id.toString());
 				});
 				
 				var max = 0;
@@ -253,7 +260,7 @@ eventSchema.statics.getResult = function () {
 					}
 				}
 				item.accepted.forEach(function(user){
-					if(votedPeople.indexOf(user) == -1){
+					if(votedPeople.indexOf(user._id.toString()) == -1){
 						User.incrementNoShowCount(user);
 					}
 				});
@@ -262,6 +269,16 @@ eventSchema.statics.getResult = function () {
 				if (item.choice.length == 1){
 					result.choice = item.choice[0].suggestion;
 					Item.active = false;
+					result.attend.forEach(function(user){
+						emails.push(user.email);
+					})
+						var mailOption = {
+							email: emails,
+							subject: item.name,
+							html: "<div>" + item.name + "</div><div>Date: " + result.date + "</div><div>Choice:" + result.choice + "</div>"
+						}
+					Mail.send(mailOption, function(err){
+					});
 				}
 			}
 			var voteExpire = new Date();
@@ -277,6 +294,16 @@ eventSchema.statics.getResult = function () {
 							maxVote = choice.userId.length;
 							result.choice = choice.suggestion;
 							Item.active = false;
+						result.attend.forEach(function(user){
+							emails.push(user.email);
+						});
+						var mailOption = {
+							email: emails,
+							subject: item.name,
+							html: "<div>" + item.name + "</div><div>Date: " + result.date + "</div><div>Choice:" + result.choice + "</div>"
+						}
+						Mail.send(mailOption, function(err){
+						});
 						}
 					});
 				}
@@ -292,7 +319,11 @@ eventSchema.statics.getResult = function () {
 			});
 		};
 		arrayHelper.walkArray(array, {}, update, function(err, records){
-			return;
+			if (typeof callback == 'function'){
+				callback();
+			} else {
+				return;
+			}
 		});
 	});        
 };

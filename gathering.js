@@ -189,7 +189,7 @@ var interfaces = os.networkInterfaces();
  */
  
 var CronJob = require('cron').CronJob;
-var Event = require('./models/event')
+var Event = require('./models/event');
 new CronJob('00 00 00 * * *', function(){
   Event.getResult();
 }, null, true, "Asia/Chita");
